@@ -15,12 +15,12 @@
 
    <div id="page_wrapper">
        <div id="form_wrapper">
-          <form id="loginForm" name="loginForm" action="/login"  method="post">
+          <form id="loginForm" name="loginForm" action="/loginValidation"  method="post">
              <div>
                 <p>
-	               <label for="uname" class="whiteLabel"><b>Username :</b></label>
+	               <label for="email" class="whiteLabel"><b>Username :</b></label>
 	               <br>
-                   <input type="text" placeholder="Enter Username" id="uname" name="uname">
+                   <input type="email" placeholder="Enter Email" id="email" name="email">
 	            </p>
 	            <p>
                    <label for="password"  class="whiteLabel"><b>Password :</b></label>

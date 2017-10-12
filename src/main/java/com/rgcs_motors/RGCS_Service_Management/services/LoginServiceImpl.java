@@ -1,6 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
 import com.rgcs_motors.RGCS_Service_Management.dao.AccountDao;
+import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +12,21 @@ public class LoginServiceImpl implements LoginService {
     private AccountDao accountDao;
 
     @Override
-    public void login(String username, String password) {
-
+    public User login(String email, String password) {
+        User user = null;
         try {
-            accountDao.login(username, password);
+            user = accountDao.login(email, password);
         } catch (Exception e) {
 //            throw new InvalidCredentialsException("User not found!");
             e.printStackTrace ();
         }
+        return user;
     }
 
     @Override
-    public void logout(String username) {
+    public void logout(String email) {
         try {
-            accountDao.logout(username);
+            accountDao.logout(email);
         } catch (Exception e) {
 //            throw new LogoutException("User not logged in!");
             e.printStackTrace ();

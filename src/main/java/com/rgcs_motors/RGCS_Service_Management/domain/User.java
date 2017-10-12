@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Users implements Serializable{
+@Table (name="users")
+public class User implements Serializable{
 
+    @Id
     @Column (nullable = false, name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Id
-    @Column(nullable = false, name = "vat")
+    @Column(nullable = false, name = "VAT", unique=true)
     private String vat;
 
     @Column(nullable = false, name = "name")
@@ -23,7 +24,7 @@ public class Users implements Serializable{
     @Column(nullable = false, name = "address")
     private String address;
 
-    @Column(nullable = false, name = "email")
+    @Column(nullable = false, name = "email", unique=true)
     private String email;
 
     @Column(nullable = false, name = "password")
@@ -32,10 +33,10 @@ public class Users implements Serializable{
     @Column(nullable = false, name = "user_type")
     private String type;
 
-    public Users() {
+    public User () {
     }
 
-    public Users( String vat, String password, String firstName, String lastName, String address,
+    public User ( String vat, String password, String firstName, String lastName, String address,
                   String email, String type) {
 
         this.vat = vat;
@@ -48,6 +49,9 @@ public class Users implements Serializable{
 
     }
 
+    public int getId () {
+        return id;
+    }
 
     public String getVat () {
         return vat;

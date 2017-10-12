@@ -30,7 +30,7 @@ body {
 	height:inherit;
 }
 
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
     width:100%;
     padding: 14px 20px;
     margin: 8px 0;

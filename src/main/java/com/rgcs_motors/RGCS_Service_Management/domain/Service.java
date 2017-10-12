@@ -1,6 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
-public class Services {
+public class Service {
 
     private String licensePlates;
     private String repairRegistrationDate;

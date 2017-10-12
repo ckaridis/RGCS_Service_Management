@@ -6,26 +6,25 @@ $( document ).ready(function() {
 	
 	$("form[name='loginForm']").validate({
 		rules : {
-			uname : {
+			email : {
 				required : true,
-				minlength : 9,
-                maxlength : 9
+				email : true
 			},
-			psw : {
+			password : {
 				required : true,
-				minlength : 10,
-				maxlength : 10
+				minlength : 6,
+				maxlength : 15
 			}
 		},
 		messages : {
-			uname : {
+			email : {
 				required : "Please enter an email",
-                minlength: "Must be 9 digits"
+				email : "Please enter a valid email address"
 			},
-			psw : {
+			password : {
 				required : "Please enter a password",
-				minlength : "Password must be 10 characters long",
-				maxlength : "Password must be 10 characters long"
+				minlength : "Password must be 6 characters min",
+				maxlength : "Password must be 15 characters max"
 			}
 		},//end of messages
 		submitHandler: function(form) {form.submit();}

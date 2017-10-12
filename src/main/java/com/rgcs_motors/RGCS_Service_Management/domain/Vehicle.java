@@ -1,6 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
-public class Vehicles {
+public class Vehicle {
 
     private String brand;
     private String model;
