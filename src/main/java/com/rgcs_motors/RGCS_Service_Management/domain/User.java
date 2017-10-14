@@ -49,6 +49,10 @@ public class User implements Serializable{
 
     }
 
+    public Boolean checkType(){
+        return this.type != null;
+    }
+
     public int getId () {
         return id;
     }
