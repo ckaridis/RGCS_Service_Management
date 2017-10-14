@@ -1,6 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.security;
 
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
+import com.rgcs_motors.RGCS_Service_Management.exceptions.InvalidCredentialsException;
 import com.rgcs_motors.RGCS_Service_Management.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,7 +28,14 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>AuthProvider mail is :" + email + " and password is : " + password);
 
-        User user = loginService.login(email, password);  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
+        User user = null;  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
+        try {
+            user = loginService.login(email, password);
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            System.out.println("User not found");
+            throw new InvalidCredentialsException("User not found!");
+        }
         Authentication auth = null;
 
         if (user != null){   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CREATE AUTHORITY FROM FETCHED USER'S ROLE
@@ -35,6 +43,12 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
             String role = user.getType();
             Set<GrantedAuthority> grantedAuths = new HashSet<>();
             grantedAuths.add(new SimpleGrantedAuthority(role.trim()));
+            auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
+        }
+        else
+        {
+            Set<GrantedAuthority> grantedAuths = new HashSet<>();
+            grantedAuths.add(new SimpleGrantedAuthority("ghost"));
             auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
         }
         return auth;

@@ -27,6 +27,8 @@
 	            <br>
                    <input type="password" placeholder="Enter Password" id="password" name="password">
                 </p>
+                <br>
+                 <p style="color:red;font-weight:bold">${errorMessage!""}</p>
 	           <p>
                   <button type="submit">Login</button>
 	           </p>

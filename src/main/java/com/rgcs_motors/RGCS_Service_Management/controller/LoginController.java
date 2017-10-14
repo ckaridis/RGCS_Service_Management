@@ -25,4 +25,12 @@ public class LoginController {
         model.addAttribute(LOGIN_FORM, new LoginForm ());
         return "index";
     }
+
+    @RequestMapping("/accessDenied")
+    String showErrorPage(Model model, @RequestParam(name = "error", required = false) String error) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> updated yesterday
+        error = "User not found";
+        model.addAttribute("errorMessage",error);
+        model.addAttribute(LOGIN_FORM, new LoginForm ());
+        return "index";
+    }
 }//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end of controller

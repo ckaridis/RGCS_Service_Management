@@ -24,6 +24,7 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     protected void handle(HttpServletRequest request, HttpServletResponse response,
                           Authentication authentication) throws IOException, ServletException {   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>EXECUTE REDIRECT STRATEGY BASED ON REDIRECTION URL
 
+
         String targetUrl = determineTargetUrl(authentication);
 
         if (response.isCommitted()) {
@@ -44,13 +45,17 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             roles.add(ga.getAuthority());
         }
 
-        if (isAdmin(roles)) {
-            redirectUrl = "/admin/home";
-        } else if (isUser(roles)) {
-            redirectUrl = "/user/home";
-        } else {
-            redirectUrl = "/accessDenied";
-        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>roles list:" + roles.toString());
+
+
+            if (isAdmin(roles)) {
+                redirectUrl = "/admin/home";
+            } else if (isUser(roles)) {
+                redirectUrl = "/user/home";
+            } else if(isGhost(roles)){
+                redirectUrl = "/accessDenied";
+            }
+
         return redirectUrl;
     }
 
@@ -63,6 +68,13 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private boolean isAdmin(List<String> roles) {
         if (roles.contains("Admin")) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isGhost(List<String> roles) {
+        if (roles.contains("ghost")) {
             return true;
         }
         return false;
