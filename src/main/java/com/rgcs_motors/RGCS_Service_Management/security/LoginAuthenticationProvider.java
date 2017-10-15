@@ -28,27 +28,21 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>AuthProvider mail is :" + email + " and password is : " + password);
 
-        User user = null;  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
-        try {
-            user = loginService.login(email, password);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-            System.out.println("User not found");
-            throw new InvalidCredentialsException("User not found!");
-        }
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
+        User user = loginService.login(email, password);
+
         Authentication auth = null;
+        Set<GrantedAuthority> grantedAuths = new HashSet<>();
 
         if (user != null){   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CREATE AUTHORITY FROM FETCHED USER'S ROLE
 
             String role = user.getType();
-            Set<GrantedAuthority> grantedAuths = new HashSet<>();
             grantedAuths.add(new SimpleGrantedAuthority(role.trim()));
             auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
         }
         else
         {
-            Set<GrantedAuthority> grantedAuths = new HashSet<>();
-            grantedAuths.add(new SimpleGrantedAuthority("ghost"));
+            grantedAuths.add(new SimpleGrantedAuthority("notFound"));
             auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
         }
         return auth;

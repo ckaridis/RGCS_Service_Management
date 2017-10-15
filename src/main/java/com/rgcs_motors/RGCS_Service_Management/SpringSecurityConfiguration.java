@@ -28,7 +28,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter { 
                 .anyRequest().fullyAuthenticated()
                 .and().csrf().disable()
                 .formLogin().successHandler(successHandler)
-                .loginPage("/loginValidation")
+                .loginPage("/")
                 .permitAll()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -36,7 +36,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter { 
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll().and()
+                .exceptionHandling().accessDeniedPage("/");
 
     }
 

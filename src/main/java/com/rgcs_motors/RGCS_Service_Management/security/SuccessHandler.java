@@ -21,10 +21,7 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
-    protected void handle(HttpServletRequest request, HttpServletResponse response,
-                          Authentication authentication) throws IOException, ServletException {   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>EXECUTE REDIRECT STRATEGY BASED ON REDIRECTION URL
-
-
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(authentication);
 
         if (response.isCommitted()) {
@@ -52,7 +49,7 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                 redirectUrl = "/admin/home";
             } else if (isUser(roles)) {
                 redirectUrl = "/user/home";
-            } else if(isGhost(roles)){
+            } else if(isNotfound(roles)){
                 redirectUrl = "/accessDenied";
             }
 
@@ -73,8 +70,8 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         return false;
     }
 
-    private boolean isGhost(List<String> roles) {
-        if (roles.contains("ghost")) {
+    private boolean isNotfound(List<String> roles) {
+        if (roles.contains("notFound")) {
             return true;
         }
         return false;

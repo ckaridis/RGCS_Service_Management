@@ -15,7 +15,7 @@
 
    <div id="page_wrapper">
        <div id="form_wrapper">
-          <form id="loginForm" name="loginForm" action="/loginValidation"  method="post">
+          <form id="loginForm" name="loginForm" action="/"  method="post">
              <div>
                 <p>
 	               <label for="email" class="whiteLabel"><b>Username :</b></label>
