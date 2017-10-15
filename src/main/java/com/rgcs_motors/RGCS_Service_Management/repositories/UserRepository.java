@@ -9,4 +9,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByEmailAndPassword(String email, String password) throws Exception;
 
+    User findByEmail(String email);
 }

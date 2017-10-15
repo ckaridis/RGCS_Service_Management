@@ -1,13 +1,45 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "vehicles")
 public class Vehicle {
 
+    @Id
+    @Column(nullable = false, name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(nullable = false, name = "brand")
     private String brand;
+
+    @Column(nullable = false, name = "model")
     private String model;
+
+    @Column(nullable = false, name = "LICENSE_PLATE", unique = true)
     private String licensePlates;
+
+    @Column(nullable = false, name = "production_year")
     private String factoryDate;
+
+    @Column(nullable = false, name = "color")
     private String colour;
+
+    @Column(nullable = false, name = "USER_VAT")
     private String afm;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(String brand, String model, String licensePlates, String factoryDate, String colour, String afm) {
+        this.brand = brand;
+        this.model = model;
+        this.licensePlates = licensePlates;
+        this.factoryDate = factoryDate;
+        this.colour = colour;
+        this.afm = afm;
+    }
 
     public String getAfm() {
         return afm;
@@ -55,5 +87,9 @@ public class Vehicle {
 
     public void setColour(String colour) {
         this.colour = colour;
+    }
+
+    public int getId() {
+        return id;
     }
 }

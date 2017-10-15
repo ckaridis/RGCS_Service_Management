@@ -32,6 +32,21 @@ public class Service {
     @Column(name = "description", nullable = false)
     private String repairDescription;
 
+
+    public Service() {
+    }
+
+    public Service(String licensePlates, String repairRegistrationDate, String repairDate, String repairStatus, String repairType, double repairCost, String repairDescription) {
+        this.licensePlates = licensePlates;
+        this.repairRegistrationDate = repairRegistrationDate;
+        this.repairDate = repairDate;
+        this.repairStatus = repairStatus;
+        this.repairType = repairType;
+        this.repairCost = repairCost;
+        this.repairDescription = repairDescription;
+    }
+
+
     public String getLicensePlates() {
         return licensePlates;
     }
@@ -46,20 +61,6 @@ public class Service {
 
     public void setRepairRegistrationDate(String repairRegistrationDate) {
         this.repairRegistrationDate = repairRegistrationDate;
-    }
-
-
-    public Service()
-    {}
-    
-    public Service(String licensePlates, String repairRegistrationDate, String repairDate, String repairStatus, String repairType, double repairCost, String repairDescription) {
-        this.licensePlates = licensePlates;
-        this.repairRegistrationDate = repairRegistrationDate;
-        this.repairDate = repairDate;
-        this.repairStatus = repairStatus;
-        this.repairType = repairType;
-        this.repairCost = repairCost;
-        this.repairDescription = repairDescription;
     }
 
     public String getRepairDate() {
