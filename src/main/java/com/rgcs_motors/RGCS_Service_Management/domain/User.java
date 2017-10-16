@@ -8,11 +8,11 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     @Id
-    @Column (nullable = false, name = "ID")
+    @Column (nullable = false, name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, name = "VAT", unique=true)
+    @Column(nullable = false, name = "vat", unique=true)
     private String vat;
 
     @Column(nullable = false, name = "name")
