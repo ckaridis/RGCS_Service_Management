@@ -21,9 +21,13 @@ public class LoginServiceImpl implements LoginService {
         User user = null;
         try {
             user = userRepository.findByEmailAndPassword(email, password);
+            if(user == null)
+            {
+                throw new InvalidCredentialsException("User not found!");
+            }
         } catch (Exception e) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service sout: user not found");
-            throw new InvalidCredentialsException("User not found!");
+            e.printStackTrace();
         }
         return user;
     }
