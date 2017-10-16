@@ -1,16 +1,13 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
-import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.model.LoginForm;
 import com.rgcs_motors.RGCS_Service_Management.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -20,29 +17,21 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping("/")
-    String indexPage(Model model) {
-
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    String indexPage(Model model, @RequestParam(name = "error", required = false) String error) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> updated yesterday
+        if(error != null)
+        {
+            model.addAttribute("errorMessage",error);
+        }
         model.addAttribute(LOGIN_FORM, new LoginForm ());
-
         return "index";
     }
 
-    @RequestMapping (value = "/loginValidation", method = RequestMethod.POST)
-    public String loginValidation( @Valid @ModelAttribute(LOGIN_FORM) LoginForm loginForm ){
-
-        System.out.println (">>>>>>>>>>>>>>>>>>>>>>" + loginForm.getEmail () + loginForm.getPassword () );
-        loginForm.setEmail ( "test@test.com" );
-        System.out.println (">>>>>>>>>>>>>>>>>>>>>>" + loginForm.getEmail () + loginForm.getPassword () );
-
-        User user = loginService.login ( loginForm.getEmail (), loginForm.getPassword () );
-
-        if (user.getType ().equals ( "Admin" )){
-            return "redirect:/admin";
-        }
-        return "redirect:/user";
+    @RequestMapping("/accessDenied")
+    String showErrorPage(Model model, @RequestParam(name = "error", required = false) String error) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> updated yesterday
+        error = "Invalid Credentials! Please try again";
+        model.addAttribute("errorMessage",error);
+        model.addAttribute(LOGIN_FORM, new LoginForm ());
+        return "index";
     }
-
-
-
-}
+}//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end of controller

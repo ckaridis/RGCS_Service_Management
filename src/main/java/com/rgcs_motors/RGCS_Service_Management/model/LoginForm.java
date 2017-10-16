@@ -6,14 +6,14 @@ import javax.validation.constraints.Size;
 
 public class LoginForm {
 
-    private static final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    //private static final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 
     private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9@#$%^&]*$";
 
     private static final int PASSWORD_MINSIZE = 6;
     private static final int PASSWORD_MAXSIZE = 15;
 
-    @Pattern(regexp = EMAIL_PATTERN, message = "{login.email.invalid}")
+    //@Pattern(regexp = EMAIL_PATTERN, message = "{login.email.invalid}")
     private String email;
 
     @NotNull(message = "{login.password.null}")
