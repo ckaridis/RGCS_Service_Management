@@ -34,6 +34,12 @@ public class UserHomeController {
         List<Service> services = userHomeService.fetchServicesForUser(username);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : " + services.toString());
         model.addAttribute("serviceList", services);
+
+        if(error != null)
+        {
+            model.addAttribute("errorMessage",error);
+        }
+        
         return "/owner/owner_home";
     }
 
