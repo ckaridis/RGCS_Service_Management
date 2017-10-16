@@ -30,7 +30,7 @@ public class User implements Serializable{
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "user_type")
+    @Column(nullable = false, name = "usertype")
     private String type;
 
     public User () {
