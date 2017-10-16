@@ -10,6 +10,23 @@
 
 	<name>RGCS_Service_Management</name>
 	<description>Vehicle service web application</description>
+	<developers>
+		<developer>
+			<name>chris</name>
+		</developer>
+		<developer>
+			<name>chris</name>
+		</developer>
+		<developer>
+			<name>george</name>
+		</developer>
+		<developer>
+			<name>john</name>
+		</developer>
+		<developer>
+			<name>Vicky</name>
+		</developer>
+	</developers>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

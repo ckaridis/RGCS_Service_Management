@@ -1,6 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.security;
 
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
+import com.rgcs_motors.RGCS_Service_Management.exceptions.InvalidCredentialsException;
 import com.rgcs_motors.RGCS_Service_Management.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,14 +28,21 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>AuthProvider mail is :" + email + " and password is : " + password);
 
-        User user = loginService.login(email, password);  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CALL OUR LOGINSERVICE TO FETCH USER FROM DB
+        User user = loginService.login(email, password);
+
         Authentication auth = null;
+        Set<GrantedAuthority> grantedAuths = new HashSet<>();
 
         if (user != null){   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CREATE AUTHORITY FROM FETCHED USER'S ROLE
 
             String role = user.getType();
-            Set<GrantedAuthority> grantedAuths = new HashSet<>();
             grantedAuths.add(new SimpleGrantedAuthority(role.trim()));
+            auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
+        }
+        else
+        {
+            grantedAuths.add(new SimpleGrantedAuthority("notFound"));
             auth = new UsernamePasswordAuthenticationToken(email, password, grantedAuths);
         }
         return auth;
