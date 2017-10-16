@@ -29,7 +29,7 @@ public class LoginController {
 
     @RequestMapping("/accessDenied")
     String showErrorPage(Model model, @RequestParam(name = "error", required = false) String error) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> updated yesterday
-        error = "User not found! Please try again";
+        error = "Invalid Credentials! Please try again";
         model.addAttribute("errorMessage",error);
         model.addAttribute(LOGIN_FORM, new LoginForm ());
         return "index";
