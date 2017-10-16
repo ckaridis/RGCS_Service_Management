@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface UserHomeService {
 
-    List<Service> fetchServicesForUser(String username);
+    List<Service> fetchServicesForUser(String username) throws Exception;
 }

@@ -8,11 +8,11 @@ import java.util.Date;
 public class Service {
 
     @Id
-    @Column (nullable = false, name = "ID")
+    @Column (nullable = false, name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "VEHICLE_PLATE", nullable = false, unique = true)
+    @Column(name = "vehicle_plate", nullable = false, unique = true)
     private String licensePlates;
 
     @Column(name = "registration_date", nullable = false)
@@ -28,7 +28,7 @@ public class Service {
     private String repairType;
 
     @Column(name = "service_cost", nullable = false)
-    private String repairCost;
+    private double repairCost;
 
     @Column(name = "description", nullable = false)
     private String repairDescription;
@@ -37,7 +37,7 @@ public class Service {
     public Service() {
     }
 
-    public Service(String licensePlates, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
+    public Service(String licensePlates, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, double repairCost, String repairDescription) {
         this.licensePlates = licensePlates;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairDate = repairDate;
@@ -88,11 +88,11 @@ public class Service {
         this.repairType = repairType;
     }
 
-    public String getRepairCost() {
+    public double getRepairCost() {
         return repairCost;
     }
 
-    public void setRepairCost(String repairCost) {
+    public void setRepairCost(double repairCost) {
         this.repairCost = repairCost;
     }
 

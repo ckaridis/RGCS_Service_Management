@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Vehicle {
 
     @Id
-    @Column(nullable = false, name = "ID")
+    @Column(nullable = false, name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
@@ -17,7 +17,7 @@ public class Vehicle {
     @Column(nullable = false, name = "model")
     private String model;
 
-    @Column(nullable = false, name = "LICENSE_PLATE", unique = true)
+    @Column(nullable = false, name = "license_plate", unique = true)
     private String licensePlates;
 
     @Column(nullable = false, name = "production_year")
@@ -26,7 +26,7 @@ public class Vehicle {
     @Column(nullable = false, name = "color")
     private String colour;
 
-    @Column(nullable = false, name = "USER_VAT")
+    @Column(nullable = false, name = "vat")
     private String afm;
 
     public Vehicle() {

@@ -28,12 +28,24 @@ public class UserHomeController {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> the service returns all the services for the user with that username
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> adds the list of services to the view model
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> shows the view
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
-        List<Service> services = userHomeService.fetchServicesForUser(username);
+
+        List<Service> services = null;
+        try {
+            services = userHomeService.fetchServicesForUser(username);
+        } catch (Exception e) {
+            e.printStackTrace();
+            error = e.getMessage().toString();
+        }
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : " + services.toString());
-        model.addAttribute("serviceList", services);
+
+        if(!services.isEmpty())
+        {
+            model.addAttribute("serviceList", services);
+        }
 
         if(error != null)
         {
