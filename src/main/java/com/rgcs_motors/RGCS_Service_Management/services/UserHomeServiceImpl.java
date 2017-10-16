@@ -28,7 +28,7 @@ public class UserHomeServiceImpl implements UserHomeService {
     @Override
     public List<Service> fetchServicesForUser(String username) {
         User user = userRepository.findByEmail(username);
-        List<Vehicle> vehicles = vehicleRepository.findByUSER_VAT(user.getVat());
+        List<Vehicle> vehicles = vehicleRepository.findByUser_vat(user.getVat());
         List<Service> services = new ArrayList<>();
         for(Vehicle v: vehicles)
         {

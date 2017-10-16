@@ -1,6 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "services")
@@ -15,10 +16,10 @@ public class Service {
     private String licensePlates;
 
     @Column(name = "registration_date", nullable = false)
-    private String repairRegistrationDate;
+    private Date repairRegistrationDate;
 
     @Column(name = "service_date", nullable = false)
-    private String repairDate;
+    private Date repairDate;
 
     @Column(name = "status", nullable = false)
     private String repairStatus;
@@ -27,7 +28,7 @@ public class Service {
     private String repairType;
 
     @Column(name = "service_cost", nullable = false)
-    private double repairCost;
+    private String repairCost;
 
     @Column(name = "description", nullable = false)
     private String repairDescription;
@@ -36,7 +37,7 @@ public class Service {
     public Service() {
     }
 
-    public Service(String licensePlates, String repairRegistrationDate, String repairDate, String repairStatus, String repairType, double repairCost, String repairDescription) {
+    public Service(String licensePlates, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
         this.licensePlates = licensePlates;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairDate = repairDate;
@@ -55,19 +56,19 @@ public class Service {
         this.licensePlates = licensePlates;
     }
 
-    public String getRepairRegistrationDate() {
+    public Date getRepairRegistrationDate() {
         return repairRegistrationDate;
     }
 
-    public void setRepairRegistrationDate(String repairRegistrationDate) {
+    public void setRepairRegistrationDate(Date repairRegistrationDate) {
         this.repairRegistrationDate = repairRegistrationDate;
     }
 
-    public String getRepairDate() {
+    public Date getRepairDate() {
         return repairDate;
     }
 
-    public void setRepairDate(String repairDate) {
+    public void setRepairDate(Date repairDate) {
         this.repairDate = repairDate;
     }
 
@@ -87,11 +88,11 @@ public class Service {
         this.repairType = repairType;
     }
 
-    public double getRepairCost() {
+    public String getRepairCost() {
         return repairCost;
     }
 
-    public void setRepairCost(double repairCost) {
+    public void setRepairCost(String repairCost) {
         this.repairCost = repairCost;
     }
 

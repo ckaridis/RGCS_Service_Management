@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
 
-    List<Vehicle> findByUSER_VAT(String email);
+    List<Vehicle> findByUser_vat(String email);
 }

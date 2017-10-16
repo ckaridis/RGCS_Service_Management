@@ -30,9 +30,11 @@ public class UserHomeController {
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> shows the view
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
         List<Service> services = userHomeService.fetchServicesForUser(username);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : " + services.toString());
         model.addAttribute("serviceList", services);
         return "/owner/owner_home";
     }
-    
+
 }
