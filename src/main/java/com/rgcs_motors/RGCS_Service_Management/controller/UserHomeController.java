@@ -39,7 +39,7 @@ public class UserHomeController {
         {
             model.addAttribute("errorMessage",error);
         }
-        
+
         return "/owner/owner_home";
     }
 
