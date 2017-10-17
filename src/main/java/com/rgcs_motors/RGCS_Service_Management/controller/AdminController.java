@@ -26,8 +26,6 @@ public class AdminController {
         List<Repair> repairs = new ArrayList<>();
         repairs = adminHomeService.fetchRepairsForOwner();
 
-
-
         return "/admin/home";
     }
 }
