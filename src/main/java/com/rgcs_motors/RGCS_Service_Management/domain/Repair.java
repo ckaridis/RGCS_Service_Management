@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "services")
+@Table(name = "repairs")
 public class Repair {
 
     @Id
@@ -18,16 +18,16 @@ public class Repair {
     @Column(name = "registrationdate", nullable = false)
     private Date repairRegistrationDate;
 
-    @Column(name = "servicedate", nullable = false)
-    private Date repairDate;
+    @Column(name = "repairdate", nullable = false)
+    private Date repairdate;
 
     @Column(name = "status", nullable = false)
     private String repairStatus;
 
-    @Column(name = "servicetype", nullable = false)
+    @Column(name = "repairtype", nullable = false)
     private String repairType;
 
-    @Column(name = "servicecost", nullable = false)
+    @Column(name = "repaircost", nullable = false)
     private String repairCost;
 
     @Column(name = "description", nullable = false)
@@ -37,10 +37,10 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String licenseplate, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, Date repairdate, String repairStatus, String repairType, String repairCost, String repairDescription) {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
-        this.repairDate = repairDate;
+        this.repairdate = repairdate;
         this.repairStatus = repairStatus;
         this.repairType = repairType;
         this.repairCost = repairCost;
@@ -64,12 +64,12 @@ public class Repair {
         this.repairRegistrationDate = repairRegistrationDate;
     }
 
-    public Date getRepairDate() {
-        return repairDate;
+    public Date getRepairdate() {
+        return repairdate;
     }
 
-    public void setRepairDate(Date repairDate) {
-        this.repairDate = repairDate;
+    public void setRepairdate(Date repairdate) {
+        this.repairdate = repairdate;
     }
 
     public String getRepairStatus() {
