@@ -15,6 +15,8 @@ import java.util.List;
 
 @Controller
 public class UserHomeController {
+    
+    private final String REPAIRS_FOR_USER = "repair";
 
     @Autowired
     private UserHomeService userHomeService;
@@ -33,9 +35,9 @@ public class UserHomeController {
         String username = (String) auth.getPrincipal();
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
 
-        List<Service> services = null;
+        List<Service> repairs = null;
         try {
-            services = userHomeService.fetchServicesForUser(username);
+            repairs = userHomeService.fetchServicesForUser(username);
         } catch (Exception e) {
             e.printStackTrace();
             error = e.getMessage().toString();
@@ -43,14 +45,14 @@ public class UserHomeController {
 
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : \n");
-        for(Service s:services)
+        for(Service s:repairs)
         {
             System.out.println(s.getLicensePlates());
         }
 
-        if(!services.isEmpty())
+        if(!repairs.isEmpty())
         {
-            model.addAttribute("serviceList", services);
+            model.addAttribute(REPAIRS_FOR_USER, repairs);
         }
 
         if(error != null)

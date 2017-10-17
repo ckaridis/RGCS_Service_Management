@@ -16,6 +16,8 @@ import java.util.List;
 @Transactional
 public class UserHomeServiceImpl implements UserHomeService {
 
+    private final String repairsNotFoundError = "No pending repairs found";
+
     @Autowired
     private UserRepository userRepository;
 
@@ -27,8 +29,18 @@ public class UserHomeServiceImpl implements UserHomeService {
 
     @Override
     public List<Service> fetchServicesForUser(String username) throws Exception{
-        User user = userRepository.findByEmail(username);
-        List<Vehicle> vehicles = vehicleRepository.findByUservat(user.getVat());
+        User user;
+        List<Vehicle> vehicles = new ArrayList<>();
+        String errorMessage = "";
+        try{
+          user = userRepository.findByEmail(username);
+          vehicles = vehicleRepository.findByUservat(user.getVat());
+        }
+        catch(Exception e)
+        {
+            errorMessage = e.getMessage().toString();
+        }
+
         List<Service> services = new ArrayList<>();
         for(Vehicle v: vehicles)
         {
@@ -37,7 +49,12 @@ public class UserHomeServiceImpl implements UserHomeService {
         }
         if(services.isEmpty())
         {
-            throw new Exception("No services found");
+            errorMessage = repairsNotFoundError;
+        }
+
+        if(errorMessage != null)
+        {
+            throw new Exception(errorMessage);
         }
         return services;
     }
