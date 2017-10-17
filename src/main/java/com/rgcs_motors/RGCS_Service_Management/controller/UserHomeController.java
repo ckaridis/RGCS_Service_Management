@@ -1,6 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
-import com.rgcs_motors.RGCS_Service_Management.domain.Service;
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.services.UserHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,7 +36,7 @@ public class UserHomeController {
         String username = (String) auth.getPrincipal();
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
 
-        List<Service> repairs = new ArrayList<>();
+        List<Repair> repairs = new ArrayList<>();
         try {
             repairs = userHomeService.fetchServicesForUser(username);
             repairs.get(0).getRepairDescription();

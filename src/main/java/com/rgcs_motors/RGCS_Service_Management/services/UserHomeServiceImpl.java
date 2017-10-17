@@ -1,9 +1,9 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
-import com.rgcs_motors.RGCS_Service_Management.domain.Service;
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
-import com.rgcs_motors.RGCS_Service_Management.repositories.ServiceRepository;
+import com.rgcs_motors.RGCS_Service_Management.repositories.RepairRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.UserRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,10 @@ public class UserHomeServiceImpl implements UserHomeService {
     private VehicleRepository vehicleRepository;
 
     @Autowired
-    private ServiceRepository serviceRepository;
+    private RepairRepository repairRepository;
 
     @Override
-    public List<Service> fetchServicesForUser(String username) throws Exception{
+    public List<Repair> fetchServicesForUser(String username) throws Exception{
         User user;
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
         String errorMessage = "";
@@ -43,13 +43,13 @@ public class UserHomeServiceImpl implements UserHomeService {
             errorMessage = e.getMessage().toString();
         }
 
-        List<Service> services = new ArrayList<Service>();
+        List<Repair> repairs = new ArrayList<Repair>();
         for(Vehicle v: vehicles)
         {
-            services.add(serviceRepository.findByLicenseplate(v.getLicensePlates()));
-            System.out.println(services.get(0).getRepairDescription());
+            repairs.add(repairRepository.findByLicenseplate(v.getLicensePlates()));
+            System.out.println(repairs.get(0).getRepairDescription());
         }
-        if(services.isEmpty())
+        if(repairs.isEmpty())
         {
             errorMessage = repairsNotFoundError;
             System.out.println("service is empty !\n");
@@ -59,6 +59,6 @@ public class UserHomeServiceImpl implements UserHomeService {
         {
             throw new Exception(errorMessage);
         }
-        return services;
+        return repairs;
     }
 }

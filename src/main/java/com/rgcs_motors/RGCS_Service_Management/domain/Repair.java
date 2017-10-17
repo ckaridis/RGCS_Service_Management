@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "services")
-public class Service {
+public class Repair {
 
     @Id
     @Column (nullable = false, name = "id")
@@ -34,10 +34,10 @@ public class Service {
     private String repairDescription;
 
 
-    public Service() {
+    public Repair() {
     }
 
-    public Service(String licenseplate, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairDate = repairDate;
