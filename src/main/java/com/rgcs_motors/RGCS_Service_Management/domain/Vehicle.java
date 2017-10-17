@@ -26,7 +26,7 @@ public class Vehicle {
     @Column(nullable = false, name = "color")
     private String colour;
 
-    @Column(nullable = false, name = "vat")
+    @Column(nullable = false, name = "uservat")
     private String afm;
 
     public Vehicle() {

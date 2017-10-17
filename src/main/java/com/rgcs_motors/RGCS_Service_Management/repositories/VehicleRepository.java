@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
 
-    List<Vehicle> findByVat(String vat);
+    List<Vehicle> findByUservat(String uservat);
 }

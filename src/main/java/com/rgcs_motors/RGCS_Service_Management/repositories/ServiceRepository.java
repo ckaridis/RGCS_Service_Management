@@ -11,6 +11,5 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends CrudRepository<Service, Long> {
 
-    //@Query("from services where VEHICLE_PLATE=:plate")
-    Service findByVehicle_plate(String plate);
+    Service findByVehicleplate(String vehicleplate);
 }

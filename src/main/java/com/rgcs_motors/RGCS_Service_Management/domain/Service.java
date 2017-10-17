@@ -12,7 +12,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "vehicle_plate", nullable = false, unique = true)
+    @Column(name = "vehicleplate", nullable = false, unique = true)
     private String licensePlates;
 
     @Column(name = "registration_date", nullable = false)

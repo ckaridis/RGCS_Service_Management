@@ -40,7 +40,13 @@ public class UserHomeController {
             e.printStackTrace();
             error = e.getMessage().toString();
         }
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : " + services.toString());
+
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : \n");
+        for(Service s:services)
+        {
+            System.out.println(s.getLicensePlates());
+        }
 
         if(!services.isEmpty())
         {

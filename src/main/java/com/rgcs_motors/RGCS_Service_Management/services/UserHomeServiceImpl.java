@@ -28,11 +28,12 @@ public class UserHomeServiceImpl implements UserHomeService {
     @Override
     public List<Service> fetchServicesForUser(String username) throws Exception{
         User user = userRepository.findByEmail(username);
-        List<Vehicle> vehicles = vehicleRepository.findByVat(user.getVat());
+        List<Vehicle> vehicles = vehicleRepository.findByUservat(user.getVat());
         List<Service> services = new ArrayList<>();
         for(Vehicle v: vehicles)
         {
-            services.add(serviceRepository.findByVehicle_plate(v.getLicensePlates()));
+            services.add(serviceRepository.findByVehicleplate(v.getLicensePlates()));
+            System.out.println(services.toString());
         }
         if(services.isEmpty())
         {
