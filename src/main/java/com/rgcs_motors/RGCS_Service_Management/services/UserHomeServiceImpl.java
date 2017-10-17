@@ -44,7 +44,7 @@ public class UserHomeServiceImpl implements UserHomeService {
         List<Service> services = new ArrayList<>();
         for(Vehicle v: vehicles)
         {
-            services.add(serviceRepository.findByVehicleplate(v.getLicensePlates()));
+            services.add(serviceRepository.findByLicenseplate(v.getLicensePlates()));
             System.out.println(services.toString());
         }
         if(services.isEmpty())

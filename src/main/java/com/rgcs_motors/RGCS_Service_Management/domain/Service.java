@@ -12,23 +12,23 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "vehicleplate", nullable = false, unique = true)
-    private String licensePlates;
+    @Column(name = "licenseplate", nullable = false, unique = true)
+    private String licenseplate;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column(name = "registrationdate", nullable = false)
     private Date repairRegistrationDate;
 
-    @Column(name = "service_date", nullable = false)
+    @Column(name = "servicedate", nullable = false)
     private Date repairDate;
 
     @Column(name = "status", nullable = false)
     private String repairStatus;
 
-    @Column(name = "service_type", nullable = false)
+    @Column(name = "servicetype", nullable = false)
     private String repairType;
 
-    @Column(name = "service_cost", nullable = false)
-    private double repairCost;
+    @Column(name = "servicecost", nullable = false)
+    private String repairCost;
 
     @Column(name = "description", nullable = false)
     private String repairDescription;
@@ -37,8 +37,8 @@ public class Service {
     public Service() {
     }
 
-    public Service(String licensePlates, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, double repairCost, String repairDescription) {
-        this.licensePlates = licensePlates;
+    public Service(String licenseplate, Date repairRegistrationDate, Date repairDate, String repairStatus, String repairType, String repairCost, String repairDescription) {
+        this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairDate = repairDate;
         this.repairStatus = repairStatus;
@@ -49,11 +49,11 @@ public class Service {
 
 
     public String getLicensePlates() {
-        return licensePlates;
+        return licenseplate;
     }
 
-    public void setLicensePlates(String licensePlates) {
-        this.licensePlates = licensePlates;
+    public void setLicensePlates(String licenseplate) {
+        this.licenseplate = licenseplate;
     }
 
     public Date getRepairRegistrationDate() {
@@ -88,11 +88,11 @@ public class Service {
         this.repairType = repairType;
     }
 
-    public double getRepairCost() {
+    public String getRepairCost() {
         return repairCost;
     }
 
-    public void setRepairCost(double repairCost) {
+    public void setRepairCost(String repairCost) {
         this.repairCost = repairCost;
     }
 

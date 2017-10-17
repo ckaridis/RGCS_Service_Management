@@ -12,7 +12,7 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, name = "vat", unique=true)
+    @Column(nullable = false, name = "uservat", unique=true)
     private String vat;
 
     @Column(nullable = false, name = "name")
@@ -27,7 +27,7 @@ public class User implements Serializable{
     @Column(nullable = false, name = "email", unique=true)
     private String email;
 
-    @Column(nullable = false, name = "psw")
+    @Column(nullable = false, name = "password")
     private String password;
 
     @Column(nullable = false, name = "usertype")

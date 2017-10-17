@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends CrudRepository<Service, Long> {
 
-    Service findByVehicleplate(String vehicleplate);
+    Service findByLicenseplate(String licenseplate);
 }

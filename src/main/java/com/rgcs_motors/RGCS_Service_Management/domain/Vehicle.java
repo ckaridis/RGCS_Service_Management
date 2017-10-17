@@ -17,36 +17,36 @@ public class Vehicle {
     @Column(nullable = false, name = "model")
     private String model;
 
-    @Column(nullable = false, name = "license_plate", unique = true)
+    @Column(nullable = false, name = "licenseplate", unique = true)
     private String licensePlates;
 
-    @Column(nullable = false, name = "production_year")
+    @Column(nullable = false, name = "productionyear")
     private String factoryDate;
 
     @Column(nullable = false, name = "color")
     private String colour;
 
     @Column(nullable = false, name = "uservat")
-    private String afm;
+    private String uservat;
 
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String model, String licensePlates, String factoryDate, String colour, String afm) {
+    public Vehicle(String brand, String model, String licensePlates, String factoryDate, String colour, String uservat) {
         this.brand = brand;
         this.model = model;
         this.licensePlates = licensePlates;
         this.factoryDate = factoryDate;
         this.colour = colour;
-        this.afm = afm;
+        this.uservat = uservat;
     }
 
     public String getAfm() {
-        return afm;
+        return uservat;
     }
 
-    public void setAfm(String afm) {
-        this.afm = afm;
+    public void setAfm(String uservat) {
+        this.uservat = uservat;
     }
 
     public String getBrand() {
