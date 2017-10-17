@@ -11,11 +11,12 @@
 </#macro>
 
 
+
+
+
 <#macro display_page> <!-- this is the basic page -->
     <!DOCTYPE html>
     <head lang="en">
-
-
 
 
         <!-- bootstrap start -->
@@ -29,10 +30,11 @@
 
     </head>
     <body>
+
     <div class="bodyclass"> <!-- required for custom css -->
-        <div class="container"> <!-- Every bootstrap page should be inside "container" -->
+
             <@page_body/>
-        </div>
+
 
         <!--bootstrap start -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
