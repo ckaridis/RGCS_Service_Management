@@ -48,7 +48,7 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             if (isAdmin(roles)) {
                 redirectUrl = "/admin/home";
             } else if (isUser(roles)) {
-                redirectUrl = "/user/home";
+                redirectUrl = "/owner/home";
             } else if(isNotfound(roles)){
                 redirectUrl = "/accessDenied";
             }
