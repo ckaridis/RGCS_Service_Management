@@ -1,5 +1,6 @@
 <#include "/base.ftl">
     <#include "/macros/navbar.ftl">
+        <#include "/macros/searchbar.ftl">
 
             <!-- PAGE HEADER GOES HERE -->
             <#macro page_head>
@@ -12,7 +13,7 @@
                 <@navbar/>
                 <div class="container">
 
-
+                    <@searchbar/>
 
                     <div class="row">
                         <table class="table table-hover table-responsive">
@@ -51,12 +52,12 @@
                             </tr>
                             <tr id="d1">
                                 <td>1</td>
-                                <td id="f1">123456789</td>
-                                <td id="l1">John</td>
-                                <td id="m1">Doe</td>
-                                <td id="m1">2</td>
-                                <td id="m1">test@test.com</td>
-                                <td id="m1">Administrator</td>
+                                <td id="f2">123456789</td>
+                                <td id="l2">John</td>
+                                <td id="m2">Doe</td>
+                                <td id="m2">2</td>
+                                <td id="m2">test@test.com</td>
+                                <td id="m2">Administrator</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                             class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
@@ -120,6 +121,10 @@
                             <div class="modal-body">
                                 <input id="fn" type="text" class="form-control" name="fname" placeholder="First Name">
                                 <input id="ln" type="text" class="form-control" name="fname" placeholder="Last Name">
+                                <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
+                                <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
+                                <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
+                                <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
                                 <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
                             </div>
                             <div class="modal-footer">
