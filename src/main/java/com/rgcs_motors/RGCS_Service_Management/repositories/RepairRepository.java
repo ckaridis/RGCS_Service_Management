@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface RepairRepository extends CrudRepository<Repair, Long> {
 
-    Repair findByLicenseplate(String licenseplate);
+    List<Repair> findByLicenseplate(String licenseplate);
 
     List<Repair> findTop10ByOrderByRepairdateAsc();
 }
