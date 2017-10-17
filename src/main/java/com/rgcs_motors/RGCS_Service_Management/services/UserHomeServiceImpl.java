@@ -30,29 +30,32 @@ public class UserHomeServiceImpl implements UserHomeService {
     @Override
     public List<Service> fetchServicesForUser(String username) throws Exception{
         User user;
-        List<Vehicle> vehicles = new ArrayList<>();
+        List<Vehicle> vehicles = new ArrayList<Vehicle>();
         String errorMessage = "";
         try{
           user = userRepository.findByEmail(username);
+            System.out.println("user vat : " + user.getVat());
           vehicles = vehicleRepository.findByUservat(user.getVat());
+            System.out.println("plate : " + vehicles.get(0).getLicensePlates());
         }
         catch(Exception e)
         {
             errorMessage = e.getMessage().toString();
         }
 
-        List<Service> services = new ArrayList<>();
+        List<Service> services = new ArrayList<Service>();
         for(Vehicle v: vehicles)
         {
             services.add(serviceRepository.findByLicenseplate(v.getLicensePlates()));
-            System.out.println(services.toString());
+            System.out.println(services.get(0).getRepairDescription());
         }
         if(services.isEmpty())
         {
             errorMessage = repairsNotFoundError;
+            System.out.println("service is empty !\n");
         }
 
-        if(errorMessage != null)
+        if(errorMessage != "")
         {
             throw new Exception(errorMessage);
         }

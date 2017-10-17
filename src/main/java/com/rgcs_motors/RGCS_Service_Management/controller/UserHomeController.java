@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,23 +36,18 @@ public class UserHomeController {
         String username = (String) auth.getPrincipal();
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
 
-        List<Service> repairs = null;
+        List<Service> repairs = new ArrayList<>();
         try {
             repairs = userHomeService.fetchServicesForUser(username);
+            repairs.get(0).getRepairDescription();
         } catch (Exception e) {
             error = e.getMessage().toString();
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>Error caught :" + error);
         }
 
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>service list : \n");
-        for(Service s:repairs)
-        {
-            System.out.println(s.getLicensePlates());
-        }
-
         if(!repairs.isEmpty())
         {
+            System.out.println("repairs list added to model");
             model.addAttribute(REPAIRS_FOR_USER, repairs);
         }
 
