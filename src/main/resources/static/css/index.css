@@ -1,21 +1,21 @@
 
-body {
+/*body {
      margin:0;
      padding:0;
      width:100%;
      height:100%;
      overflow:hidden; 
-}
+}*/
 
-#page_wrapper{
+/*#page_wrapper{
   width:inherit;
   height: 1000px;
   padding: 0;
   margin: 0;
-  background:url(../res/login_page.jpg);
+  *//*background:url(../res/login_page.jpg);*//*
   background-size: 100% 100%;
   display:block;
-}
+}*/
 
 #form_wrapper{
 	width:30%;

@@ -1,0 +1,12 @@
+package com.rgcs_motors.RGCS_Service_Management.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class AdminController {
+    @RequestMapping("/admin/home")
+    String adminPage() {
+        return "/admin/home";
+    }
+}
