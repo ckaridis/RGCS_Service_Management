@@ -25,6 +25,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter { 
                 .antMatchers("/admin/**").hasAuthority("Admin")
                 .antMatchers("/owner/**").hasAuthority("Owner")
                 .antMatchers("/css/**","/js/**","/res/**").permitAll()
+                //.antMatchers("/").anonymous()
                 .anyRequest().fullyAuthenticated()
                 .and().csrf().disable()
                 .formLogin().successHandler(successHandler)
@@ -38,7 +39,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter { 
                 .logoutSuccessUrl("/")
                 .permitAll().and()
                 .exceptionHandling().accessDeniedPage("/accessDenied");
-
     }
 
     @Autowired
