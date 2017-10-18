@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface AdminHomeService {
 
-    List<Repair> fetchRepairsForOwner();
+    List<Repair> fetchRepairsForAdmin()throws Exception;
 }

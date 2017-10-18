@@ -7,12 +7,13 @@ import com.rgcs_motors.RGCS_Service_Management.repositories.RepairRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.UserRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@org.springframework.stereotype.Service
+@Service
 @Transactional
 public class UserHomeServiceImpl implements UserHomeService {
 

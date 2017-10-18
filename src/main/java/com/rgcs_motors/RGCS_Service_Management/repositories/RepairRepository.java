@@ -12,5 +12,5 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     Repair findByLicenseplate(String licenseplate);
 
-    List<Repair> findTop10ByOrderByRepairdateAsc();
+    List<Repair> findTop10ByStatusOrderByRepairdateAsc(String status) throws Exception;
 }

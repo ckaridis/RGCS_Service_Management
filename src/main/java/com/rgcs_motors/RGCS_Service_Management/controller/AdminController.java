@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-    private static String REPAIRS_FOR_ADMIN = "AdminRepairs";
+    private static final String REPAIRS_FOR_ADMIN = "AdminRepairs";
 
     @Autowired
     private AdminHomeService adminHomeService;
@@ -23,9 +23,23 @@ public class AdminController {
     @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public String adminPage(Model model, @RequestParam(name = "error", required = false) String error) {
 
-        List<Repair> repairs = new ArrayList<>();
-        repairs = adminHomeService.fetchRepairsForOwner();
+        List<Repair> repairs = new ArrayList<Repair>();
+        try {
+            repairs = adminHomeService.fetchRepairsForAdmin();
+            System.out.println("the firtttttt element is "+ repairs.get(0).getLicensePlates());
+        } catch (Exception e) {
 
+            error = e.getMessage().toString();
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>Error caught :" + error);
+        }
+        System.out.println("the firt element is "+ repairs.get(0).getLicensePlates());
+        if (!repairs.isEmpty()) {
+            System.out.println("Admin repairs list added to model");
+            model.addAttribute(REPAIRS_FOR_ADMIN, repairs);
+        }
+        if (error != null) {
+            model.addAttribute("errorMessage",error);
+        }
         return "/admin/home";
     }
 }

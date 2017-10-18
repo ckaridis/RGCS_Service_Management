@@ -22,7 +22,7 @@ public class Repair {
     private Date repairdate;
 
     @Column(name = "status", nullable = false)
-    private String repairStatus;
+    private String status;
 
     @Column(name = "repairtype", nullable = false)
     private String repairType;
@@ -37,11 +37,11 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String licenseplate, Date repairRegistrationDate, Date repairdate, String repairStatus, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, Date repairdate, String status, String repairType, String repairCost, String repairDescription) {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairdate = repairdate;
-        this.repairStatus = repairStatus;
+        this.status = status;
         this.repairType = repairType;
         this.repairCost = repairCost;
         this.repairDescription = repairDescription;
@@ -72,12 +72,12 @@ public class Repair {
         this.repairdate = repairdate;
     }
 
-    public String getRepairStatus() {
-        return repairStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRepairStatus(String repairStatus) {
-        this.repairStatus = repairStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getRepairType() {

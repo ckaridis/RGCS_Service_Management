@@ -15,30 +15,33 @@
 
                     <@searchbar/>
 
+
                     <div class="row">
                         <table class="table table-hover table-responsive">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>VAT Number</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Active Services</th>
-                                <th>Email</th>
-                                <th>Type</th>
+                                <th>License Plates</th>
+                                <th>Repair Date</th>
+                                <th>Repair Type</th>
+                                <th>Repair Cost</th>
+                                <th>Description</th>
+                                <th>Status</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
                             <tbody>
+
+                            <#if AdminRepairs??>
+                            <#list AdminRepairs as repairs>
+
                             <tr id="d1">
-                                <td>1</td>
-                                <td id="f1">123456789</td>
-                                <td id="l1">John</td>
-                                <td id="m1">Doe</td>
-                                <td id="m1">2</td>
-                                <td id="m1">test@test.com</td>
-                                <td id="m1">Administrator</td>
+                                <td id="f1">${repairs.getLicensePlates()}</td>
+                                <td id="l1">${repairs.getRepairdate()}</td>
+                                <td id="m1">${repairs.getRepairType()}</td>
+                                <td id="m1">${repairs.getRepairCost()}</td>
+                                <td id="m1">${repairs.getRepairDescription()}</td>
+                                <td id="m1">${repairs.getStatus()}</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                             class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
@@ -50,67 +53,11 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr id="d1">
-                                <td>1</td>
-                                <td id="f2">123456789</td>
-                                <td id="l2">John</td>
-                                <td id="m2">Doe</td>
-                                <td id="m2">2</td>
-                                <td id="m2">test@test.com</td>
-                                <td id="m2">Administrator</td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
-                                            class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
-                                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr id="d2">
-                                <td>1</td>
-                                <td id="f1">123456789</td>
-                                <td id="l1">John</td>
-                                <td id="m1">Doe</td>
-                                <td id="m1">2</td>
-                                <td id="m1">test@test.com</td>
-                                <td id="m1">Administrator</td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
-                                            class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
-                                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr id="d3">
-                                <td>1</td>
-                                <td id="f1">123456789</td>
-                                <td id="l1">John</td>
-                                <td id="m1">Doe</td>
-                                <td id="m1">2</td>
-                                <td id="m1">test@test.com</td>
-                                <td id="m1">Administrator</td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
-                                            class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
-                                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </td>
-                            </tr>
+                            </#list>
+                            </#if>
                             </tbody>
                         </table>
                     </div>
-                </div>
                 <div id="edit" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -121,7 +68,6 @@
                             <div class="modal-body">
                                 <input id="fn" type="text" class="form-control" name="fname" placeholder="First Name">
                                 <input id="ln" type="text" class="form-control" name="fname" placeholder="Last Name">
-                                <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
                                 <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
                                 <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
                                 <input id="mn" type="text" class="form-control" name="fname" placeholder="Middle Name">
