@@ -14,7 +14,7 @@
             <@navbar/>
             <div class="container">
                 <div class="row">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="/admin/createuser" method = "post">
                         <fieldset>
 
                             <!-- Form Name -->
@@ -59,15 +59,6 @@
                                 </div>
                             </div>
 
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="username">Username</label>
-                                <div class="col-md-5">
-                                    <input id="username" name="username" type="text" placeholder="Your username"
-                                           class="form-control input-md" required="">
-
-                                </div>
-                            </div>
 
                             <!-- Password input-->
                             <div class="form-group">
@@ -109,8 +100,8 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="createuser"></label>
                                 <div class="col-md-4">
-                                    <button id="createuser" name="createuser" class="btn btn-primary">Create User
-                                    </button>
+                                    <input type="submit" id="createuser" value="Create User"
+                                                  name="createuser" class="btn btn-primary">
                                 </div>
                             </div>
 

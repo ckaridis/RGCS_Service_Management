@@ -29,7 +29,7 @@ public class AdminController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();
-        model.addAttribute(ADMIN_EMAIL, username);
+        model.addAttribute(ADMIN_EMAIL,username);
 
         List<Repair> repairs = new ArrayList<Repair>();
         try {
