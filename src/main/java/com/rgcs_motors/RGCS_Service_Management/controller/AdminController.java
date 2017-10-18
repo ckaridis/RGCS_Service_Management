@@ -3,6 +3,8 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.services.AdminHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +18,17 @@ import java.util.List;
 public class AdminController {
 
     private static final String REPAIRS_FOR_ADMIN = "AdminRepairs";
+    private static final String ADMIN_EMAIL = "AdminEmail";
 
     @Autowired
     private AdminHomeService adminHomeService;
 
     @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public String adminPage(Model model, @RequestParam(name = "error", required = false) String error) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = (String) auth.getPrincipal();
+        model.addAttribute(ADMIN_EMAIL,username);
 
         List<Repair> repairs = new ArrayList<Repair>();
         try {

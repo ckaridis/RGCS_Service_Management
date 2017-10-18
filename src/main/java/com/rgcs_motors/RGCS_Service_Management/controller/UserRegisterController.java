@@ -6,6 +6,8 @@ import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerImpl;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +25,18 @@ public class UserRegisterController {
 
     private static final String REGISTER_FORM = "ownerRegistrationForm";
     private static final String failedRegistrationMessage = "Registration proccess failed";
+    private static final String ADMIN_EMAIL = "AdminEmail";
 
     @Autowired
     private RegisterNewOwnerService registerNewOwnerService;
 
     @GetMapping("/admin/createuser")
     String adminPage(Model model, RedirectAttributes redirectAttributes) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = (String) auth.getPrincipal();
+        model.addAttribute(ADMIN_EMAIL,username);
+
         if(!redirectAttributes.containsAttribute("returnedMessage"))
         {
             System.out.println("redirect attr msg : " + model.asMap().get("returnedMessage"));
