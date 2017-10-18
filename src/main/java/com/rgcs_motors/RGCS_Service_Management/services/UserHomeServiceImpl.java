@@ -45,10 +45,16 @@ public class UserHomeServiceImpl implements UserHomeService {
         }
 
         List<Repair> repairs = new ArrayList<Repair>();
+        List<Repair> repairsPerVehicle  = new ArrayList<Repair>();
+
         for(Vehicle v: vehicles)
         {
-            repairs.add(repairRepository.findByLicenseplate(v.getLicensePlates()));
-            System.out.println(repairs.get(0).getRepairDescription());
+            repairsPerVehicle = repairRepository.findByLicenseplate(v.getLicensePlates());
+            for(Repair repair : repairsPerVehicle)
+            {
+                repairs.add(repair);
+                System.out.println(repair.getRepairDescription());
+            }
         }
         if(repairs.isEmpty())
         {

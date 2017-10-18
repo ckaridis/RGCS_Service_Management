@@ -39,7 +39,6 @@ public class UserHomeController {
         List<Repair> repairs = new ArrayList<>();
         try {
             repairs = userHomeService.fetchServicesForUser(username);
-            repairs.get(0).getRepairDescription();
         } catch (Exception e) {
             error = e.getMessage().toString();
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>Error caught :" + error);
