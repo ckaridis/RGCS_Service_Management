@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class UserHomeController {
     
-    private final String REPAIRS_FOR_USER = "repair";
+    private final String REPAIRS_FOR_USER = "OwnerRepairs";
 
     @Autowired
     private UserHomeService userHomeService;
