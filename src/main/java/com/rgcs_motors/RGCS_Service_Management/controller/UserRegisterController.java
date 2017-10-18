@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class UserRegisterController {
+
     @RequestMapping("/admin/createuser")
     String adminPage() {
         return "/admin/createuser";

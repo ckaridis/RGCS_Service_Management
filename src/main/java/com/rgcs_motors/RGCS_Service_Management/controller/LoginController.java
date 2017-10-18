@@ -19,8 +19,8 @@ public class LoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     String indexPage(Model model, @RequestParam(name = "error", required = false) String error) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> updated yesterday
-        if(error != null)
-        {
+
+        if(error != null) {
             model.addAttribute("errorMessage",error);
         }
         model.addAttribute(LOGIN_FORM, new LoginForm ());

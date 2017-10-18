@@ -44,18 +44,15 @@ public class UserHomeController {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>Error caught :" + error);
         }
 
-        if(!repairs.isEmpty())
-        {
+        if(!repairs.isEmpty()) {
             System.out.println("repairs list added to model");
             model.addAttribute(REPAIRS_FOR_USER, repairs);
         }
 
-        if(error != null)
-        {
+        if(error != null) {
             model.addAttribute("errorMessage",error);
         }
 
         return "/owner/owner_home";
     }
-
 }
