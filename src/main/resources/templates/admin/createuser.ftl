@@ -59,6 +59,16 @@
                                 </div>
                             </div>
 
+                             <!-- Text input-->
+                                <div class="form-group">
+                                   <label class="col-md-4 control-label" for="address">Address</label>
+                                   <div class="col-md-5">
+                                      <input id="address" name="address" type="text"
+                                            placeholder="Your address goes here" class="form-control input-md"
+                                            required="">
+                                   </div>
+                                </div>
+
 
                             <!-- Password input-->
                             <div class="form-group">
@@ -81,20 +91,15 @@
                                 </div>
                             </div>
 
-                             <!--Multiple Radios (inline)-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="user_type">User type</label>
-                                <div class="col-md-4">
-                                    <label class="radio-inline" for="admin">
-                                        <input type="radio" name="user_type" id="admin" value="Admin" checked="checked">
-                                        Admin
-                                    </label>
-                                    <label class="radio-inline" for="owner">
-                                        <input type="radio" name="user_type" id="owner" value="Owner">
-                                        Owner
-                                    </label>
+                             <!-- User type input-->
+                             <div class="form-group">
+                                <label class="col-md-4 control-label" for="">User Type</label>
+                                <div class="col-md-5">
+                                   <input id="type" name="type" type="text" placeholder="Type of user"
+                                                                 class="form-control input-md" required="">
+                                      <span class="help-block">"Admin" or "Owner"</span>
                                 </div>
-                            </div>
+                             </div>
 
                             <!-- Button -->
                             <div class="form-group">
@@ -109,6 +114,36 @@
                     </form>
 
                 </div>
+                <br>
+                <#if binding_result??>
+                <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
+                   Form errors on previous try :
+                </p>
+                <#list errorsList as error>
+                <div class="row">
+                   <br>
+                   <p style="color:red;font-weight:bold;text-align:center;">
+                      error : ${error.getDefaultMessage()!error.toString()}
+                   </p>
+                </div>
+                </#list>
+                </#if>
+                <br>
+                <#if errorMessage??>
+                   <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
+                      Exceptions that occured on previous submission try :
+                   </p>
+                   <div class="row">
+                   <br>
+                      <p style="color:red;font-weight:bold;text-align:center;">
+                         error : ${errorMessage}
+                         <#if registrationResult??>
+                            <br>
+                            registration result : ${registrationResult}
+                         </#if>
+                      </p>
+                   </div>
+                </#if>
             </div>
 
 

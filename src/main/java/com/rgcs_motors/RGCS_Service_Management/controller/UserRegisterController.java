@@ -5,11 +5,15 @@ import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerImpl;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
+import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserRegisterController {
@@ -29,6 +34,9 @@ public class UserRegisterController {
 
     @Autowired
     private RegisterNewOwnerService registerNewOwnerService;
+
+    @Autowired
+    private OwnerRegistrationFormValidator formValidator;
 
     @GetMapping("/admin/createuser")
     String adminPage(Model model, RedirectAttributes redirectAttributes) {
@@ -52,9 +60,14 @@ public class UserRegisterController {
                                 RedirectAttributes redirectAttributes)
     {
 
+        formValidator.validate(registrationForm, bindingResult);
+        System.out.println("Field error : >>>> " + bindingResult.getFieldError("confirmpassword"));
+
         if (bindingResult.hasErrors()) {
             //redirect to the
             //get method after adding the binding result and the form to the redirect attributes.
+            List<FieldError> errorsList = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList",errorsList);
             System.out.println(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             redirectAttributes.addFlashAttribute("binding_result",bindingResult);
             redirectAttributes.addFlashAttribute(REGISTER_FORM,registrationForm);

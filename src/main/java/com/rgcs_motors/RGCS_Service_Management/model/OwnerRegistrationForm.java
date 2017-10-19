@@ -1,5 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -12,7 +14,7 @@ public class OwnerRegistrationForm {
     private static final int PASSWORD_MINSIZE = 6;
     private static final int PASSWORD_MAXSIZE = 15;
 
-    private static final String VAT_PATTERN = "^[1-9{9}]";
+    private static final String VAT_PATTERN = "^[1-9]{9}";
 
     private final static String NAME_PATTERN = "^[\\D]*$";
 
@@ -43,10 +45,11 @@ public class OwnerRegistrationForm {
     private String address;
 
     @NotNull(message = "{register.mail.null}")
+    @Email
     private String email;
 
     @NotNull(message = "{register.type.null}")
-    private String user_type;
+    private String type;
 
 
 
@@ -99,11 +102,11 @@ public class OwnerRegistrationForm {
     }
 
     public String getType() {
-        return user_type;
+        return type;
     }
 
     public void setType(String type) {
-        this.user_type = type;
+        this.type = type;
     }
 
     public String getEmail() {
