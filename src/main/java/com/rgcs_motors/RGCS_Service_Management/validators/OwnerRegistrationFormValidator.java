@@ -8,8 +8,6 @@ import org.springframework.validation.Validator;
 @Component
 public class OwnerRegistrationFormValidator implements Validator {
 
-    private final static String adminType = "Admin";
-    private final static String ownerType = "Owner";
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -23,13 +21,6 @@ public class OwnerRegistrationFormValidator implements Validator {
         {
             System.out.println(">>>>>>>>>>>>>>>>Validator pass error");
             errors.rejectValue("confirmpassword","Confirm Password doesn't match password");
-        }
-        if(!form.getType().toString().trim().equals(adminType) ||
-                !form.getType().toString().trim().equals(ownerType))
-        {
-            System.out.println(form.getType().trim());
-            System.out.println(">>>>>>>>>>>>>>>>Validator type error");
-            errors.rejectValue("type","User type must either be 'Admin' or 'Owner'");
         }
     }
 }

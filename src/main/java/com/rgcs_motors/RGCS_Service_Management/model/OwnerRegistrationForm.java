@@ -14,9 +14,11 @@ public class OwnerRegistrationForm {
     private static final int PASSWORD_MINSIZE = 6;
     private static final int PASSWORD_MAXSIZE = 15;
 
-    private static final String VAT_PATTERN = "^[1-9]{9}";
+    private static final String VAT_PATTERN = "^[1-9]{9}$";
 
     private final static String NAME_PATTERN = "^[\\D]*$";
+
+    private final static String YOLO_PATTERN = "(^Admin$)|(^Owner$)";
 
     @NotNull(message = "{register.password.null}")
     @Pattern(regexp = PASSWORD_PATTERN, message = "{register.password.invalid}")

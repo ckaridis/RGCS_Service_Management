@@ -3,7 +3,6 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
-import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerImpl;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,10 +25,10 @@ import java.util.List;
 public class UserRegisterController {
 
     private static final String REGISTER_FORM = "ownerRegistrationForm";
-    private static final String failedRegistrationMessage = "Registration proccess failed";
+    private static final String FAILED_REGISTRATION_MESSAGE = "Registration proccess failed";
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String ADMIN_CREATEUSER_PAGE = "/admin/createuser";
-    private static final String ADMIN_CREATEVEHICLE_PAGE = "/admin/createvehicle";
+    private static final String ADMIN_CREATEVEHICLE_PAGE = "/admin/CreateVehicle";
     private String redirectUrl = "";
 
     @Autowired
@@ -75,7 +71,7 @@ public class UserRegisterController {
             System.out.println(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             redirectAttributes.addFlashAttribute("binding_result",bindingResult);
             redirectAttributes.addFlashAttribute(REGISTER_FORM,registrationForm);
-            redirectAttributes.addFlashAttribute("returnedMessage",failedRegistrationMessage);
+            redirectAttributes.addFlashAttribute("returnedMessage", FAILED_REGISTRATION_MESSAGE);
             redirectUrl = "redirect:" + ADMIN_CREATEUSER_PAGE;
         }
         else{
@@ -83,7 +79,6 @@ public class UserRegisterController {
                 User user = UserConverter.buildUserObject(registrationForm);
                 System.out.println("user type is : " + user.getType());
                 String result = registerNewOwnerService.registerNewOwner(user);
-                redirectAttributes.addFlashAttribute("registrationResult",result);
                 redirectAttributes.addFlashAttribute("vatNumber",user.getVat());
                 redirectUrl = "redirect:" + ADMIN_CREATEVEHICLE_PAGE;
             } catch (Exception e) {
