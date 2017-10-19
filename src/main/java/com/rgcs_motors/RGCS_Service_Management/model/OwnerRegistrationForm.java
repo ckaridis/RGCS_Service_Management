@@ -8,8 +8,6 @@ import javax.validation.constraints.Size;
 
 public class OwnerRegistrationForm {
 
-    //private static final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-
     private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9@#$%^&]*$";
     private static final int PASSWORD_MINSIZE = 6;
     private static final int PASSWORD_MAXSIZE = 15;
@@ -17,8 +15,6 @@ public class OwnerRegistrationForm {
     private static final String VAT_PATTERN = "^[1-9]{9}$";
 
     private final static String NAME_PATTERN = "^[\\D]*$";
-
-    private final static String YOLO_PATTERN = "(^Admin$)|(^Owner$)";
 
     @NotNull(message = "{register.password.null}")
     @Pattern(regexp = PASSWORD_PATTERN, message = "{register.password.invalid}")
