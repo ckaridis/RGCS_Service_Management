@@ -31,6 +31,9 @@ public class UserRegisterController {
     private static final String REGISTER_FORM = "ownerRegistrationForm";
     private static final String failedRegistrationMessage = "Registration proccess failed";
     private static final String ADMIN_EMAIL = "AdminEmail";
+    private static final String ADMIN_CREATEUSER_PAGE = "/admin/createuser";
+    private static final String ADMIN_CREATEVEHICLE_PAGE = "/admin/createvehicle";
+    private String redirectUrl = "";
 
     @Autowired
     private RegisterNewOwnerService registerNewOwnerService;
@@ -50,7 +53,7 @@ public class UserRegisterController {
             System.out.println("redirect attr msg : " + model.asMap().get("returnedMessage"));
             model.addAttribute(REGISTER_FORM, new OwnerRegistrationForm());
         }
-        return "/admin/createuser";
+        return ADMIN_CREATEUSER_PAGE;
     }
 
     @RequestMapping(value = "/admin/createuser", method = RequestMethod.POST)
@@ -60,6 +63,7 @@ public class UserRegisterController {
                                 RedirectAttributes redirectAttributes)
     {
 
+        System.out.println(registrationForm.getType());
         formValidator.validate(registrationForm, bindingResult);
         System.out.println("Field error : >>>> " + bindingResult.getFieldError("confirmpassword"));
 
@@ -72,17 +76,22 @@ public class UserRegisterController {
             redirectAttributes.addFlashAttribute("binding_result",bindingResult);
             redirectAttributes.addFlashAttribute(REGISTER_FORM,registrationForm);
             redirectAttributes.addFlashAttribute("returnedMessage",failedRegistrationMessage);
+            redirectUrl = "redirect:" + ADMIN_CREATEUSER_PAGE;
+        }
+        else{
+            try {
+                User user = UserConverter.buildUserObject(registrationForm);
+                System.out.println("user type is : " + user.getType());
+                String result = registerNewOwnerService.registerNewOwner(user);
+                redirectAttributes.addFlashAttribute("registrationResult",result);
+                redirectAttributes.addFlashAttribute("vatNumber",user.getVat());
+                redirectUrl = "redirect:" + ADMIN_CREATEVEHICLE_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+                redirectUrl = "redirect:" + ADMIN_CREATEUSER_PAGE;
+            }
         }
 
-        try {
-            User user = UserConverter.buildUserObject(registrationForm);
-            System.out.println("user type is : " + user.getType());
-            String result = registerNewOwnerService.registerNewOwner(user);
-            redirectAttributes.addFlashAttribute("registrationResult",result);
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-        }
-
-        return "redirect:/admin/createuser";
+        return redirectUrl;
     }
 }

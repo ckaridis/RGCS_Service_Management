@@ -91,14 +91,14 @@
                                 </div>
                             </div>
 
-                             <!-- User type input-->
                              <div class="form-group">
-                                <label class="col-md-4 control-label" for="">User Type</label>
-                                <div class="col-md-5">
-                                   <input id="type" name="type" type="text" placeholder="Type of user"
-                                                                 class="form-control input-md" required="">
-                                      <span class="help-block">"Admin" or "Owner"</span>
-                                </div>
+                                   <label class="col-md-4 control-label" for="type">Select user type</label>
+                                   <div class="col-md-5">
+                                      <select class="form-control" id="type" name="type">
+                                         <option>Admin</option>
+                                         <option>Owner</option>
+                                      </select>
+                                   </div>
                              </div>
 
                             <!-- Button -->
