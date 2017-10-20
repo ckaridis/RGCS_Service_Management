@@ -38,7 +38,7 @@
         <div class="input-group-addon">@</div>
         <div class="input-group-addon">VAT</div>
         <input type="text" class="form-control" name="searchval" id="searchval"
-         placeholder="Enter search criteria...">
+         placeholder="Enter search criteria comma separated... f.ex. mail@com , vat number" required>
       </div>
 
       <a id="clear_bt" class="btn btn-default text-muted" href=""
