@@ -1,7 +1,7 @@
 <#macro searchbar>
 
 
-    <div class="input-group">
+    <!--<div class="input-group">
         <div class="input-group-btn search-panel">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <span id="search_concept">Select...</span> <span class="caret"></span>
@@ -20,7 +20,34 @@
                title="Clear"><i class="glyphicon glyphicon-remove"></i> </a>
 			<button class="btn btn-info" type="submit">  Search  </button>
 	</span>
-    </div>
+    </div>-->
+
+
+    <form class="form-inline center">
+      <label class="sr-only" for="searchtype">Name</label>
+      <select class="form-control mb-2 mr-sm-2 mb-sm-0"
+       id="searchtype" placeholder="Jane Doe">
+          <option selected disabled>Search type</option>
+          <option>Vehicle</option>
+          <option>Repair</option>
+          <option>Owner</option>
+      </select>
+
+      <label class="sr-only" for="searchval">Username</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">@</div>
+        <div class="input-group-addon">VAT</div>
+        <input type="text" class="form-control" name="searchval" id="searchval"
+         placeholder="Enter search criteria comma separated... f.ex. mail@com , vat number" required>
+      </div>
+
+      <a id="clear_bt" class="btn btn-default text-muted" href=""
+                                      title="Clear">
+         <i class="glyphicon glyphicon-remove"></i>
+      </a>
+
+      <button type="submit" class="btn btn-primary mb-2 mr-sm-2 mb-sm-0">Search</button>
+    </form>
 
 
 
