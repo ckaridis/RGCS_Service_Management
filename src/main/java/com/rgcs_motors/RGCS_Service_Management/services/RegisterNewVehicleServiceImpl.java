@@ -1,5 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
+import com.mysql.jdbc.exceptions.MySQLTransactionRollbackException;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ public class RegisterNewVehicleServiceImpl implements RegisterNewVehicleService 
 
         Vehicle registeredVehicle;
         try {
-
             registeredVehicle = vehicleRepo.save(vehicle);
             returnedMessage = (registeredVehicle == null) ? errorMessage : successMessage;
         }
+        /*catch (MySQ e){
+            throw new Exception("The User with the above VAT does not exist");
+
+        }*/
         catch(Exception e) {
             throw new Exception(e.getMessage().toString());
         }

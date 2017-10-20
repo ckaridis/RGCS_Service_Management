@@ -120,9 +120,9 @@
                    Form errors on previous try :
                 </p>
                 <#list errorsList as error>
-                <div class="row">
+                <div class="row alert alert-warning">
                    <br>
-                   <p style="color:red;font-weight:bold;text-align:center;">
+                   <p> <!--style="color:red;font-weight:bold;text-align:center;"-->
                       error : ${error.getDefaultMessage()!error.toString()}
                    </p>
                 </div>

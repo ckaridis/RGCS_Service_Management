@@ -1,5 +1,9 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
+import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
+import com.rgcs_motors.RGCS_Service_Management.domain.User;
+import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewVehicleService;
@@ -9,19 +13,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class VehicleRegisterController {
 
     private static final String ADMIN_EMAIL = "AdminEmail";
-    private static final String VEHICLE_REGISTER_FORM = "vehicleRegistrationForm";
-    private static final String ADMIN_CREATE_VEHICLE_PAGE = "/admin/createvehicle";
+    private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
+    private static final String ADMIN_CREATE_VEHICLE_PAGE = "/admin/CreateVehicle";
+    private static final String FAILED_REGISTRATION_MESSAGE = "Registration process failed";
+
 
 
 
@@ -43,10 +51,31 @@ public class VehicleRegisterController {
         return ADMIN_CREATE_VEHICLE_PAGE;
     }
 
-    @RequestMapping(value = "/admin/createuser", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/CreateVehicle", method = RequestMethod.POST)
     String registerVehicle(@Valid @ModelAttribute(VEHICLE_REGISTER_FORM) VehicleRegistrationForm registrationForm,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        return VEHICLE_REGISTER_FORM;
+        if (bindingResult.hasErrors()) {
+            //redirect to the
+            //get method after adding the binding result and the form to the redirect attributes.
+            List<FieldError> errorsList = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList",errorsList);
+            System.out.println(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
+            redirectAttributes.addFlashAttribute("binding_result",bindingResult);
+            redirectAttributes.addFlashAttribute(VEHICLE_REGISTER_FORM,registrationForm);
+            redirectAttributes.addFlashAttribute("returnedMessage", FAILED_REGISTRATION_MESSAGE);
+            return "redirect:/admin/CreateVehicle";
+        }
+        else {
+            try {
+                Vehicle vehicle = VehicleConverter.buildVehicleObject(registrationForm);
+                String result = registerNewVehicleService.registerNewVehicle(vehicle);
+                System.out.println("Successful Registration!!");
+                return "redirect:/admin/CreateVehicle";
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            }
+        }
+        return "redirect:/admin/CreateVehicle";
     }
 }

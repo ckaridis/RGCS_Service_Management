@@ -6,9 +6,9 @@ import javax.validation.constraints.Pattern;
 public class VehicleRegistrationForm {
 
     private static final String LICENSEPLATES_PATTERN = "[a-zA-Z]{3}-[0-9]{4}";
-    private static final String FACTORYDATE_PATTERN = "dd/MM/yyyy";
+    private static final String FACTORYDATE_PATTERN = "[0-9]{4}";
     private static final String COLOUR_PATTERN = "^[a-zA-Z\\s]+";
-    private static final String USERVAT_PATTERN = "^[1-9{9}]";
+    private static final String USERVAT_PATTERN = "^[1-9]{9}";
 
 
     @NotNull(message = "{register.brand.null}")
