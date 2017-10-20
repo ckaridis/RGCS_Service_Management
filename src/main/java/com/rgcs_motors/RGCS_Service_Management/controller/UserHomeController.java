@@ -18,6 +18,8 @@ import java.util.List;
 public class UserHomeController {
     
     private final String REPAIRS_FOR_USER = "OwnerRepairs";
+    private static final String OWNER_EMAIL = "OwnerEmail";
+
 
     @Autowired
     private UserHomeService userHomeService;
@@ -25,7 +27,6 @@ public class UserHomeController {
     @RequestMapping(value = "/owner/home", method = RequestMethod.GET)
     public String showOwnerHomePage(Model model, @RequestParam(name = "error", required = false) String error)
     {
-
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> gets username from authentication context object
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> calls userHomeService with the username as parameter
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> the service returns all the services for the user with that username
@@ -35,6 +36,8 @@ public class UserHomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>username from auth: " + username);
+        model.addAttribute(OWNER_EMAIL,username);
+
 
         List<Repair> repairs = new ArrayList<>();
         try {
