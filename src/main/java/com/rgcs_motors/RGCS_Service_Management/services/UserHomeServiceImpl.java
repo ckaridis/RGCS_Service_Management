@@ -37,7 +37,7 @@ public class UserHomeServiceImpl implements UserHomeService {
           user = userRepository.findByEmail(username);
             System.out.println("user vat : " + user.getVat());
           vehicles = vehicleRepository.findByUservat(user.getVat());
-            System.out.println("plate : " + vehicles.get(0).getLicensePlates());
+            System.out.println("plate : " + vehicles.get(0).getLicenseplate());
         }
         catch(Exception e)
         {
@@ -49,7 +49,7 @@ public class UserHomeServiceImpl implements UserHomeService {
 
         for(Vehicle v: vehicles)
         {
-            repairsPerVehicle = repairRepository.findByLicenseplate(v.getLicensePlates());
+            repairsPerVehicle = repairRepository.findByLicenseplate(v.getLicenseplate());
             for(Repair repair : repairsPerVehicle)
             {
                 repairs.add(repair);

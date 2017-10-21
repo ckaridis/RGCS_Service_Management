@@ -27,8 +27,10 @@
                     </#list>
                     </#if>
                     <br>
-
+                    <br>
                     <#if searchedUser??>
+                    <h2 class"primary" style"font-weight:bold;">User search results</h2>
+                    <br>
                     <div class="row">
                         <table class="table table-hover table-responsive">
                             <thead>
@@ -65,10 +67,53 @@
                                     </button>
                                 </td>
                             </tr>
-                            </#if>
                             </tbody>
                         </table>
                     </div>
+                    </#if>
+
+                    <#if vehicles??>
+                    <h2 class"primary" style"font-weight:bold;">Vehicles search results</h2>
+                    <br>
+                       <div class="row">
+                          <table class="table table-hover table-responsive">
+                             <thead>
+                                <tr>
+                                   <th>VAT</th>
+                                   <th>BRAND</th>
+                                   <th>MODEL</th>
+                                   <th>PRODUCTION YEAR</th>
+                                   <th>COLOR</th>
+                                   <th>PLATE</th>
+                                   <th>EDIT</th>
+                                   <th>DELETE</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                             <#list vehicles as vehicle>
+                                <tr id="d1">
+                                   <td id="f1">${vehicle.getUservat()}</td>
+                                   <td id="l1">${vehicle.getBrand()}</td>
+                                   <td id="m1">${vehicle.getModel()}</td>
+                                   <td id="m1">${vehicle.getFactoryDate()}</td>
+                                   <td id="m1">${vehicle.getColour()}</td>
+                                   <td id="m1">${vehicle.getLicenseplate()}</td>
+                                   <td>
+                                      <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
+                                              class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
+                                      </button>
+                                   </td>
+                                   <td>
+                                      <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
+                                              class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                                      </button>
+                                   </td>
+                                </tr>
+                             </#list>
+                             </tbody>
+                          </table>
+                       </div>
+                    </#if>
 
 
                 <div id="edit" class="modal fade" role="dialog">

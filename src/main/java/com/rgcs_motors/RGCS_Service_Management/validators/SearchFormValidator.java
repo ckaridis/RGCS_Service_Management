@@ -19,6 +19,12 @@ public class SearchFormValidator implements Validator{
         IVALID_VAT
     }
 
+    private enum VehicleMessages{
+        OVERSIZED_V,
+        IVALID_PLATE,
+        IVALID_VAT_V
+    }
+
     private Map<String,String> searchParamsMap = new HashMap<>();
 
 
@@ -48,6 +54,15 @@ public class SearchFormValidator implements Validator{
             case "IVALID_VAT":
                 errors.rejectValue("searchval","The vat number you entered is invalid");
                 break;
+            case "OVERSIZED_V":
+                errors.rejectValue("searchval","You have entered too many parameters");
+                break;
+            case "IVALID_PLATE":
+                errors.rejectValue("searchval","The plate you entered is invalid");
+                break;
+            case "IVALID_VAT_V":
+                errors.rejectValue("searchval","The vat number you entered is invalid");
+                break;
             case "EMPTY_TYPE":
                 errors.rejectValue("searchtype","You must select target to check");
                 break;
@@ -64,6 +79,9 @@ public class SearchFormValidator implements Validator{
             case "Owner":
                 message = filterOwner(form);
             break;
+            case "Vehicle":
+                message = filterVehicle(form);
+                break;
             default:
                 message = "EMPTY_TYPE";
                 break;
@@ -140,6 +158,67 @@ public class SearchFormValidator implements Validator{
         return message;
     }
 
+    private String filterVehicle(SearchForm form)
+    {
+        System.out.println("\nwe are in filterVehicle");
+        String[] searchParams = form.getSearchval().trim().split(",");
+        System.out.println("validator form search params : " + searchParams[0]);
+        String vat = "";
+        String message = "";
+        if(searchParams.length >= 3) {  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is too many values
+            message = UserMessages.OVERSIZED.toString();
+        }
+        else if(searchParams.length == 2) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is two values
+            if(searchParams[0].matches("[a-zA-Z]{3}-[0-9]{4}"))// if plate is correct
+            {
+                vat = searchParams[1];
+                if(vat.length() != 9 || !vat.matches("^[1-9]{9}$"))
+                {
+                    message = VehicleMessages.IVALID_VAT_V.toString();
+                }
+                else{
+                    searchParamsMap.put("userPlate",searchParams[0]);
+                    searchParamsMap.put("userVat",searchParams[1]);
+                }
+            }
+            else if(searchParams[1].matches("[a-zA-Z]{3}-[0-9]{4}"))
+            {
+                vat = searchParams[0];
+                if(vat.length() != 9 || !vat.matches("^[1-9]{9}$"))
+                {
+                    message = VehicleMessages.IVALID_VAT_V.toString();
+                }
+                else{
+                    searchParamsMap.put("userPlate",searchParams[1]);
+                    searchParamsMap.put("userVat",searchParams[0]);
+                }
+            }
+            else
+                message = VehicleMessages.IVALID_PLATE.toString();
+        }
+        else if(searchParams.length == 1) //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is one value
+        {
+            if(!searchParams[0].matches("[a-zA-Z]{3}-[0-9]{4}"))
+            {
+                vat = searchParams[0];
+                System.out.println("[validator] vat" + vat);
+                if(!(vat.length() == 9 && vat.matches("^[1-9]{9}$")))
+                {
+                    System.out.println("ivalid vat");
+                    message = VehicleMessages.IVALID_VAT_V.toString();
+                }
+                else{
+                    System.out.println("[validator] vat was put i search params");
+                    searchParamsMap.put("userVat",searchParams[0]);
+                }
+            }
+            else {
+                System.out.println("[validator] plate was put i search params");
+                searchParamsMap.put("userPlate",searchParams[0]);
+            }
+        }
+        return message;
+    }
 
     public Map<String, String> getSearchParamsMap() {
         return searchParamsMap;

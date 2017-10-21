@@ -18,7 +18,7 @@ public class Vehicle {
     private String model;
 
     @Column(nullable = false, name = "licenseplate", unique = true)
-    private String licensePlates;
+    private String licenseplate;
 
     @Column(nullable = false, name = "productionyear")
     private String factoryDate;
@@ -32,10 +32,10 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String model, String licensePlates, String factoryDate, String colour, String uservat) {
+    public Vehicle(String brand, String model, String licenseplate, String factoryDate, String colour, String uservat) {
         this.brand = brand;
         this.model = model;
-        this.licensePlates = licensePlates;
+        this.licenseplate = licenseplate;
         this.factoryDate = factoryDate;
         this.colour = colour;
         this.uservat = uservat;
@@ -69,12 +69,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getLicensePlates() {
-        return licensePlates;
+    public String getLicenseplate() {
+        return licenseplate;
     }
 
-    public void setLicensePlates(String licensePlates) {
-        this.licensePlates = licensePlates;
+    public void setLicenseplate(String licenseplate) {
+        this.licenseplate = licenseplate;
     }
 
     public String getFactoryDate() {

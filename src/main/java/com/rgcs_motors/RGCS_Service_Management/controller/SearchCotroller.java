@@ -2,6 +2,7 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
+import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
 import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
@@ -80,7 +81,13 @@ public class SearchCotroller {
             redirectAttributes.addFlashAttribute(SEARCH_FORM,searchForm);
         }
         else{
-            handleUserSearch(redirectAttributes);
+            switch(searchForm.getSearchtype())
+            {
+                case "Vehicle":
+                    handleVehicleSearch(redirectAttributes);
+                case "Owner":
+                    handleUserSearch(redirectAttributes);
+            }
         }
     }
 
@@ -123,6 +130,52 @@ public class SearchCotroller {
                     if(returnedUser != null) {
                         System.out.println("retured user: " + returnedUser.getAddress());
                         redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            searchFormValidator.clearSearchParamsMap();
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
+        }
+    }// end of handleUserSearch()
+
+    private void handleVehicleSearch(RedirectAttributes redirectAttributes) {
+        try {
+            Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
+            if(paramsMap.containsKey("userVat") && paramsMap.containsKey("userPlate")) {
+                try{
+                    List<Vehicle> vehicles = searchService.
+                            searchVehicleByVatAndPlate(paramsMap.get("userVat"),paramsMap.get("userPlate"));
+                    if(!vehicles.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("vehicles",vehicles);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            else if(paramsMap.containsKey("userVat"))
+            {
+                try{
+                    List<Vehicle> vehicles = searchService.
+                            searchVehicleByVat(paramsMap.get("userVat"));
+                    if(!vehicles.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("vehicles",vehicles);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            else{
+                try{
+                    List<Vehicle> vehicles = searchService.
+                            searchVehicleByPlate(paramsMap.get("userPlate"));
+                    if(!vehicles.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("vehicles",vehicles);
                     }
                 }
                 catch (Exception e) {
