@@ -40,6 +40,8 @@
                                 <th>PASSWORD</th>
                                 <th>ADDRESS</th>
                                 <th>USERTYPE</th>
+                                <th>EDIT</th>
+                                <th>DELETE</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,9 +50,10 @@
                                 <td id="f1">${searchedUser.getVat()}</td>
                                 <td id="l1">${searchedUser.getFirstName()}</td>
                                 <td id="m1">${searchedUser.getLastName()}</td>
-                                <td id="m1">${searchedUser.getAddress()}</td>
                                 <td id="m1">${searchedUser.getEmail()}</td>
-                                <td id="m1">${searchedUser.getPassword}</td>
+                                <td id="m1">${searchedUser.getPassword()}</td>
+                                <td id="m1">${searchedUser.getAddress()}</td>
+                                <td id="m1">${searchedUser.getType()}</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                             class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
@@ -62,7 +65,6 @@
                                     </button>
                                 </td>
                             </tr>
-                            </#list>
                             </#if>
                             </tbody>
                         </table>

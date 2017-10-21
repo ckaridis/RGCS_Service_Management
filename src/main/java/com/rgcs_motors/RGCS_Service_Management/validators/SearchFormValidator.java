@@ -48,6 +48,9 @@ public class SearchFormValidator implements Validator{
             case "IVALID_VAT":
                 errors.rejectValue("searchval","The vat number you entered is invalid");
                 break;
+            case "EMPTY_TYPE":
+                errors.rejectValue("searchtype","You must select target to check");
+                break;
         }
     }
 
@@ -61,6 +64,9 @@ public class SearchFormValidator implements Validator{
             case "Owner":
                 message = filterOwner(form);
             break;
+            default:
+                message = "EMPTY_TYPE";
+                break;
         }
         return message;
     }
@@ -70,6 +76,7 @@ public class SearchFormValidator implements Validator{
     {
         System.out.println("\nwe are in filterOwner");
         String[] searchParams = form.getSearchval().trim().split(",");
+        System.out.println("validator form search params : " + searchParams[0]);
         String vat = "";
         String message = "";
         if(searchParams.length >= 3) {  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is too many values
@@ -110,19 +117,25 @@ public class SearchFormValidator implements Validator{
             if(!searchParams[0].contains("@"))
             {
                 vat = searchParams[0];
-                if(vat.length() != 9 || !vat.matches("^[1-9]{9}$"))
+                System.out.println("[validator] vat" + vat);
+                if(!(vat.length() == 9 && vat.matches("^[1-9]{9}$")))
                 {
+                    System.out.println("ivalid vat");
                     message = UserMessages.IVALID_VAT.toString();
                 }
                 else{
+                    System.out.println("[validator] vat was put i search params");
                     searchParamsMap.put("userVat",searchParams[0]);
                 }
             }
-            else if(searchParams[0].indexOf(".") < searchParams[0].indexOf("@")) {
+            else if(searchParams[0].contains("@") &&
+                    searchParams[0].indexOf(".") < searchParams[0].indexOf("@")) {
                 message = UserMessages.IVALID_EMAIL.toString();
             }
-            else
+            else {
+                System.out.println("[validator] mail was put i search params");
                 searchParamsMap.put("userMail",searchParams[0]);
+            }
         }
         return message;
     }

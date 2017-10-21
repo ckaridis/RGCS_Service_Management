@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,6 @@ public class SearchCotroller {
     private final String SEARCH_PAGE = "/admin/SearchOVR";
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String SEARCH_FORM = "searchForm";
-    private static final String FAILED_REGISTRATION_MESSAGE = "Registration proccess failed";
 
     @Autowired
     private SearchForm form;
@@ -57,6 +57,16 @@ public class SearchCotroller {
 
         System.out.println("form type : " + searchForm.getSearchtype());
         System.out.println("form value : " + searchForm.getSearchval());
+
+        if(searchForm.getSearchtype() != null)
+        {
+            searchTypeNotNullActions(searchForm, bindingResult, redirectAttributes);
+        }
+        return "redirect:" + SEARCH_PAGE;
+    }
+
+    private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         searchFormValidator.validate(searchForm, bindingResult);
         System.out.println("Field error : >>>> " + bindingResult.getFieldError("searchval"));
 
@@ -68,22 +78,20 @@ public class SearchCotroller {
             System.out.println(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             redirectAttributes.addFlashAttribute("binding_result",bindingResult);
             redirectAttributes.addFlashAttribute(SEARCH_FORM,searchForm);
-            redirectAttributes.addFlashAttribute("returnedMessage", FAILED_REGISTRATION_MESSAGE);
         }
         else{
             handleUserSearch(redirectAttributes);
         }
-        return "redirect:" + SEARCH_PAGE;
     }
 
     private void handleUserSearch(RedirectAttributes redirectAttributes) {
         try {
             Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
-            searchFormValidator.clearSearchParamsMap();
+            System.out.println("params mail: " + paramsMap.get("userMail"));
             if(paramsMap.containsKey("userVat") && paramsMap.containsKey("userMail")) {
                 try{
-                    User returnedUser = searchService
-                            .searchUserByVatAndEmail(paramsMap.get("userVat"),paramsMap.get("userMail"));
+                    System.out.println("retured user: oth");
+                    User returnedUser = searchService.searchUserByVatAndEmail(paramsMap.get("userVat"),paramsMap.get("userMail"));
                     if(returnedUser != null) {
                         redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
                     }
@@ -95,9 +103,10 @@ public class SearchCotroller {
             else if(paramsMap.containsKey("userVat"))
             {
                 try{
-                    User returnedUser = searchService
-                            .searchUserByVat(paramsMap.get("userVat"));
+                    System.out.println("retured user: vat");
+                    User returnedUser = searchService.searchUserByVat(paramsMap.get("userVat"));
                     if(returnedUser != null) {
+                        System.out.println("retured user added to model");
                         redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
                     }
                 }
@@ -107,9 +116,12 @@ public class SearchCotroller {
             }
             else{
                 try{
-                    User returnedUser = searchService
-                            .searchUserByEmail(paramsMap.get("userMail"));
+                    System.out.println("retured user: mail");
+                    System.out.println("params mail: " + paramsMap.get("userMail"));
+                    User returnedUser = searchService.searchUserByEmail(paramsMap.get("userMail"));
+                    System.out.println("retured user: " + returnedUser.getAddress());
                     if(returnedUser != null) {
+                        System.out.println("retured user: " + returnedUser.getAddress());
                         redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
                     }
                 }
@@ -117,6 +129,7 @@ public class SearchCotroller {
                     redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
                 }
             }
+            searchFormValidator.clearSearchParamsMap();
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
         }
