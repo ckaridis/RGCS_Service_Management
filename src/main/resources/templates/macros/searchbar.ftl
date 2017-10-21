@@ -23,10 +23,11 @@
     </div>-->
 
 
-    <form class="form-inline center">
+    <form class="form-inline" id="searchForm" name="searchForm"
+                                       center" action = "/admin/SearchOVR" method = "post" >
       <label class="sr-only" for="searchtype">Name</label>
       <select class="form-control mb-2 mr-sm-2 mb-sm-0"
-       id="searchtype" placeholder="Jane Doe">
+       id="searchtype" name="searchtype" placeholder="Jane Doe" required>
           <option selected disabled>Search type</option>
           <option>Vehicle</option>
           <option>Repair</option>

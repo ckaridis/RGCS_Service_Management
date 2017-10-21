@@ -1,9 +1,11 @@
 package com.rgcs_motors.RGCS_Service_Management.validators;
 
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@Component
 public class SearchFormValidator implements Validator{
 
     private enum UserMessages{
@@ -20,11 +22,31 @@ public class SearchFormValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
+        System.out.println("\nwe are in validate");
         SearchForm form = (SearchForm) o;
+        String messageFromFiltering = filterSearchParams(form);
+        showAppropriateErrorMessage(messageFromFiltering, errors);
+    }
+
+    private void showAppropriateErrorMessage(String message, Errors errors)
+    {
+        System.out.println("\nwe are in showAppropriateErrorMessage");
+        switch(message){
+            case "OVERSIZED":
+                errors.rejectValue("searchval","You have entered too many parameters");
+                break;
+            case "IVALID_EMAIL":
+                errors.rejectValue("searchval","The email you entered is invalid");
+                break;
+            case "IVALID_VAT":
+                errors.rejectValue("searchval","The vat number you entered is invalid");
+                break;
+        }
     }
 
     private String filterSearchParams(Object o)
     {
+        System.out.println("\nwe are in filterSearchParams");
         String message = "";
         SearchForm form = (SearchForm) o;
         switch(form.getSearchtype())
@@ -39,6 +61,7 @@ public class SearchFormValidator implements Validator{
 
     private String filterOwner(SearchForm form)
     {
+        System.out.println("\nwe are in filterOwner");
         String[] searchParams = form.getSearchval().trim().split(",");
         String vat = "";
         String message = "";

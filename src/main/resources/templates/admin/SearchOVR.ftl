@@ -16,6 +16,16 @@
                     <@searchbar/>
 
                     <br>
+                    <#if binding_result??>
+                    <#list errorsList as error>
+                       <div class="row">
+                       <br>
+                       <p class="alert alert-danger" style="color:red;font-weight:bold;text-align:center;">
+                                          error : ${error.getDefaultMessage()!error.toString()}
+                       </p>
+                       </div>
+                    </#list>
+                    </#if>
                     <br>
 
                     <div class="row">
