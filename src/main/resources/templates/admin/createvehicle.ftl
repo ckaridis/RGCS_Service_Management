@@ -27,7 +27,7 @@
                                     <#if vatNumber??>
                                     <input id="uservat" name="uservat" type="text" value="${vatNumber}"
                                            placeholder="Please type the Owner's VAT Number"
-                                           class="form-control input-md" required="" disabled>
+                                           class="form-control input-md" required="" readonly="readonly">
                                     <#else>
                                         <input id="uservat" name="uservat" type="text" value=""
                                                placeholder="Please type the Owner's VAT Number"
