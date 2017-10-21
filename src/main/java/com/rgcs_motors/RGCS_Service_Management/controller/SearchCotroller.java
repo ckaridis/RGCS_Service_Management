@@ -3,6 +3,7 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
+import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,9 @@ public class SearchCotroller {
 
     @Autowired
     private SearchFormValidator searchFormValidator;
+
+    @Autowired
+    private SearchService searchService;
 
     @GetMapping("/admin/SearchOVR")
     public String showSearchPage(Model model, RedirectAttributes redirectAttributes) {
@@ -67,19 +71,55 @@ public class SearchCotroller {
             redirectAttributes.addFlashAttribute("returnedMessage", FAILED_REGISTRATION_MESSAGE);
         }
         else{
-            try {
-                Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
-                if(paramsMap.containsKey("userVat") && paramsMap.containsKey("userMail"))
-                {}
-                else if(paramsMap.containsKey("userVat"))
-                {}
-                else{}
-                //check search type
-                //run search
-            } catch (Exception e) {
-                //catch Exception
-            }
+            handleUserSearch(redirectAttributes);
         }
         return "redirect:" + SEARCH_PAGE;
     }
+
+    private void handleUserSearch(RedirectAttributes redirectAttributes) {
+        try {
+            Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
+            searchFormValidator.clearSearchParamsMap();
+            if(paramsMap.containsKey("userVat") && paramsMap.containsKey("userMail")) {
+                try{
+                    User returnedUser = searchService
+                            .searchUserByVatAndEmail(paramsMap.get("userVat"),paramsMap.get("userMail"));
+                    if(returnedUser != null) {
+                        redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            else if(paramsMap.containsKey("userVat"))
+            {
+                try{
+                    User returnedUser = searchService
+                            .searchUserByVat(paramsMap.get("userVat"));
+                    if(returnedUser != null) {
+                        redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            else{
+                try{
+                    User returnedUser = searchService
+                            .searchUserByEmail(paramsMap.get("userMail"));
+                    if(returnedUser != null) {
+                        redirectAttributes.addFlashAttribute("searchedUser",returnedUser);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
+        }
+    }// end of handleUserSearch()
+
 }

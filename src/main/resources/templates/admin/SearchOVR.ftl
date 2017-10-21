@@ -28,8 +28,7 @@
                     </#if>
                     <br>
 
-                    <#if usersList??>
-                    <#list usersList as user>
+                    <#if searchedUser??>
                     <div class="row">
                         <table class="table table-hover table-responsive">
                             <thead>
@@ -46,12 +45,12 @@
                             <tbody>
 
                             <tr id="d1">
-                                <td id="f1">${user.getVat()}</td>
-                                <td id="l1">${user.getFirstName()}</td>
-                                <td id="m1">${user.getLastName()}</td>
-                                <td id="m1">${user.getAddress()}</td>
-                                <td id="m1">${user.getEmail()}</td>
-                                <td id="m1">${user.getPassword}</td>
+                                <td id="f1">${searchedUser.getVat()}</td>
+                                <td id="l1">${searchedUser.getFirstName()}</td>
+                                <td id="m1">${searchedUser.getLastName()}</td>
+                                <td id="m1">${searchedUser.getAddress()}</td>
+                                <td id="m1">${searchedUser.getEmail()}</td>
+                                <td id="m1">${searchedUser.getPassword}</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                             class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
