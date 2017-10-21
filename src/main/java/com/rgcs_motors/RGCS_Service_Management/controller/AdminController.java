@@ -2,7 +2,6 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.services.AdminHomeService;
-import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,13 +34,12 @@ public class AdminController {
         List<Repair> repairs = new ArrayList<Repair>();
         try {
             repairs = adminHomeService.fetchRepairsForAdmin();
-            System.out.println("the firtttttt element is "+ repairs.get(0).getLicensePlates());
+            System.out.println("the firtttttt element is "+ repairs.get(0).getLicenseplate());
         } catch (Exception e) {
 
             error = e.getMessage().toString();
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>Error caught :" + error);
         }
-        System.out.println("the firt element is "+ repairs.get(0).getLicensePlates());
         if (!repairs.isEmpty()) {
             System.out.println("Admin repairs list added to model");
             model.addAttribute(REPAIRS_FOR_ADMIN, repairs);
