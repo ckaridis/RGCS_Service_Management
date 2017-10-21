@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SearchCotroller {
@@ -67,6 +68,12 @@ public class SearchCotroller {
         }
         else{
             try {
+                Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
+                if(paramsMap.containsKey("userVat") && paramsMap.containsKey("userMail"))
+                {}
+                else if(paramsMap.containsKey("userVat"))
+                {}
+                else{}
                 //check search type
                 //run search
             } catch (Exception e) {

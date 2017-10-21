@@ -5,6 +5,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 @Component
 public class SearchFormValidator implements Validator{
 
@@ -13,6 +18,8 @@ public class SearchFormValidator implements Validator{
         IVALID_EMAIL,
         IVALID_VAT
     }
+
+    private Map<String,String> searchParamsMap = new HashMap<>();
 
 
     @Override
@@ -70,12 +77,16 @@ public class SearchFormValidator implements Validator{
         }
         else if(searchParams.length == 2) { //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is two values
             if(searchParams[0].contains("@") &&
-                    searchParams[0].indexOf(".") > searchParams[0].indexOf("@"))
+                    searchParams[0].indexOf(".") > searchParams[0].indexOf("@"))// if mail is correct
             {
                 vat = searchParams[1];
                 if(vat.length() != 9 || !vat.matches("^[1-9]{9}$"))
                 {
                     message = UserMessages.IVALID_VAT.toString();
+                }
+                else{
+                    searchParamsMap.put("userMail",searchParams[0]);
+                    searchParamsMap.put("userVat",searchParams[1]);
                 }
             }
             else if(searchParams[1].contains("@") &&
@@ -85,6 +96,10 @@ public class SearchFormValidator implements Validator{
                 if(vat.length() != 9 || !vat.matches("^[1-9]{9}$"))
                 {
                     message = UserMessages.IVALID_VAT.toString();
+                }
+                else{
+                    searchParamsMap.put("userMail",searchParams[1]);
+                    searchParamsMap.put("userVat",searchParams[0]);
                 }
             }
             else
@@ -99,12 +114,26 @@ public class SearchFormValidator implements Validator{
                 {
                     message = UserMessages.IVALID_VAT.toString();
                 }
+                else{
+                    searchParamsMap.put("userVat",searchParams[0]);
+                }
             }
             else if(searchParams[0].indexOf(".") < searchParams[0].indexOf("@")) {
                 message = UserMessages.IVALID_EMAIL.toString();
             }
-
+            else
+                searchParamsMap.put("userMail",searchParams[0]);
         }
         return message;
+    }
+
+
+    public Map<String, String> getSearchParamsMap() {
+        return searchParamsMap;
+    }
+
+    public String clearSearchParamsMap() {
+        searchParamsMap.clear();
+        return "cleared";
     }
 }
