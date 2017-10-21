@@ -1,10 +1,7 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
-import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
-import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
-import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewVehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,9 +25,6 @@ public class VehicleRegisterController {
     private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
     private static final String ADMIN_CREATE_VEHICLE_PAGE = "/admin/CreateVehicle";
     private static final String FAILED_REGISTRATION_MESSAGE = "Registration process failed";
-
-
-
 
     @Autowired
     private RegisterNewVehicleService registerNewVehicleService;
@@ -73,7 +66,8 @@ public class VehicleRegisterController {
                 System.out.println("Successful Registration!!");
                 return "redirect:/admin/CreateVehicle";
             } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+                    redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());
+
             }
         }
         return "redirect:/admin/CreateVehicle";
