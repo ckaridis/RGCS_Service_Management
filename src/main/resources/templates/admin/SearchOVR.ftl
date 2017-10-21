@@ -16,34 +16,44 @@
                     <@searchbar/>
 
                     <br>
+                    <#if binding_result??>
+                    <#list errorsList as error>
+                       <div class="row">
+                       <br>
+                       <p class="alert alert-danger" style="color:red;font-weight:bold;text-align:center;">
+                                          error : ${error.getDefaultMessage()!error.toString()}
+                       </p>
+                       </div>
+                    </#list>
+                    </#if>
                     <br>
 
+                    <#if searchedUser??>
                     <div class="row">
                         <table class="table table-hover table-responsive">
                             <thead>
                             <tr>
-                                <th>License Plates</th>
-                                <th>Repair Date</th>
-                                <th>Repair Type</th>
-                                <th>Repair Cost</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>VAT</th>
+                                <th>NAME</th>
+                                <th>SURNAME</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>ADDRESS</th>
+                                <th>USERTYPE</th>
+                                <th>EDIT</th>
+                                <th>DELETE</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <#if AdminRepairs??>
-                            <#list AdminRepairs as repairs>
-
                             <tr id="d1">
-                                <td id="f1">${repairs.getLicensePlates()}</td>
-                                <td id="l1">${repairs.getRepairdate()}</td>
-                                <td id="m1">${repairs.getRepairType()}</td>
-                                <td id="m1">${repairs.getRepairCost()}</td>
-                                <td id="m1">${repairs.getRepairDescription()}</td>
-                                <td id="m1">${repairs.getStatus()}</td>
+                                <td id="f1">${searchedUser.getVat()}</td>
+                                <td id="l1">${searchedUser.getFirstName()}</td>
+                                <td id="m1">${searchedUser.getLastName()}</td>
+                                <td id="m1">${searchedUser.getEmail()}</td>
+                                <td id="m1">${searchedUser.getPassword()}</td>
+                                <td id="m1">${searchedUser.getAddress()}</td>
+                                <td id="m1">${searchedUser.getType()}</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                             class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>
@@ -55,11 +65,12 @@
                                     </button>
                                 </td>
                             </tr>
-                            </#list>
                             </#if>
                             </tbody>
                         </table>
                     </div>
+
+
                 <div id="edit" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
