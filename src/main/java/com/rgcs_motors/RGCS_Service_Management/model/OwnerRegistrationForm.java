@@ -16,6 +16,8 @@ public class OwnerRegistrationForm {
 
     private final static String NAME_PATTERN = "^[\\D]*$";
 
+    private int id;
+
     @NotNull(message = "{register.password.null}")
     @Pattern(regexp = PASSWORD_PATTERN, message = "{register.password.invalid}")
     @Size(min = PASSWORD_MINSIZE, max = PASSWORD_MAXSIZE, message = "{register.password.size}")
@@ -113,5 +115,13 @@ public class OwnerRegistrationForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
