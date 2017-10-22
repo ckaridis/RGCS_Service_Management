@@ -9,16 +9,10 @@ public class RepairConverter {
 
     public static Repair buildRepairObject(RepairRegistrationForm repairRegistrationForm) {
         Repair repairToBeRegistered = new Repair();
-
-        java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String currentTime = sdf.format(dt);
-
         repairToBeRegistered.setLicenseplate(repairRegistrationForm.getLicenseplates());
         repairToBeRegistered.setRepairCost(repairRegistrationForm.getRepairCost());
         repairToBeRegistered.setRepairType(repairRegistrationForm.getRepairtype());
         repairToBeRegistered.setRepairdate(repairRegistrationForm.getRepairdate());
-        repairToBeRegistered.setRepairRegistrationDate(dt);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>"+repairToBeRegistered.getRepairRegistrationDate());
         repairToBeRegistered.setStatus(repairRegistrationForm.getStatus());
         repairToBeRegistered.setRepairDescription(repairRegistrationForm.getRepairDescription());

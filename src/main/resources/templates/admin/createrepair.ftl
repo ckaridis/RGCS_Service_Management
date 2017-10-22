@@ -38,21 +38,13 @@
                             </div>
 
                             <!-- Text input-->
+
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="repairdate">Repair Date</label>
                                 <div class="col-md-5">
-                                    <input id="repairdate" name="repairdate" type="text"
+                                    <input id="repairdate" name="repairdate" type="datetime-local"
                                            placeholder="Repair Date"
-                                           class="form-control input-md" required="">
-                                </div>
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="repairtype">Repair Type</label>
-                                <div class="col-md-5">
-                                    <input id="repairtype" name="repairtype" type="text"
-                                           placeholder="Repair Type" class="form-control input-md" required="">
+                                           class="form-control input-md" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                 </div>
                             </div>
 
@@ -67,18 +59,32 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="status">Status</label>
+                                <label class="col-md-4 control-label" for="repairCost">Repair Cost</label>
                                 <div class="col-md-5">
-                                    <input id="status" name="status" type="text" placeholder="Status"
+                                    <input id="repairCost" name="repairCost" type="text" placeholder="RepairCost"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="repairCost">Repair Cost</label>
+                                <label class="col-md-4 control-label" for="status">Status</label>
                                 <div class="col-md-5">
-                                    <input id="repairCost" name="repairCost" type="text" placeholder="RepairCost"
-                                           class="form-control input-md" required="">
+                                    <select class="form-control" name="status" id="status">
+                                        <option>InProgress</option>
+                                        <option>Finished</option>
+                                        <option>Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="repairtype">Repair Type</label>
+                                <div class="col-md-5">
+                                    <select class="form-control" name="repairtype" id="repairtype">
+                                        <option>Small</option>
+                                        <option>Big</option>
+                                    </select>
                                 </div>
                             </div>
 

@@ -21,6 +21,7 @@ public class RegisterNewRepairServiceImpl implements RegisterNewRepairService {
     @Override
     public String registerNewRepair(Repair repair) throws Exception {
         Repair registeredRepair;
+
         try {
             registeredRepair = repairRepo.save(repair);
             returnedMessage = (registeredRepair == null) ? errorMessage : successMessage;

@@ -12,7 +12,7 @@ public class RepairRegistrationForm {
 
 
     private static final String LICENSEPLATES_PATTERN = "[a-zA-Z]{3}-[0-9]{4}";
-    private static final String REPAIRCOST_PATTERN = "[\\D]*$";
+    private static final String REPAIRCOST_PATTERN = "\\d+";
     private final static String NO_NUMBERS = "^[\\D]*$";
 
 
@@ -20,22 +20,19 @@ public class RepairRegistrationForm {
     @Pattern(regexp = LICENSEPLATES_PATTERN, message = "{register.licenseplates.invalid}")
     private String licenseplates;
 
-    @NotNull(message = "{register.repairregistrationdate.null}")
-    private Date repairregistrationdate;
-
     @NotNull(message = "{register.repairdate.null}")
-    private Date repairdate;
+    private String repairdate;
 
     @NotNull(message = "{register.status.null}")
-    @Pattern(regexp = NO_NUMBERS, message = "{register.licenseplates.invalid}")
+    @Pattern(regexp = NO_NUMBERS, message = "{register.status.invalid}")
     private String status;
 
     @NotNull(message = "{register.repairtype.null}")
-    @Pattern(regexp = NO_NUMBERS, message = "{register.licenseplates.invalid}")
+    @Pattern(regexp = NO_NUMBERS, message = "{register.repairtype.invalid}")
     private String repairtype;
 
     @NotNull(message = "{register.repairCost.null}")
-    @Pattern(regexp = REPAIRCOST_PATTERN, message = "{register.licenseplates.invalid}")
+    @Pattern(regexp = REPAIRCOST_PATTERN, message = "{register.repairCost.invalid}")
     private String repairCost;
 
     @NotNull(message = "{register.repairDescription.null}")
@@ -49,19 +46,11 @@ public class RepairRegistrationForm {
         this.licenseplates = licenseplates;
     }
 
-    public Date getRepairregistrationdate() {
-        return repairregistrationdate;
-    }
-
-    public void setRepairregistrationdate(Date repairregistrationdate) {
-        this.repairregistrationdate = repairregistrationdate;
-    }
-
-    public Date getRepairdate() {
+    public String getRepairdate() {
         return repairdate;
     }
 
-    public void setRepairdate(Date repairdate) {
+    public void setRepairdate(String repairdate) {
         this.repairdate = repairdate;
     }
 

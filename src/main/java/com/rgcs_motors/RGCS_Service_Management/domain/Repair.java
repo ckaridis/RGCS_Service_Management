@@ -16,10 +16,11 @@ public class Repair {
     private String licenseplate;
 
     @Column(name = "registrationdate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date repairRegistrationDate;
 
     @Column(name = "repairdate", nullable = false)
-    private Date repairdate;
+    private String repairdate;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -36,7 +37,7 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String licenseplate, Date repairRegistrationDate, Date repairdate, String status, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, String repairdate, String status, String repairType, String repairCost, String repairDescription) {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairdate = repairdate;
@@ -55,6 +56,7 @@ public class Repair {
         this.licenseplate = licenseplate;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getRepairRegistrationDate() {
         return repairRegistrationDate;
     }
@@ -63,11 +65,11 @@ public class Repair {
         this.repairRegistrationDate = repairRegistrationDate;
     }
 
-    public Date getRepairdate() {
+    public String getRepairdate() {
         return repairdate;
     }
 
-    public void setRepairdate(Date repairdate) {
+    public void setRepairdate(String repairdate) {
         this.repairdate = repairdate;
     }
 
