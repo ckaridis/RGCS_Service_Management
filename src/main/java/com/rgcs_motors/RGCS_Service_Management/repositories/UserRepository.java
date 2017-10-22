@@ -15,5 +15,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByEmailAndVat(String email, String vat) throws Exception;
 
+    User findById(int id) throws Exception;
+
     User save(User user);
 }

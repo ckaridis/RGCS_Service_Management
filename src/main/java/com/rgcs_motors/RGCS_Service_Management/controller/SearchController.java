@@ -3,8 +3,12 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
+import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
+import com.rgcs_motors.RGCS_Service_Management.services.EditUserService;
+import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
 import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
+import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,16 +23,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-public class SearchCotroller {
+public class SearchController {
 
     private final String SEARCH_PAGE = "/admin/SearchOVR";
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String SEARCH_FORM = "searchForm";
+    private static final String REGISTER_FORM = "ownerRegistrationForm";
+    private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
+
+    private String redirectUrl = "";
 
     @Autowired
     private SearchForm form;
@@ -37,7 +44,15 @@ public class SearchCotroller {
     private SearchFormValidator searchFormValidator;
 
     @Autowired
+    private OwnerRegistrationFormValidator registrationFormValidator;
+
+    @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private EditUserService editUserService;
+
+
 
     @GetMapping("/admin/SearchOVR")
     public String showSearchPage(Model model, RedirectAttributes redirectAttributes) {
@@ -47,6 +62,11 @@ public class SearchCotroller {
         model.addAttribute(ADMIN_EMAIL,username);
 
         model.addAttribute(SEARCH_FORM, new SearchForm());
+
+        if(!redirectAttributes.containsAttribute("returnedMessage_modal"))
+        {
+            model.addAttribute(REGISTER_FORM, new OwnerRegistrationForm());
+        }
 
         return SEARCH_PAGE;
     }
@@ -64,6 +84,39 @@ public class SearchCotroller {
             searchTypeNotNullActions(searchForm, bindingResult, redirectAttributes);
         }
         return "redirect:" + SEARCH_PAGE;
+    }
+
+
+    @PostMapping("/admin/edituser")
+    public String search(@Valid @ModelAttribute(REGISTER_FORM)
+                                     OwnerRegistrationForm registrationForm,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+        registrationFormValidator.validate(registrationForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errorsListmodal = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList_modal",errorsListmodal);
+            redirectAttributes.addFlashAttribute("binding_result_modal",bindingResult);
+            redirectAttributes.addFlashAttribute(REGISTER_FORM,registrationForm);
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        }
+        else{
+            try {
+                User user = UserConverter.buildUserObject(registrationForm);
+                user.setId(registrationForm.getId());
+                User editedUser = editUserService.editUser(user);
+                System.out.println("user was edited" + editedUser.getVat());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_EDIT_MESSAGE);
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            }
+        }
+
+        return redirectUrl;
     }
 
     private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
