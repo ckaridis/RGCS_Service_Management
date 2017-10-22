@@ -10,6 +10,8 @@ public class VehicleRegistrationForm {
     private static final String COLOUR_PATTERN = "^[a-zA-Z\\s]+";
     private static final String USERVAT_PATTERN = "^[1-9]{9}";
 
+    private int id;
+
     @NotNull(message = "{register.brand.null}")
     private String brand;
 
@@ -78,5 +80,13 @@ public class VehicleRegistrationForm {
 
     public void setUservat(String uservat) {
         this.uservat = uservat;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

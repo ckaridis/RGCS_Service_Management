@@ -1,11 +1,14 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
+import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.EditUserService;
+import com.rgcs_motors.RGCS_Service_Management.services.EditVehicleService;
 import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
 import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
@@ -33,6 +36,7 @@ public class SearchController {
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String SEARCH_FORM = "searchForm";
     private static final String REGISTER_FORM = "ownerRegistrationForm";
+    private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
 
     private String redirectUrl = "";
@@ -51,6 +55,9 @@ public class SearchController {
 
     @Autowired
     private EditUserService editUserService;
+
+    @Autowired
+    private EditVehicleService editVehicleService;
 
 
 
@@ -108,6 +115,38 @@ public class SearchController {
                 user.setId(registrationForm.getId());
                 User editedUser = editUserService.editUser(user);
                 System.out.println("user was edited" + editedUser.getVat());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_EDIT_MESSAGE);
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            }
+        }
+
+        return redirectUrl;
+    }
+
+
+    @PostMapping("/admin/editVehicle")
+    public String search(@Valid @ModelAttribute(VEHICLE_REGISTER_FORM)
+                                 VehicleRegistrationForm vehicleRegistrationForm,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errorsListmodal = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList_modal",errorsListmodal);
+            redirectAttributes.addFlashAttribute("binding_result_modal",bindingResult);
+            redirectAttributes.addFlashAttribute(VEHICLE_REGISTER_FORM,vehicleRegistrationForm);
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        }
+        else{
+            try {
+                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleRegistrationForm);
+                vehicle.setId(vehicleRegistrationForm.getId());
+                Vehicle editedVehicle = editVehicleService.editVehicle(vehicle);
+                System.out.println("user was edited" + editedVehicle.getBrand());
                 redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_EDIT_MESSAGE);
                 redirectUrl = "redirect:" + SEARCH_PAGE;
             } catch (Exception e) {
