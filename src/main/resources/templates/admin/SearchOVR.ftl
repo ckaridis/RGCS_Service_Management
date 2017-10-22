@@ -300,6 +300,15 @@
                                                <div class="row">
                                                <form class="form-horizontal" action="/admin/editVehicle" method="post">
                                                   <fieldset>
+                                                  <!-- Text input-->
+                                                     <div class="form-group">
+                                                        <label class="col-md-4 control-label" for="id">Id</label>
+                                                        <div class="col-md-5">
+                                                        <input id="id" name="id" type="text" placeholder="user id"
+                                                           class="form-control input-md vehicleid" required="" readonly>
+                                                        </div>
+                                                     </div>
+
                                                       <!-- Text input-->
                                                       <div class="form-group">
                                                           <label class="col-md-4 control-label" for="uservat">User VAT</label>

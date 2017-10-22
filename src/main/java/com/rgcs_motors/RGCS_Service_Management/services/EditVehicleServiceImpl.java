@@ -23,5 +23,5 @@ public class EditVehicleServiceImpl implements  EditVehicleService{
         }
         return editedVehicle;
     }
-    
+
 }

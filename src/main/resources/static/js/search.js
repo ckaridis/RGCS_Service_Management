@@ -52,7 +52,7 @@ $(document).ready(function (){
            var id = selectorArray[0];
            alert(id);
 
-           $("#id").val(id);
+           $(".vehicleid").val(id);
            $("#uservat").val(vat);
            $("#licenseplates").val(plate);
            $("#brand").val(brand);

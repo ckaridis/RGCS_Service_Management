@@ -35,10 +35,10 @@
       </select>
 
       <label class="sr-only" for="searchval">Username</label>
-      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0 col-xs-8">
         <div class="input-group-addon">@</div>
         <div class="input-group-addon">VAT</div>
-        <input type="text" width="150" class="form-control" name="searchval" id="searchval"
+        <input type="text" class="form-control input-large" name="searchval" id="searchval"
          placeholder="Enter search criteria comma separated... f.ex. mail@com , vat number" required>
       </div>
 

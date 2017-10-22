@@ -38,6 +38,7 @@ public class SearchController {
     private static final String REGISTER_FORM = "ownerRegistrationForm";
     private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
+    private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
 
     private String redirectUrl = "";
 
@@ -144,10 +145,11 @@ public class SearchController {
         else{
             try {
                 Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleRegistrationForm);
+                System.out.println("form id : "+vehicleRegistrationForm.getId());
                 vehicle.setId(vehicleRegistrationForm.getId());
                 Vehicle editedVehicle = editVehicleService.editVehicle(vehicle);
                 System.out.println("user was edited" + editedVehicle.getBrand());
-                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_EDIT_MESSAGE);
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_VEHICLE_EDIT_MESSAGE);
                 redirectUrl = "redirect:" + SEARCH_PAGE;
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
