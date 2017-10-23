@@ -67,6 +67,24 @@
                        </p>
                        </div>
                        </#if>
+                       <#if deletionResult??>
+                       <div class="row">
+                       <p class="alert alert-success">
+                          ${deletionResult}
+                       </p>
+                       </div>
+                       </#if>
+                       <#if errorMessageJson??>
+                       <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
+                          Exceptions that occured on previous submission try :
+                       </p>
+                       <div class="row">
+                       <br>
+                       <p class="alert alert-danger">
+                          error : ${errorMessageJson}
+                       </p>
+                       </div>
+                       </#if>
                     </div>
 
                     <br>

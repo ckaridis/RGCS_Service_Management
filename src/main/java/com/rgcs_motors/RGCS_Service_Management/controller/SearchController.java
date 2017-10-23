@@ -2,16 +2,14 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
 import com.rgcs_motors.RGCS_Service_Management.model.VehicleData;
 import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
-import com.rgcs_motors.RGCS_Service_Management.services.EditUserService;
-import com.rgcs_motors.RGCS_Service_Management.services.EditVehicleService;
-import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
-import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
+import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,7 @@ public class SearchController {
     private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
+    private static final String SUCCESSFUL_DELETION_MESSAGE = "Vehicle deleted successfully";
 
     private String redirectUrl = "";
 
@@ -59,6 +58,9 @@ public class SearchController {
 
     @Autowired
     private EditVehicleService editVehicleService;
+
+    @Autowired
+    private DeleteVehicleService deleteVehicleService;
 
 
 
@@ -162,17 +164,19 @@ public class SearchController {
 
 
     @RequestMapping(value = "/admin/delVehicle", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String deleteVehicle(@RequestBody VehicleData vehicleData) {
-        System.out.println("fuck yeah");
-        System.out.println(vehicleData.getId());
-        System.out.println(vehicleData.getBrand());
-        System.out.println(vehicleData.getColour());
-        System.out.println(vehicleData.getFactorydate());
-        System.out.println(vehicleData.getLicenseplates());
-        System.out.println(vehicleData.getUservat());
-        System.out.println(vehicleData.getModel());
+    public @ResponseBody String deleteVehicle(@RequestBody VehicleData vehicleData,
+                                              RedirectAttributes redirectAttributes) {
+        try {
+            Vehicle vehicle = VehicleFromJsoConverter.buildVehicleObjectFromJson(vehicleData);
+            String deletionResult = deleteVehicleService.deleteVehicle(vehicle);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_DELETION_MESSAGE);
+            System.out.println("Successful deletio!!");
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+        }
 
-        return "redirect:" + SEARCH_PAGE;
+        return redirectUrl;
     }
 
     private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
