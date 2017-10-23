@@ -2,6 +2,17 @@ $(document).ready(function (){
 
        var vehicle = new Map();
 
+       $('#searchSelect').on('change', function() {
+         if(this.value == "Vehicle" || this.value == "Repair"){
+            $('#firstAddon').html("PL");
+            $('#secondAddon').html("VAT");
+         }
+         else if(this.value == "Owner"){
+            $('#firstAddon').html("@");
+            $('#secondAddon').html("VAT");
+         }
+       })
+
        $("#edit_btn").click(function (){
        var vat = $("#f1").html();
        var fname = $("#l1").html();

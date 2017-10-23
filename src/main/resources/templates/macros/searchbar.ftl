@@ -26,7 +26,7 @@
     <form class="form-inline" id="searchForm" name="searchForm"
                                        center" action = "/admin/SearchOVR" method = "post" >
       <label class="sr-only" for="searchtype">Name</label>
-      <select class="form-control mb-2 mr-sm-2 mb-sm-0"
+      <select id="searchSelect" class="form-control mb-2 mr-sm-2 mb-sm-0"
        id="searchtype" name="searchtype" placeholder="Jane Doe" required>
           <option selected disabled>Search type</option>
           <option>Vehicle</option>
@@ -36,8 +36,8 @@
 
       <label class="sr-only" for="searchval">Username</label>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0 col-xs-8">
-        <div class="input-group-addon">@</div>
-        <div class="input-group-addon">VAT</div>
+        <div id="firstAddon" class="input-group-addon">@</div>
+        <div id="secondAddon" class="input-group-addon">VAT</div>
         <input type="text" class="form-control input-large" name="searchval" id="searchval"
          placeholder="Enter search criteria comma separated... f.ex. mail@com , vat number" required>
       </div>
