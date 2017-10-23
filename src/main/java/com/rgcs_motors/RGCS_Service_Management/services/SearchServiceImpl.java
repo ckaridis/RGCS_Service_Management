@@ -1,7 +1,9 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
+import com.rgcs_motors.RGCS_Service_Management.repositories.RepairRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.UserRepository;
 import com.rgcs_motors.RGCS_Service_Management.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,10 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private RepairRepository repairRepository;
+
 
     @Override
     public User searchUserByVatAndEmail(String vat, String email) throws Exception {
@@ -110,5 +116,20 @@ public class SearchServiceImpl implements SearchService {
             throw new Exception(e.getCause().toString());
         }
         return vehicles;
+    }
+
+    @Override
+    public List<Repair> searchRepairByPlate(String licenseplate) throws Exception {
+        List<Repair> repairs;
+        try {
+            repairs = repairRepository.findByLicenseplate(licenseplate);
+            if(repairs.isEmpty())
+            {
+                throw new Exception("Repair not found!");
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getCause().toString());
+        }
+        return repairs;
     }
 }

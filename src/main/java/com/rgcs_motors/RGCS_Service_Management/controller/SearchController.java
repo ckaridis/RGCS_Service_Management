@@ -3,6 +3,7 @@ package com.rgcs_motors.RGCS_Service_Management.controller;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
@@ -200,6 +201,8 @@ public class SearchController {
                     handleVehicleSearch(redirectAttributes);
                 case "Owner":
                     handleUserSearch(redirectAttributes);
+                case "Repair":
+                    handleRepairSearch(redirectAttributes);
             }
         }
     }
@@ -299,6 +302,31 @@ public class SearchController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
         }
-    }// end of handleUserSearch()
+    }// end of handleVehicleSearch()
+
+    private void handleRepairSearch(RedirectAttributes redirectAttributes) {
+        try {
+            Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
+            if(paramsMap.containsKey("userVat"))
+            {
+                //search repair by vat
+            }
+            else{
+                try{
+                    List<Repair> repairs = searchService.
+                            searchRepairByPlate(paramsMap.get("userPlate"));
+                    if(!repairs.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("repairs",repairs);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            searchFormValidator.clearSearchParamsMap();
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
+        }
+    }// end of handleVehicleSearch()
 
 }
