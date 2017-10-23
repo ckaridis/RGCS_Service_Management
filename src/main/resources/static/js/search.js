@@ -64,6 +64,47 @@ $(document).ready(function (){
         })
 
 
+
+        $(".editRbtn").click(function (){
+           var selectorArray = ($(this).attr('id')).split("-");
+           var selector = selectorArray[0];
+
+           var licenseplatesSelectorSelector = "#f3-".concat(selectorArray[0]);
+           var licenseplates = $(licenseplatesSelectorSelector).html();
+
+           var repairdateSelector = "#l3-".concat(selectorArray[0]);
+           var repairdate = $(repairdateSelector).html().trim();
+           repairdate = repairdate.slice(0, 10) + "T" + repairdate.slice(10, 16).replace(" ", "");
+           alert(repairdate);
+
+           var repairtypeSelector = "#m3-".concat(selectorArray[0]);
+           var repairtype = $(repairtypeSelector).html();
+
+           var repairCostSelector = "#o3-".concat(selectorArray[0]);
+           var repairCost = $(repairCostSelector).html();
+
+
+           var repairDescriptionSelector = "#p3-".concat(selectorArray[0]);
+           var repairDescription = $(repairDescriptionSelector).html();
+
+
+           var statusSelector = "#r3-".concat(selectorArray[0]);
+           var status = $(statusSelector).html();
+
+
+           var id = selectorArray[0];
+
+
+           $(".repairid").val(id);
+           $("#repairdate").val(repairdate);
+           $(".repairPlates").val(licenseplates);
+           $("#repairCost").val(repairCost);
+           $("#repairtype").val(repairtype);
+           $("#repairDescription").val(repairDescription);
+           $("#status").val(status);
+        })
+
+
         $(".deleteBtn").click(function (){
                    var selectorArray = ($(this).attr('id')).split("-");
                    var selector = selectorArray[0];

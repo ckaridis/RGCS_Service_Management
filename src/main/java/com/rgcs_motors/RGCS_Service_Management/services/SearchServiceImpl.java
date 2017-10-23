@@ -132,4 +132,24 @@ public class SearchServiceImpl implements SearchService {
         }
         return repairs;
     }
+
+    @Override
+    public List<Repair> searchRepairByVat(String uservat) throws Exception {
+        List<Repair> repairs = new ArrayList<>();
+        List<Repair> tempRepairs;
+        try {
+            List<Vehicle> vehicles = vehicleRepository.findByUservat(uservat);
+            for(Vehicle v:vehicles){
+                tempRepairs = repairRepository.findByLicenseplate(v.getLicenseplate());
+                repairs.add(tempRepairs.get(0));
+            }
+            if(repairs.isEmpty())
+            {
+                throw new Exception("Repair not found!");
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getCause().toString());
+        }
+        return repairs;
+    }
 }

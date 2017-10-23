@@ -17,4 +17,5 @@ public interface SearchService {
     List<Vehicle> searchVehicleByPlate(String licenseplate) throws Exception;
 
     List<Repair>  searchRepairByPlate(String licenseplate) throws Exception;
+    List<Repair>  searchRepairByVat(String uservat) throws Exception;
 }

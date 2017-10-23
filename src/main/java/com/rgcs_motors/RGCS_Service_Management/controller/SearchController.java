@@ -1,15 +1,13 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
+import com.rgcs_motors.RGCS_Service_Management.converters.RepairConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
-import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
-import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
-import com.rgcs_motors.RGCS_Service_Management.model.VehicleData;
-import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
+import com.rgcs_motors.RGCS_Service_Management.model.*;
 import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
@@ -36,8 +34,10 @@ public class SearchController {
     private static final String SEARCH_FORM = "searchForm";
     private static final String REGISTER_FORM = "ownerRegistrationForm";
     private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
+    private static final String REPAIR_REGISTER_FORM = "RepairRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
+    private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
     private static final String SUCCESSFUL_DELETION_MESSAGE = "Vehicle deleted successfully";
 
     private String redirectUrl = "";
@@ -62,6 +62,9 @@ public class SearchController {
 
     @Autowired
     private DeleteVehicleService deleteVehicleService;
+
+    @Autowired
+    private EditRepairService editRepairService;
 
 
 
@@ -179,6 +182,43 @@ public class SearchController {
 
         return redirectUrl;
     }
+
+
+
+    @PostMapping("/admin/editRepair")
+    public String editRepair(@Valid @ModelAttribute(REPAIR_REGISTER_FORM)
+                                 RepairRegistrationForm repairRegistrationForm,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errorsListmodal = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList_modal",errorsListmodal);
+            redirectAttributes.addFlashAttribute("binding_result_modal",bindingResult);
+            redirectAttributes.addFlashAttribute(REPAIR_REGISTER_FORM,repairRegistrationForm);
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        }
+        else{
+            try {
+                Repair repair = RepairConverter.buildRepairObject(repairRegistrationForm);
+                System.out.println("form id : "+repairRegistrationForm.getId());
+                repair.setId(repairRegistrationForm.getId());
+                Repair editedRepair = editRepairService.editRepair(repair);
+                System.out.println("user was edited" + editedRepair.getRepairdate());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_REPAIR_EDIT_MESSAGE);
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            }
+        }
+
+        return redirectUrl;
+    }
+
+
+
 
     private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
                                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -309,7 +349,16 @@ public class SearchController {
             Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
             if(paramsMap.containsKey("userVat"))
             {
-                //search repair by vat
+                try{
+                    List<Repair> repairs = searchService.
+                            searchRepairByVat(paramsMap.get("userVat"));
+                    if(!repairs.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("repairs",repairs);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
             }
             else{
                 try{

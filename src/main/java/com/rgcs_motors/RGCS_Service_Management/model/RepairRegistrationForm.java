@@ -16,6 +16,7 @@ public class RepairRegistrationForm {
     private static final String REPAIRCOST_PATTERN = "\\d+";
     private final static String NO_NUMBERS = "^[\\D]*$";
 
+    private int id;
 
     @NotNull(message = "{register.licenseplates.null}")
     @Pattern(regexp = LICENSEPLATES_PATTERN, message = "{register.licenseplates.invalid}")
@@ -85,5 +86,13 @@ public class RepairRegistrationForm {
 
     public void setRepairDescription(String repairDescription) {
         this.repairDescription = repairDescription;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
