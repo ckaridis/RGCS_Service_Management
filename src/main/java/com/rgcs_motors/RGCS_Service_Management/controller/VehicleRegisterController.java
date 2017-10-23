@@ -66,7 +66,7 @@ public class VehicleRegisterController {
                 Vehicle vehicle = VehicleConverter.buildVehicleObject(registrationForm);
                 String result = registerNewVehicleService.registerNewVehicle(vehicle);
                 System.out.println("Successful Registration!!");
-                redirectAttributes.addFlashAttribute("licensePlates",vehicle.getLicensePlate());
+                redirectAttributes.addFlashAttribute("licensePlates",vehicle.getLicenseplate());
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());

@@ -69,11 +69,11 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getLicensePlate() {
+    public String getLicenseplate() {
         return licenseplate;
     }
 
-    public void setLicensePlate(String licenseplate) {
+    public void setLicenseplate(String licenseplate) {
         this.licenseplate = licenseplate;
     }
 

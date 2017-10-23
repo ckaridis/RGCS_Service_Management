@@ -9,7 +9,7 @@ public class VehicleConverter {
         Vehicle vehicleToBeRegistered = new Vehicle();
         vehicleToBeRegistered.setBrand(vehicleRegistrationForm.getBrand());
         vehicleToBeRegistered.setModel(vehicleRegistrationForm.getModel());
-        vehicleToBeRegistered.setLicensePlate(vehicleRegistrationForm.getLicenseplates());
+        vehicleToBeRegistered.setLicenseplate(vehicleRegistrationForm.getLicenseplates());
         vehicleToBeRegistered.setFactoryDate(vehicleRegistrationForm.getFactorydate());
         vehicleToBeRegistered.setColour(vehicleRegistrationForm.getColour());
         vehicleToBeRegistered.setUservat(vehicleRegistrationForm.getUservat());
