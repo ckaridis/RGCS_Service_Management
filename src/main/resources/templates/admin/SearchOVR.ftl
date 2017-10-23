@@ -89,6 +89,8 @@
 
                     <br>
                     <br>
+
+
                     <#if searchedUser??>
                     <h2 class"primary" style"font-weight:bold;">User search results</h2>
                     <br>
@@ -125,7 +127,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
+                                    <button id="deleteUser" type="button" data-toggle="modal" data-target="#delete" data-uid="1"
                                             class="delete btn btn-danger btn-sm">
                                                <span class="glyphicon glyphicon-trash"></span>
                                     </button>
@@ -416,7 +418,7 @@
                                 <strong>Are you sure you want to delete this data?</strong>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                <button id="deleteUserBtn" type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

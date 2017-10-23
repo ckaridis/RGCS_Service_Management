@@ -1,6 +1,7 @@
 $(document).ready(function (){
 
        var vehicle = new Map();
+       var user  = new Map();
 
        $("#edit_btn").click(function (){
        var vat = $("#f1").html();
@@ -63,6 +64,57 @@ $(document).ready(function (){
            $("#factorydate").val(fd);
         })
 
+        $("#deleteUser").click(function (){
+               var vat = $("#f1").html();
+               var fname = $("#l1").html();
+               var lname = $("#m1").html();
+               var email = $("#o1").html();
+               var password = $("#p1").html();
+               var address = $("#q1").html();
+               var type = $("#r1").html();
+               var id = $("#s1").html();
+
+               ////////////////////////////////////// populate user map after clearing it first
+               user.clear();
+
+               user.set("id",id);
+               user.set("vat",vat);
+               user.set("password",password);
+               user.set("firstname",fname);
+               user.set("lastname",lname);
+               user.set("address",address);
+               user.set("email",email);
+               user.set("type",type);
+            })
+
+            $("#delUserBtn").click(function (){
+
+            var userData = {
+               "id": user.get("id").toString(),
+               "vat": user.get("vat"),
+               "password": user.get("password"),
+               "firstname": user.get("firstname"),
+               "lastname": user.get("lastname"),
+               "address": user.get("address"),
+               "email": user.get("email"),
+               "type": user.get("type")
+            }
+
+
+            $.ajax({
+               type: "POST",
+               contentType : 'application/json; charset=utf-8',
+               dataType : 'json',
+               url: "http://localhost:8080/admin/delVehicle",
+               data: JSON.stringify(vehicleData), // This converts the payLoad to Json to pass along to Controller
+               success :function(result) {
+                  // do what ever you want with data
+                  alert('yeah');
+               }
+            });
+
+            })// end of click method
+
 
         $(".deleteBtn").click(function (){
                    var selectorArray = ($(this).attr('id')).split("-");
@@ -95,7 +147,7 @@ $(document).ready(function (){
                    var id = selectorArray[0];
 
 
-                   ////////////////////////////////////// populate vehicle map
+                   ////////////////////////////////////// populate vehicle map after clearing it first
                    vehicle.clear();
 
                    vehicle.set("id",id);
