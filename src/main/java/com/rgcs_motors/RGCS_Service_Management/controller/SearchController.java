@@ -1,25 +1,26 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
-import com.rgcs_motors.RGCS_Service_Management.services.EditUserService;
-import com.rgcs_motors.RGCS_Service_Management.services.RegisterNewOwnerService;
-import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
+import com.rgcs_motors.RGCS_Service_Management.model.VehicleData;
+import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
+import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -33,7 +34,10 @@ public class SearchController {
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String SEARCH_FORM = "searchForm";
     private static final String REGISTER_FORM = "ownerRegistrationForm";
+    private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
+    private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
+    private static final String SUCCESSFUL_DELETION_MESSAGE = "Vehicle deleted successfully";
 
     private String redirectUrl = "";
 
@@ -51,6 +55,12 @@ public class SearchController {
 
     @Autowired
     private EditUserService editUserService;
+
+    @Autowired
+    private EditVehicleService editVehicleService;
+
+    @Autowired
+    private DeleteVehicleService deleteVehicleService;
 
 
 
@@ -114,6 +124,56 @@ public class SearchController {
                 redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
                 redirectUrl = "redirect:" + SEARCH_PAGE;
             }
+        }
+
+        return redirectUrl;
+    }
+
+
+    @PostMapping("/admin/editVehicle")
+    public String search(@Valid @ModelAttribute(VEHICLE_REGISTER_FORM)
+                                 VehicleRegistrationForm vehicleRegistrationForm,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errorsListmodal = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList_modal",errorsListmodal);
+            redirectAttributes.addFlashAttribute("binding_result_modal",bindingResult);
+            redirectAttributes.addFlashAttribute(VEHICLE_REGISTER_FORM,vehicleRegistrationForm);
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        }
+        else{
+            try {
+                Vehicle vehicle = VehicleConverter.buildVehicleObject(vehicleRegistrationForm);
+                System.out.println("form id : "+vehicleRegistrationForm.getId());
+                vehicle.setId(vehicleRegistrationForm.getId());
+                Vehicle editedVehicle = editVehicleService.editVehicle(vehicle);
+                System.out.println("user was edited" + editedVehicle.getBrand());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_VEHICLE_EDIT_MESSAGE);
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            }
+        }
+
+        return redirectUrl;
+    }
+
+
+    @RequestMapping(value = "/admin/delVehicle", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteVehicle(@RequestBody VehicleData vehicleData,
+                                              RedirectAttributes redirectAttributes) {
+        try {
+            Vehicle vehicle = VehicleFromJsoConverter.buildVehicleObjectFromJson(vehicleData);
+            String deletionResult = deleteVehicleService.deleteVehicle(vehicle);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_DELETION_MESSAGE);
+            System.out.println("Successful deletio!!");
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
         }
 
         return redirectUrl;

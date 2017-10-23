@@ -19,4 +19,6 @@ public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
 
     Vehicle save(Vehicle vehicle);
 
+    void delete(Vehicle vehicle) throws IllegalArgumentException;
+
 }

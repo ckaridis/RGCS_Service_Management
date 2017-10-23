@@ -1,36 +1,26 @@
 package com.rgcs_motors.RGCS_Service_Management.model;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VehicleRegistrationForm {
-
-    private static final String LICENSEPLATES_PATTERN = "[a-zA-Z]{3}-[0-9]{4}";
-    private static final String FACTORYDATE_PATTERN = "[0-9]{4}";
-    private static final String USERVAT_PATTERN = "^[1-9]{9}";
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class VehicleData {
 
     private int id;
 
-    @NotNull(message = "{register.brand.null}")
     private String brand;
 
-    @NotNull(message = "{register.model.null}")
     private String model;
 
-    @NotNull(message = "{register.licenseplates.null}")
-    @Pattern(regexp = LICENSEPLATES_PATTERN, message = "{register.licenseplates.invalid}")
     private String licenseplates;
 
-    @NotNull(message = "{register.factorydate.null}")
-    @Pattern(regexp = FACTORYDATE_PATTERN, message = "{register.factorydate.invalid}")
     private String factorydate;
 
-    @NotNull(message = "{register.colour.null}")
     private String colour;
 
-    @NotNull(message = "{register.vat.null}")
-    @Pattern(regexp = USERVAT_PATTERN, message = "{register.vat.invalid}")
+    @JsonProperty("uservat")
     private String uservat;
+
 
     public String getBrand() {
         return brand;
