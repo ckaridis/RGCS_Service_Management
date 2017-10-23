@@ -1,20 +1,56 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "vehicles")
 public class Vehicle {
 
-    private String brand;
-    private String model;
-    private String licensePlates;
-    private String factoryDate;
-    private String colour;
-    private String afm;
+    @Id
+    @Column(nullable = false, name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    public String getAfm() {
-        return afm;
+    @Column(nullable = false, name = "brand")
+    private String brand;
+
+    @Column(nullable = false, name = "model")
+    private String model;
+
+    @Column(nullable = false, name = "licenseplate", unique = true)
+    private String licenseplate;
+
+    @Column(nullable = false, name = "productionyear")
+    private String factoryDate;
+
+    @Column(nullable = false, name = "color")
+    private String colour;
+
+    @Column(nullable = false, name = "uservat")
+    private String uservat;
+
+    public Vehicle() {
     }
 
-    public void setAfm(String afm) {
-        this.afm = afm;
+    public Vehicle(String brand, String model, String licenseplate, String factoryDate, String colour, String uservat) {
+        this.brand = brand;
+        this.model = model;
+        this.licenseplate = licenseplate;
+        this.factoryDate = factoryDate;
+        this.colour = colour;
+        this.uservat = uservat;
+    }
+
+    public String getUservat() {
+        return uservat;
+    }
+
+    public void setUservat(String uservat) {
+        this.uservat = uservat;
+    }
+
+    public void setAfm(String uservat) {
+        this.uservat = uservat;
     }
 
     public String getBrand() {
@@ -33,12 +69,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getLicensePlates() {
-        return licensePlates;
+    public String getLicenseplate() {
+        return licenseplate;
     }
 
-    public void setLicensePlates(String licensePlates) {
-        this.licensePlates = licensePlates;
+    public void setLicenseplate(String licenseplate) {
+        this.licenseplate = licenseplate;
     }
 
     public String getFactoryDate() {
@@ -55,5 +91,13 @@ public class Vehicle {
 
     public void setColour(String colour) {
         this.colour = colour;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

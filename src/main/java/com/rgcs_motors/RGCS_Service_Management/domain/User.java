@@ -12,7 +12,7 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, name = "vat", unique=true)
+    @Column(nullable = false, name = "uservat", unique=true)
     private String vat;
 
     @Column(nullable = false, name = "name")
@@ -55,6 +55,10 @@ public class User implements Serializable{
 
     public int getId () {
         return id;
+    }
+
+    public void setId (int id) {
+        this.id = id;
     }
 
     public String getVat () {

@@ -1,6 +1,8 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,7 +21,7 @@ public class Repair {
     private Date repairRegistrationDate;
 
     @Column(name = "repairdate", nullable = false)
-    private Date repairdate;
+    private String repairdate;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -33,11 +35,10 @@ public class Repair {
     @Column(name = "description", nullable = false)
     private String repairDescription;
 
-
     public Repair() {
     }
 
-    public Repair(String licenseplate, Date repairRegistrationDate, Date repairdate, String status, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, String repairdate, String status, String repairType, String repairCost, String repairDescription) {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairdate = repairdate;
@@ -48,14 +49,15 @@ public class Repair {
     }
 
 
-    public String getLicensePlates() {
+    public String getLicenseplate() {
         return licenseplate;
     }
 
-    public void setLicensePlates(String licenseplate) {
+    public void setLicenseplate(String licenseplate) {
         this.licenseplate = licenseplate;
     }
 
+    //@Temporal(TemporalType.TIMESTAMP)
     public Date getRepairRegistrationDate() {
         return repairRegistrationDate;
     }
@@ -64,11 +66,11 @@ public class Repair {
         this.repairRegistrationDate = repairRegistrationDate;
     }
 
-    public Date getRepairdate() {
+    public String getRepairdate() {
         return repairdate;
     }
 
-    public void setRepairdate(Date repairdate) {
+    public void setRepairdate(String repairdate) {
         this.repairdate = repairdate;
     }
 

@@ -1,7 +1,5 @@
 <#include "/base.ftl">
-    <#include "/macros/navbar.ftl">
-        <#include "/macros/searchbar.ftl">
-
+    <#include "/macros/navbarUser.ftl">
             <!-- PAGE HEADER GOES HERE -->
             <#macro page_head>
                 <title> Owner Home </title>
@@ -10,6 +8,7 @@
 
             <!--  BODY CODE HOES HERE -->
             <#macro page_body>
+                <@navbarUser/>
                 <div class="container">
 
                     <div class="row">
