@@ -153,8 +153,8 @@
                                       </button>
                                    </td>
                                    <td>
-                                      <button type="button" data-toggle="modal" data-target="#deleteVehicle" data-uid="1"
-                                              class="delete btn btn-danger btn-sm">
+                                      <button id="${vehicle.getId()}-deleteBtn" type="button" data-toggle="modal" data-target="#deleteVehicleDiv" data-uid="1"
+                                              class="delete btn btn-danger btn-sm deleteBtn">
                                                  <span class="glyphicon glyphicon-trash"></span>
                                       </button>
                                    </td>
@@ -405,7 +405,7 @@
                     </div>
                 </div>
 
-                <div id="deleteVehicle" class="modal fade" role="dialog">
+                <div id="deleteVehicleDiv" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -416,7 +416,7 @@
                                                 <strong>Are you sure you want to delete this data?</strong>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                <button type="button" id="delVehiclebtn" class="btn btn-danger" data-dismiss="modal">Delete</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>

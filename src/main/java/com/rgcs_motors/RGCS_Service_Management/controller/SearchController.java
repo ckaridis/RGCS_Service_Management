@@ -6,6 +6,7 @@ import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
+import com.rgcs_motors.RGCS_Service_Management.model.VehicleData;
 import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.EditUserService;
 import com.rgcs_motors.RGCS_Service_Management.services.EditVehicleService;
@@ -14,15 +15,14 @@ import com.rgcs_motors.RGCS_Service_Management.services.SearchService;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -158,6 +158,21 @@ public class SearchController {
         }
 
         return redirectUrl;
+    }
+
+
+    @RequestMapping(value = "/admin/delVehicle", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteVehicle(@RequestBody VehicleData vehicleData) {
+        System.out.println("fuck yeah");
+        System.out.println(vehicleData.getId());
+        System.out.println(vehicleData.getBrand());
+        System.out.println(vehicleData.getColour());
+        System.out.println(vehicleData.getFactorydate());
+        System.out.println(vehicleData.getLicenseplates());
+        System.out.println(vehicleData.getUservat());
+        System.out.println(vehicleData.getModel());
+
+        return "redirect:" + SEARCH_PAGE;
     }
 
     private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
