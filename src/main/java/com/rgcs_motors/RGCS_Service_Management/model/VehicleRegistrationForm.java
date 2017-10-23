@@ -7,7 +7,6 @@ public class VehicleRegistrationForm {
 
     private static final String LICENSEPLATES_PATTERN = "[a-zA-Z]{3}-[0-9]{4}";
     private static final String FACTORYDATE_PATTERN = "[0-9]{4}";
-    private static final String COLOUR_PATTERN = "^[a-zA-Z\\s]+";
     private static final String USERVAT_PATTERN = "^[1-9]{9}";
 
     private int id;
@@ -27,11 +26,10 @@ public class VehicleRegistrationForm {
     private String factorydate;
 
     @NotNull(message = "{register.colour.null}")
-    @Pattern(regexp = COLOUR_PATTERN, message = "{register.colour.invalid}")
     private String colour;
 
-    @NotNull(message = "{register.uservat.null}")
-    @Pattern(regexp = USERVAT_PATTERN, message = "{register.uservat.invalid}")
+    @NotNull(message = "{register.vat.null}")
+    @Pattern(regexp = USERVAT_PATTERN, message = "{register.vat.invalid}")
     private String uservat;
 
     public String getBrand() {

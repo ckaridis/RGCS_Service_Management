@@ -13,4 +13,7 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
     List<Repair> findByLicenseplate(String licenseplate);
 
     List<Repair> findTop10ByStatusOrderByRepairdateAsc(String status) throws Exception;
+
+    Repair save(Repair repair);
+
 }
