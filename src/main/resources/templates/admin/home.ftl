@@ -13,8 +13,6 @@
                 <@navbar/>
                 <div class="container">
 
-                    <@searchbar/>
-
 
                     <div class="row">
                         <table class="table table-hover table-responsive">

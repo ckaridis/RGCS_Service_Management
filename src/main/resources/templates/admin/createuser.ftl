@@ -10,39 +10,11 @@
         <!--  BODY CODE HOES HERE -->
         <#macro page_body>
 
+
             <@navbar/>
-
-
             <div class="container">
-
-
-            <#if binding_result??>
-                <#list errorsList as error>
-                    <div class="row alert alert-danger alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        error : ${error.getDefaultMessage()!error.toString()}
-                    </div>
-                </#list>
-            </#if>
-
-            <#if errorMessage??>
-                <p>
-                    Exceptions that occured on previous submission try :
-                </p>
                 <div class="row">
-                    <p>
-                        error : ${errorMessage}
-                        <#if registrationResult??>
-                            registration result : ${registrationResult}
-                        </#if>
-                    </p>
-                </div>
-            </#if>
-
-
-
-                <div class="row">
-                    <form class="form-horizontal" action="/admin/createuser" method="post">
+                    <form class="form-horizontal" action="/admin/createuser" method = "post">
                         <fieldset>
 
                             <!-- Form Name -->
@@ -87,15 +59,15 @@
                                 </div>
                             </div>
 
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="address">Address</label>
-                                <div class="col-md-5">
-                                    <input id="address" name="address" type="text"
-                                           placeholder="Your address goes here" class="form-control input-md"
-                                           required="">
+                             <!-- Text input-->
+                                <div class="form-group">
+                                   <label class="col-md-4 control-label" for="address">Address</label>
+                                   <div class="col-md-5">
+                                      <input id="address" name="address" type="text"
+                                            placeholder="Your address goes here" class="form-control input-md"
+                                            required="">
+                                   </div>
                                 </div>
-                            </div>
 
 
                             <!-- Password input-->
@@ -119,22 +91,22 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="type">Select user type</label>
-                                <div class="col-md-5">
-                                    <select class="form-control" id="type" name="type">
-                                        <option>Admin</option>
-                                        <option>Owner</option>
-                                    </select>
-                                </div>
-                            </div>
+                             <div class="form-group">
+                                   <label class="col-md-4 control-label" for="type">Select user type</label>
+                                   <div class="col-md-5">
+                                      <select class="form-control" id="type" name="type">
+                                         <option>Admin</option>
+                                         <option>Owner</option>
+                                      </select>
+                                   </div>
+                             </div>
 
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="createuser"></label>
                                 <div class="col-md-4">
                                     <input type="submit" id="createuser" value="Create User"
-                                           name="createuser" class="btn btn-primary">
+                                                  name="createuser" class="btn btn-primary">
                                 </div>
                             </div>
 
@@ -144,32 +116,33 @@
                 </div>
                 <br>
                 <#if binding_result??>
-                    <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
-                        Form errors on previous try :
-                    </p>
-                    <br>
-                    <#list errorsList as error>
-                        <div class="row alert alert-danger alert-dismissable">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            error : ${error.getDefaultMessage()!error.toString()}
-                        </div>
-                    </#list>
+                <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
+                   Form errors on previous try :
+                </p>
+                <#list errorsList as error>
+                <div class="row alert alert-warning">
+                   <br>
+                   <p> <!--style="color:red;font-weight:bold;text-align:center;"-->
+                      error : ${error.getDefaultMessage()!error.toString()}
+                   </p>
+                </div>
+                </#list>
                 </#if>
                 <br>
                 <#if errorMessage??>
-                    <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
-                        Exceptions that occured on previous submission try :
-                    </p>
-                    <div class="row">
-                        <br>
-                        <p style="color:red;font-weight:bold;text-align:center;">
-                            error : ${errorMessage}
-                            <#if registrationResult??>
-                                <br>
-                                registration result : ${registrationResult}
-                            </#if>
-                        </p>
-                    </div>
+                   <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
+                      Exceptions that occured on previous submission try :
+                   </p>
+                   <div class="row">
+                   <br>
+                      <p style="color:red;font-weight:bold;text-align:center;">
+                         error : ${errorMessage}
+                         <#if registrationResult??>
+                            <br>
+                            registration result : ${registrationResult}
+                         </#if>
+                      </p>
+                   </div>
                 </#if>
             </div>
 

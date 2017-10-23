@@ -12,4 +12,13 @@ import java.util.List;
 public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
 
     List<Vehicle> findByUservat(String uservat) throws Exception;
+
+    List<Vehicle> findByLicenseplate(String licenseplate) throws Exception;
+
+    List<Vehicle> findByLicenseplateAndUservat(String licenseplate, String uservat) throws Exception;
+
+    Vehicle save(Vehicle vehicle);
+
+    void delete(Vehicle vehicle) throws IllegalArgumentException;
+
 }
