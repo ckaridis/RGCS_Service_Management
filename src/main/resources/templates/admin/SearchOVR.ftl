@@ -144,7 +144,7 @@
                                    <td id="m1">${vehicle.getModel()}</td>
                                    <td id="m1">${vehicle.getFactoryDate()}</td>
                                    <td id="m1">${vehicle.getColour()}</td>
-                                   <td id="m1">${vehicle.getLicenseplate()}</td>
+                                   <td id="m1">${vehicle.getLicensePlate()}</td>
                                    <td>
                                       <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
                                               class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span>

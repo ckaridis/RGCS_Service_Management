@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class RepairRegistrationForm {
@@ -16,7 +17,7 @@ public class RepairRegistrationForm {
     private final static String NO_NUMBERS = "^[\\D]*$";
 
 
-    @NotNull(message = "{register.licenseplate.null}")
+    @NotNull(message = "{register.licenseplates.null}")
     @Pattern(regexp = LICENSEPLATES_PATTERN, message = "{register.licenseplates.invalid}")
     private String licenseplates;
 

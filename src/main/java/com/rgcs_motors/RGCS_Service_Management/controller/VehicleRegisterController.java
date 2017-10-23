@@ -56,7 +56,7 @@ public class VehicleRegisterController {
             List<FieldError> errorsList = bindingResult.getFieldErrors();
             redirectAttributes.addFlashAttribute("errorsList",errorsList);
             System.out.println(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
-            redirectAttributes.addFlashAttribute("binding_result",bindingResult);
+            redirectAttributes.addFlashAttribute("binding_result_vehicle",bindingResult);
             redirectAttributes.addFlashAttribute(VEHICLE_REGISTER_FORM,registrationForm);
             redirectAttributes.addFlashAttribute("returnedMessage", FAILED_REGISTRATION_MESSAGE);
             redirectUrl = "redirect:" + ADMIN_CREATE_VEHICLE_PAGE;
@@ -66,7 +66,7 @@ public class VehicleRegisterController {
                 Vehicle vehicle = VehicleConverter.buildVehicleObject(registrationForm);
                 String result = registerNewVehicleService.registerNewVehicle(vehicle);
                 System.out.println("Successful Registration!!");
-                redirectAttributes.addFlashAttribute("licensePlates",vehicle.getLicensePlates());
+                redirectAttributes.addFlashAttribute("licensePlates",vehicle.getLicensePlate());
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());

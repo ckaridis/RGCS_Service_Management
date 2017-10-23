@@ -3,7 +3,7 @@
 
         <!-- PAGE HEADER GOES HERE -->
         <#macro page_head>
-            <title> User Registration </title>
+            <title> Vehicle Registration </title>
         </#macro>
 
 
@@ -97,7 +97,7 @@
 
                 </div>
                 <br>
-                <#if binding_result??>
+                <#if binding_result_vehicle??>
                     <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
                         Form errors on previous try :
                     </p>

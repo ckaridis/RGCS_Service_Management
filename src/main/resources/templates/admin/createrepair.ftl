@@ -3,7 +3,7 @@
 
         <!-- PAGE HEADER GOES HERE -->
         <#macro page_head>
-            <title> User Registration </title>
+            <title> Repair Registration </title>
         </#macro>
 
 
@@ -43,6 +43,7 @@
                                 <label class="col-md-4 control-label" for="repairdate">Repair Date</label>
                                 <div class="col-md-5">
                                     <input id="repairdate" name="repairdate" type="datetime-local"
+                                           min="2017-10-23T08:30" max="2018-06-30T16:30"
                                            placeholder="Repair Date"
                                            class="form-control input-md" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                 </div>

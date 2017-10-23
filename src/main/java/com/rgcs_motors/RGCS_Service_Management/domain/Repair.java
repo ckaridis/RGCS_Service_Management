@@ -1,6 +1,8 @@
 package com.rgcs_motors.RGCS_Service_Management.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -16,7 +18,6 @@ public class Repair {
     private String licenseplate;
 
     @Column(name = "registrationdate", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date repairRegistrationDate;
 
     @Column(name = "repairdate", nullable = false)
@@ -56,7 +57,7 @@ public class Repair {
         this.licenseplate = licenseplate;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     public Date getRepairRegistrationDate() {
         return repairRegistrationDate;
     }
