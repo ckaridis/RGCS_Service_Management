@@ -1,10 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
-import com.rgcs_motors.RGCS_Service_Management.converters.RepairConverter;
-import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
-import com.rgcs_motors.RGCS_Service_Management.converters.UserFromJsonConverter;
-import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
-import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.*;
 import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
@@ -12,6 +8,7 @@ import com.rgcs_motors.RGCS_Service_Management.model.*;
 import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
+import javassist.bytecode.stackmap.BasicBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -40,7 +37,9 @@ public class SearchController {
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
     private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
     private static final String SUCCESSFUL_VEHICLE_DELETION_MESSAGE = "Vehicle was deleted successfully";
+    private static final String SUCCESSFUL_REPAIR_DELETION_MESSAGE = "Vehicle was deleted successfully";
     private static final String SUCCESSFUL_USER_DELETION_MESSAGE = "User was deleted successfully";
+    private static final String SEARCH_FORM_DATE ="searchFormDate";
 
     private String redirectUrl = "";
 
@@ -70,6 +69,9 @@ public class SearchController {
 
     @Autowired
     private DeleteUserService deleteUserService;
+
+    @Autowired
+    private DeleteRepairService deleteRepairService;
 
 
 
@@ -104,6 +106,40 @@ public class SearchController {
         }
         return "redirect:" + SEARCH_PAGE;
     }
+
+    @PostMapping("/admin/SearchOVRD")
+    public String search(@Valid @ModelAttribute(SEARCH_FORM_DATE) SearchFormDate searchFormDate,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+        List<Repair> repairs = null;
+        if(!searchFormDate.getDate2().equals("")) {
+            try {
+                StringBuilder dateWithoutT1 = new StringBuilder(searchFormDate.getDate1());
+                StringBuilder dateWithoutT2 = new StringBuilder(searchFormDate.getDate2());
+                dateWithoutT1.setCharAt(10, ' ');
+                dateWithoutT2.setCharAt(10, ' ');
+
+                repairs = searchService.searchRepairByDates(dateWithoutT1.toString(), dateWithoutT2.toString());
+            } catch (Exception e){
+                redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+            }
+        }
+        else{
+            try {
+                StringBuilder dateWithoutT1 = new StringBuilder(searchFormDate.getDate1());
+                dateWithoutT1.setCharAt(10, ' ');
+                repairs = searchService.searchRepairByDate(dateWithoutT1.toString());
+            }catch (Exception e) {
+                redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+            }
+        }
+        if(!repairs.isEmpty()) {
+            redirectAttributes.addFlashAttribute("repairs",repairs);
+        }
+        return "redirect:" + SEARCH_PAGE;
+    }
+
 
 
     @PostMapping("/admin/edituser")
@@ -197,6 +233,25 @@ public class SearchController {
             User user = UserFromJsonConverter.buildUserObjectFromJson(userData);
             String deletionResult = deleteUserService.deleteUser(user);
             redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_USER_DELETION_MESSAGE);
+            System.out.println("Successful deletio!!");
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+        }
+
+        return redirectUrl;
+    }
+
+
+    @RequestMapping(value = "/admin/delRepair", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteRepair(@RequestBody RepairData repairData,
+                                              RedirectAttributes redirectAttributes) {
+        System.out.println("delete repair");
+        try {
+            Repair repair = RepairFromJsonConverter.buildRepairObjectFromJson(repairData);
+            System.out.println("repair from jso : " + repair.getRepairdate());
+            String deletionResult = deleteRepairService.deleteRepair(repair);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_REPAIR_DELETION_MESSAGE);
             System.out.println("Successful deletio!!");
             redirectUrl = "redirect:" + SEARCH_PAGE;
         } catch (Exception e) {

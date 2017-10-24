@@ -1,6 +1,33 @@
-/*    body {
-        padding-top: 50px;
-    }*/
+.bodyclass {
+    background: linear-gradient(#e7e7e7, #e7e7e7);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+/*
+    color: #fff;
+*/
+    height: 450px;
+    padding-top: 50px;
+}
+
+/*
+.navbar{
+
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+
+}
+*/
+
+/*.table, .form-horizontal{
+background-color: rgba(255,255,255,.6);
+
+}*/
+
+body, html{
+     height: 100%;
+ 	background-repeat: no-repeat;
+ 	font-family: 'Oxygen', sans-serif;
+}
 
 .container {
 

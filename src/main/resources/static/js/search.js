@@ -2,6 +2,7 @@ $(document).ready(function (){
 
        var vehicle = new Map();
        var user  = new Map();
+       var repair = new Map();
 
        $('#searchSelect').on('change', function() {
          if(this.value == "Vehicle" || this.value == "Repair"){
@@ -220,9 +221,6 @@ $(document).ready(function (){
 
                 $("#delVehiclebtn").click(function (){
 
-                           alert("jso_fuctio");
-                           alert(vehicle.get("colour"));
-
                            var vehicleData = {
                              "id": vehicle.get("id").toString(),
                              "uservat": vehicle.get("uservat"),
@@ -247,5 +245,76 @@ $(document).ready(function (){
                             }
                            });
                     })
+
+
+
+        $(".deleteRepairBtn").click(function (){
+                           var selectorArray = ($(this).attr('id')).split("-");
+                           var selector = selectorArray[0];
+
+                           var licenseplatesSelector = "#f3-".concat(selectorArray[0]);
+                           var licenseplates = $(licenseplatesSelector).html();
+
+
+                           var statusSelector = "#r3-".concat(selectorArray[0]);
+                           var status = $(statusSelector).html();
+
+
+                           var repairtypeSelector = "#m3-".concat(selectorArray[0]);
+                           var repairtype = $(repairtypeSelector).html();
+
+
+                           var repaircostSelector = "#o3-".concat(selectorArray[0]);
+                           var repaircost = $(repaircostSelector).html();
+
+
+                           var descriptionSelector = "#p3-".concat(selectorArray[0]);
+                           var description = $(descriptionSelector).html();
+
+
+                           var repairDateSelector = "#l3-".concat(selectorArray[0]);
+                           var repairDate = $(repairDateSelector).html();
+
+
+                           var id = selectorArray[0];
+
+
+                           ////////////////////////////////////// populate repair map after clearing it first
+                           repair.clear();
+
+                           repair.set("id",id);
+                           repair.set("licenseplates",licenseplates);
+                           repair.set("status",status);
+                           repair.set("repairtype",repairtype);
+                           repair.set("repaircost",repaircost);
+                           repair.set("description",description);
+                           repair.set("repairDate",repairDate);
+                        })
+
+
+         $("#delRepairbtn").click(function (){
+
+                                   var repairData = {
+                                     "id": repair.get("id"),
+                                     "status": repair.get("status"),
+                                     "licenseplates": repair.get("licenseplates"),
+                                     "repairtype": repair.get("repairtype"),
+                                     "repaircost": repair.get("repaircost"),
+                                     "description": repair.get("description"),
+                                     "repairDate": repair.get("repairDate")
+                                    }
+
+                                   $.ajax({
+                                     type: "POST",
+                                     contentType : 'application/json; charset=utf-8',
+                                     dataType : 'json',
+                                     url: "http://localhost:8080/admin/delRepair",
+                                     data: JSON.stringify(repairData), // This converts the payLoad to Json to pass along to Controller
+                                     success :function(result) {
+                                      // do what ever you want with data
+                                      alert('yeah');
+                                    }
+                                   });
+                            })
 
 });

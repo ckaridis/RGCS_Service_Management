@@ -18,4 +18,7 @@ public interface SearchService {
 
     List<Repair>  searchRepairByPlate(String licenseplate) throws Exception;
     List<Repair>  searchRepairByVat(String uservat) throws Exception;
+
+    List<Repair> searchRepairByDate(String date) throws Exception;
+    List<Repair> searchRepairByDates(String date1, String date2) throws Exception;
 }
