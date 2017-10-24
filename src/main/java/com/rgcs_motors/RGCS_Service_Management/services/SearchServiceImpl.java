@@ -152,4 +152,32 @@ public class SearchServiceImpl implements SearchService {
         }
         return repairs;
     }
+
+    @Override
+    public List<Repair> searchRepairByDate(String date) throws Exception {
+        List<Repair> repairs = null;
+        try {
+            repairs = repairRepository.findByRepairdateLessThanOrderByRepairdateAsc(date);
+        if (repairs.isEmpty()){
+            throw new Exception("Repair not found");
+        }
+        }catch (Exception e) {
+            throw new Exception(e.getCause().toString());
+        }
+        return repairs;
+    }
+
+    @Override
+    public List<Repair> searchRepairByDates(String date1, String date2) throws Exception {
+        List<Repair> repairs = null;
+        try {
+            repairs = repairRepository.findByRepairdateBetweenOrderByRepairdateAsc(date1, date2);
+            if (repairs.isEmpty()){
+                throw new Exception("Repair not found");
+            }
+        }catch (Exception e) {
+            throw new Exception(e.getCause().toString());
+        }
+        return repairs;
+    }
 }

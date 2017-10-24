@@ -238,7 +238,7 @@ public class SearchFormValidator implements Validator{
         else if(searchParams.length == 1) //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is one value
         {
             if(!searchParams[0].matches("[a-zA-Z]{3}-[0-9]{4}"))
-            {
+                {
                 vat = searchParams[0];
                 System.out.println("[validator] vat" + vat);
                 if(!vat.matches("^[1-9]{9}$"))

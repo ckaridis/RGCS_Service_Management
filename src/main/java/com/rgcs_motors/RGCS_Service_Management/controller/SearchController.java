@@ -12,6 +12,7 @@ import com.rgcs_motors.RGCS_Service_Management.model.*;
 import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
+import javassist.bytecode.stackmap.BasicBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -41,6 +42,7 @@ public class SearchController {
     private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
     private static final String SUCCESSFUL_VEHICLE_DELETION_MESSAGE = "Vehicle was deleted successfully";
     private static final String SUCCESSFUL_USER_DELETION_MESSAGE = "User was deleted successfully";
+    private static final String SEARCH_FORM_DATE ="searchFormDate";
 
     private String redirectUrl = "";
 
@@ -104,6 +106,40 @@ public class SearchController {
         }
         return "redirect:" + SEARCH_PAGE;
     }
+
+    @PostMapping("/admin/SearchOVRD")
+    public String search(@Valid @ModelAttribute(SEARCH_FORM_DATE) SearchFormDate searchFormDate,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+        List<Repair> repairs = null;
+        if(!searchFormDate.getDate2().equals("")) {
+            try {
+                StringBuilder dateWithoutT1 = new StringBuilder(searchFormDate.getDate1());
+                StringBuilder dateWithoutT2 = new StringBuilder(searchFormDate.getDate2());
+                dateWithoutT1.setCharAt(10, ' ');
+                dateWithoutT2.setCharAt(10, ' ');
+
+                repairs = searchService.searchRepairByDates(dateWithoutT1.toString(), dateWithoutT2.toString());
+            } catch (Exception e){
+                redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+            }
+        }
+        else{
+            try {
+                StringBuilder dateWithoutT1 = new StringBuilder(searchFormDate.getDate1());
+                dateWithoutT1.setCharAt(10, ' ');
+                repairs = searchService.searchRepairByDate(dateWithoutT1.toString());
+            }catch (Exception e) {
+                redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+            }
+        }
+        if(!repairs.isEmpty()) {
+            redirectAttributes.addFlashAttribute("repairs",repairs);
+        }
+        return "redirect:" + SEARCH_PAGE;
+    }
+
 
 
     @PostMapping("/admin/edituser")

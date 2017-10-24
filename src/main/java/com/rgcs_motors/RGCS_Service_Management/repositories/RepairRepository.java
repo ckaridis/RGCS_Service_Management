@@ -14,6 +14,10 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     List<Repair> findTop10ByStatusOrderByRepairdateAsc(String status) throws Exception;
 
+    List<Repair> findByRepairdateLessThanOrderByRepairdateAsc(String date) throws Exception;
+
+    List<Repair> findByRepairdateBetweenOrderByRepairdateAsc(String date1, String date2) throws Exception;
+
     Repair save(Repair repair);
 
     void delete(Repair repair) throws IllegalArgumentException;
