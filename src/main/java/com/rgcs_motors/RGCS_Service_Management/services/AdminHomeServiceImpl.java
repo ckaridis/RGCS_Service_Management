@@ -18,8 +18,6 @@ public class AdminHomeServiceImpl implements AdminHomeService {
 
     private final String repairsAdminNotFoundError = "No pending Admin repairs found";
 
-
-
     @Override
     public List<Repair> fetchRepairsForAdmin() throws Exception {
 

@@ -25,6 +25,7 @@ public class SearchFormValidator implements Validator{
         IVALID_VAT_V
     }
 
+
     private Map<String,String> searchParamsMap = new HashMap<>();
 
 
@@ -81,6 +82,9 @@ public class SearchFormValidator implements Validator{
             break;
             case "Vehicle":
                 message = filterVehicle(form);
+                break;
+            case "Repair":
+                message = filterRepair(form);
                 break;
             default:
                 message = "EMPTY_TYPE";
@@ -219,6 +223,42 @@ public class SearchFormValidator implements Validator{
         }
         return message;
     }
+
+
+    private String filterRepair(SearchForm form)
+    {
+        System.out.println("\nwe are in filterRepair");
+        String[] searchParams = form.getSearchval().trim().split(",");
+        System.out.println("validator form search params : " + searchParams[0]);
+        String vat = "";
+        String message = "";
+        if(searchParams.length >= 2) {  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is too many values
+            message = UserMessages.OVERSIZED.toString();
+        }
+        else if(searchParams.length == 1) //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search input is one value
+        {
+            if(!searchParams[0].matches("[a-zA-Z]{3}-[0-9]{4}"))
+            {
+                vat = searchParams[0];
+                System.out.println("[validator] vat" + vat);
+                if(!vat.matches("^[1-9]{9}$"))
+                {
+                    System.out.println("ivalid vat");
+                    message = VehicleMessages.IVALID_VAT_V.toString();
+                }
+                else{
+                    System.out.println("[validator] vat was put i search params");
+                    searchParamsMap.put("userVat",searchParams[0]);
+                }
+            }
+            else {
+                System.out.println("[validator] plate was put i search params");
+                searchParamsMap.put("userPlate",searchParams[0]);
+            }
+        }
+        return message;
+    }
+
 
     public Map<String, String> getSearchParamsMap() {
         return searchParamsMap;
