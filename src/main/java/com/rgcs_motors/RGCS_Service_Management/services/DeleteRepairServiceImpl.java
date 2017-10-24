@@ -8,14 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class DeleteRepairServiceImpl {
+public class DeleteRepairServiceImpl implements DeleteRepairService{
 
     @Autowired
     private RepairRepository repairRepository;
 
     private String deletionResultMessage = "";
 
-    //@Override
+    @Override
     public String deleteRepair(Repair repair) throws Exception {
         try{
             repairRepository.delete(repair);

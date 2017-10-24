@@ -141,7 +141,8 @@ public class SearchServiceImpl implements SearchService {
             List<Vehicle> vehicles = vehicleRepository.findByUservat(uservat);
             for(Vehicle v:vehicles){
                 tempRepairs = repairRepository.findByLicenseplate(v.getLicenseplate());
-                repairs.add(tempRepairs.get(0));
+                for(Repair repair:tempRepairs)
+                repairs.add(repair);
             }
             if(repairs.isEmpty())
             {
@@ -150,6 +151,7 @@ public class SearchServiceImpl implements SearchService {
         } catch (Exception e) {
             throw new Exception(e.getCause().toString());
         }
+        System.out.println("repairs list size: " + repairs.size());
         return repairs;
     }
 }

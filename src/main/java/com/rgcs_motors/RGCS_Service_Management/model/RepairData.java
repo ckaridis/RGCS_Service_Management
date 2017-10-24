@@ -19,7 +19,7 @@ public class RepairData {
 
     private String repairDate;
 
-    private String registrationDate;
+
 
     public int getId () {
         return id;
@@ -75,13 +75,5 @@ public class RepairData {
 
     public void setRepairDate ( String repairDate ) {
         this.repairDate = repairDate;
-    }
-
-    public String getRegistrationDate () {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate ( String registrationDate ) {
-        this.registrationDate = registrationDate;
     }
 }
