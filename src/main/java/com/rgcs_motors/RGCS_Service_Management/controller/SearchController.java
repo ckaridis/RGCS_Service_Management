@@ -1,14 +1,14 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
+import com.rgcs_motors.RGCS_Service_Management.converters.RepairConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.UserConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.UserFromJsonConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleConverter;
 import com.rgcs_motors.RGCS_Service_Management.converters.VehicleFromJsoConverter;
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
-import com.rgcs_motors.RGCS_Service_Management.model.OwnerRegistrationForm;
-import com.rgcs_motors.RGCS_Service_Management.model.SearchForm;
-import com.rgcs_motors.RGCS_Service_Management.model.VehicleData;
-import com.rgcs_motors.RGCS_Service_Management.model.VehicleRegistrationForm;
+import com.rgcs_motors.RGCS_Service_Management.model.*;
 import com.rgcs_motors.RGCS_Service_Management.services.*;
 import com.rgcs_motors.RGCS_Service_Management.validators.OwnerRegistrationFormValidator;
 import com.rgcs_motors.RGCS_Service_Management.validators.SearchFormValidator;
@@ -35,9 +35,12 @@ public class SearchController {
     private static final String SEARCH_FORM = "searchForm";
     private static final String REGISTER_FORM = "ownerRegistrationForm";
     private static final String VEHICLE_REGISTER_FORM = "VehicleRegistrationForm";
+    private static final String REPAIR_REGISTER_FORM = "RepairRegistrationForm";
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
-    private static final String SUCCESSFUL_DELETION_MESSAGE = "Vehicle deleted successfully";
+    private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
+    private static final String SUCCESSFUL_VEHICLE_DELETION_MESSAGE = "Vehicle was deleted successfully";
+    private static final String SUCCESSFUL_USER_DELETION_MESSAGE = "User was deleted successfully";
 
     private String redirectUrl = "";
 
@@ -61,6 +64,12 @@ public class SearchController {
 
     @Autowired
     private DeleteVehicleService deleteVehicleService;
+
+    @Autowired
+    private EditRepairService editRepairService;
+
+    @Autowired
+    private DeleteUserService deleteUserService;
 
 
 
@@ -169,7 +178,7 @@ public class SearchController {
         try {
             Vehicle vehicle = VehicleFromJsoConverter.buildVehicleObjectFromJson(vehicleData);
             String deletionResult = deleteVehicleService.deleteVehicle(vehicle);
-            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_DELETION_MESSAGE);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_VEHICLE_DELETION_MESSAGE);
             System.out.println("Successful deletio!!");
             redirectUrl = "redirect:" + SEARCH_PAGE;
         } catch (Exception e) {
@@ -178,6 +187,61 @@ public class SearchController {
 
         return redirectUrl;
     }
+
+
+    @RequestMapping(value = "/admin/delUser", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteUser(@RequestBody UserData userData,
+                                              RedirectAttributes redirectAttributes) {
+        System.out.println("so far so good");
+        try {
+            User user = UserFromJsonConverter.buildUserObjectFromJson(userData);
+            String deletionResult = deleteUserService.deleteUser(user);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_USER_DELETION_MESSAGE);
+            System.out.println("Successful deletio!!");
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+        }
+
+        return redirectUrl;
+    }
+
+
+
+    @PostMapping("/admin/search/editRepair")
+    public String editRepair(@Valid @ModelAttribute(REPAIR_REGISTER_FORM)
+                                 RepairRegistrationForm repairRegistrationForm,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errorsListmodal = bindingResult.getFieldErrors();
+            redirectAttributes.addFlashAttribute("errorsList_modal",errorsListmodal);
+            redirectAttributes.addFlashAttribute("binding_result_modal",bindingResult);
+            redirectAttributes.addFlashAttribute(REPAIR_REGISTER_FORM,repairRegistrationForm);
+            redirectUrl = "redirect:" + SEARCH_PAGE;
+        }
+        else{
+            try {
+                Repair repair = RepairConverter.buildRepairObject(repairRegistrationForm);
+                System.out.println("form id : "+repairRegistrationForm.getId());
+                repair.setId(repairRegistrationForm.getId());
+                Repair editedRepair = editRepairService.editRepair(repair);
+                System.out.println("user was edited" + editedRepair.getRepairdate());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESSFUL_REPAIR_EDIT_MESSAGE);
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage_modal", e.getMessage());
+                redirectUrl = "redirect:" + SEARCH_PAGE;
+            }
+        }
+
+        return redirectUrl;
+    }
+
+
+
 
     private void searchTypeNotNullActions(@Valid @ModelAttribute(SEARCH_FORM) SearchForm searchForm,
                                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -200,6 +264,8 @@ public class SearchController {
                     handleVehicleSearch(redirectAttributes);
                 case "Owner":
                     handleUserSearch(redirectAttributes);
+                case "Repair":
+                    handleRepairSearch(redirectAttributes);
             }
         }
     }
@@ -299,6 +365,40 @@ public class SearchController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
         }
-    }// end of handleUserSearch()
+    }// end of handleVehicleSearch()
+
+    private void handleRepairSearch(RedirectAttributes redirectAttributes) {
+        try {
+            Map<String,String> paramsMap = searchFormValidator.getSearchParamsMap();
+            if(paramsMap.containsKey("userVat"))
+            {
+                try{
+                    List<Repair> repairs = searchService.
+                            searchRepairByVat(paramsMap.get("userVat"));
+                    if(!repairs.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("repairs",repairs);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            else{
+                try{
+                    List<Repair> repairs = searchService.
+                            searchRepairByPlate(paramsMap.get("userPlate"));
+                    if(!repairs.isEmpty()) {
+                        redirectAttributes.addFlashAttribute("repairs",repairs);
+                    }
+                }
+                catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("searchErrorMessage",e.getCause());
+                }
+            }
+            searchFormValidator.clearSearchParamsMap();
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",e.getCause().toString());
+        }
+    }// end of handleVehicleSearch()
 
 }

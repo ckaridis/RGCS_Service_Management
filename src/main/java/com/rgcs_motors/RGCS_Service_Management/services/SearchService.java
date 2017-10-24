@@ -1,5 +1,6 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
+import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
 import com.rgcs_motors.RGCS_Service_Management.domain.User;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 
@@ -14,4 +15,7 @@ public interface SearchService {
     List<Vehicle> searchVehicleByVatAndPlate(String uservat, String licenseplate) throws Exception;
     List<Vehicle> searchVehicleByVat(String uservat) throws Exception;
     List<Vehicle> searchVehicleByPlate(String licenseplate) throws Exception;
+
+    List<Repair>  searchRepairByPlate(String licenseplate) throws Exception;
+    List<Repair>  searchRepairByVat(String uservat) throws Exception;
 }

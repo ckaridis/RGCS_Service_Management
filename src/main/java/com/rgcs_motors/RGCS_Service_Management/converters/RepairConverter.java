@@ -13,7 +13,7 @@ public class RepairConverter {
 
 
 
-    public static Repair buildRepairObject(RepairRegistrationForm repairRegistrationForm) throws ParseException {
+    public static Repair buildRepairObject(RepairRegistrationForm repairRegistrationForm) {
         Repair repairToBeRegistered = new Repair();
 
         StringBuilder dateWithoutT = new StringBuilder(repairRegistrationForm.getRepairdate());
