@@ -1,6 +1,7 @@
 <#include "/base.ftl">
     <#include "/macros/navbar.ftl">
         <#include "/macros/searchbar.ftl">
+            <#include "/macros/editUserForm.ftl">
 
             <!-- PAGE HEADER GOES HERE -->
             <#macro page_head>
@@ -89,8 +90,6 @@
 
                     <br>
                     <br>
-
-
                     <#if searchedUser??>
                     <h2 class"primary" style"font-weight:bold;">User search results</h2>
                     <br>

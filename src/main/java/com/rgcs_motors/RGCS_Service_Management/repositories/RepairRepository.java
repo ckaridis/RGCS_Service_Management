@@ -16,4 +16,6 @@ public interface RepairRepository extends CrudRepository<Repair, Long> {
 
     Repair save(Repair repair);
 
+    void delete(Repair repair) throws IllegalArgumentException;
+
 }
