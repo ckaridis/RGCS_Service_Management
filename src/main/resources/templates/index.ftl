@@ -69,8 +69,6 @@
                             <p style="color:red;font-weight:bold" class="text-center">${errorMessage!""}</p>
                         </form>
                     </div>
-
-                    <img src="/res/technologies_wall.png" class="img-responsive center-block">
                 </div>
             </div>
 
