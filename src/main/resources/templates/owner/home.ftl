@@ -29,7 +29,7 @@
                                 <#list OwnerRepairs as repairs>
 
                                     <tr id="d1">
-                                        <td id="f1">${repairs.getLicensePlates()}</td>
+                                        <td id="f1">${repairs.getLicenseplate()}</td>
                                         <td id="l1">${repairs.getRepairdate()}</td>
                                         <td id="m1">${repairs.getRepairType()}</td>
                                         <td id="m1">${repairs.getRepairCost()}</td>
