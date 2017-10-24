@@ -18,4 +18,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findById(int id) throws Exception;
 
     User save(User user);
+
+    void delete(User user) throws IllegalArgumentException;
 }
