@@ -467,7 +467,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                <div class="row">
-                                                        <form class="form-horizontal" action="/admin/editRepair" method="post">
+                                                        <form class="form-horizontal" action="/admin/search/editRepair" method="post">
                                                                                 <fieldset>
 
                                                                                     <div class="form-group">

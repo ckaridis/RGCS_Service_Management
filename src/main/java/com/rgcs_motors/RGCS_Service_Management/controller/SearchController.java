@@ -208,7 +208,7 @@ public class SearchController {
 
 
 
-    @PostMapping("/admin/editRepair")
+    @PostMapping("/admin/search/editRepair")
     public String editRepair(@Valid @ModelAttribute(REPAIR_REGISTER_FORM)
                                  RepairRegistrationForm repairRegistrationForm,
                          BindingResult bindingResult,

@@ -42,7 +42,7 @@
                             <tr id="d1">
                                 <td id="f3-${repairs.getId()}">${repairs.getLicenseplate()}</td>
                                 <td id="l3-${repairs.getId()}">${repairs.getRepairdate()}</td>
-                                <td id="n3-${repairs.getId()}">${repairs.getRepairType()}</td>
+                                <td id="m3-${repairs.getId()}">${repairs.getRepairType()}</td>
                                 <td id="o3-${repairs.getId()}">${repairs.getRepairCost()}</td>
                                 <td id="p3-${repairs.getId()}">${repairs.getRepairDescription()}</td>
                                 <td id="r3-${repairs.getId()}">${repairs.getStatus()}</td>

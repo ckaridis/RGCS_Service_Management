@@ -63,7 +63,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/editRepair")
-    public String editRepair(@Valid @ModelAttribute(REPAIR_REGISTER_FORM)
+    public String editAdminRepair(@Valid @ModelAttribute(REPAIR_REGISTER_FORM)
                                  RepairRegistrationForm repairRegistrationForm,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
