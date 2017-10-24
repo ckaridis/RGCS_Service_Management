@@ -39,7 +39,6 @@ public class SearchController {
     private static final String SUCCESSFUL_EDIT_MESSAGE = "User updated successfully";
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
     private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
-    private static final String SUCCESSFUL_DELETION_MESSAGE = "Vehicle deleted successfully";
     private static final String SUCCESSFUL_VEHICLE_DELETION_MESSAGE = "Vehicle was deleted successfully";
     private static final String SUCCESSFUL_USER_DELETION_MESSAGE = "User was deleted successfully";
 
@@ -193,6 +192,7 @@ public class SearchController {
     @RequestMapping(value = "/admin/delUser", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteUser(@RequestBody UserData userData,
                                               RedirectAttributes redirectAttributes) {
+        System.out.println("so far so good");
         try {
             User user = UserFromJsonConverter.buildUserObjectFromJson(userData);
             String deletionResult = deleteUserService.deleteUser(user);

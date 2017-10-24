@@ -96,12 +96,14 @@ $(document).ready(function (){
                user.set("address",address);
                user.set("email",email);
                user.set("type",type);
+
+               alert(user.get("vat"));
             })
 
             $("#delUserBtn").click(function (){
 
             var userData = {
-               "id": user.get("id").toString(),
+               "id": user.get("id"),
                "vat": user.get("vat"),
                "password": user.get("password"),
                "firstname": user.get("firstname"),
@@ -112,12 +114,14 @@ $(document).ready(function (){
             }
 
 
+            alert(userData.vat);
+
             $.ajax({
                type: "POST",
                contentType : 'application/json; charset=utf-8',
                dataType : 'json',
-               url: "http://localhost:8080/admin/delVehicle",
-               data: JSON.stringify(vehicleData), // This converts the payLoad to Json to pass along to Controller
+               url: "http://localhost:8080/admin/delUser",
+               data: JSON.stringify(userData), // This converts the payLoad to Json to pass along to Controller
                success :function(result) {
                   // do what ever you want with data
                   alert('yeah');

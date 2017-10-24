@@ -572,7 +572,7 @@
                                 <strong>Are you sure you want to delete this data?</strong>
                             </div>
                             <div class="modal-footer">
-                                <button id="deleteUserBtn" type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                <button id="delUserBtn" type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -595,9 +595,10 @@
                                             </div>
                                         </div>
                                     </div>
+                </div>
 
 
-                </div><div id="deleteRepairDiv" class="modal fade" role="dialog">
+                <div id="deleteRepairDiv" class="modal fade" role="dialog">
                    <div class="modal-dialog">
                       <div class="modal-content">
                          <div class="modal-header">
