@@ -38,7 +38,9 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(String licenseplate, Date repairRegistrationDate, String repairdate, String status, String repairType, String repairCost, String repairDescription) {
+    public Repair(String licenseplate, Date repairRegistrationDate, String repairdate, String status,
+                  String repairType, String repairCost, String repairDescription)
+    {
         this.licenseplate = licenseplate;
         this.repairRegistrationDate = repairRegistrationDate;
         this.repairdate = repairdate;

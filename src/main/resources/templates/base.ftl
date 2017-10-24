@@ -1,6 +1,11 @@
 <#macro page_head> <!-- This is the header code which will be changed from page to page -->
     <title>RGCS MOTORS</title>
     <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
 </#macro>
 
 
@@ -42,6 +47,7 @@
                 integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
                 crossorigin="anonymous"></script>
         <!-- bootstrap end -->
+        <script type="text/javascript" src="/js/navbarSelected.js"></script>
     </div>
     </body>
     </html>
