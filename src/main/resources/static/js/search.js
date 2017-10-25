@@ -109,12 +109,11 @@ $(document).ready(function (){
             $.ajax({
                type: "POST",
                contentType : 'application/json; charset=utf-8',
-               dataType : 'json',
                url: "http://localhost:8080/admin/delUser",
                data: JSON.stringify(userData), // This converts the payLoad to Json to pass along to Controller
                success :function(result) {
-                  // do what ever you want with data
-                  alert('yeah');
+                  alert(result);
+                  window.location.replace("http://localhost:8080/admin/SearchOVR");
                }
             });
 
@@ -221,12 +220,11 @@ $(document).ready(function (){
                            $.ajax({
                              type: "POST",
                              contentType : 'application/json; charset=utf-8',
-                             dataType : 'json',
                              url: "http://localhost:8080/admin/delVehicle",
                              data: JSON.stringify(vehicleData), // This converts the payLoad to Json to pass along to Controller
                              success :function(result) {
-                              // do what ever you want with data
-                              alert('yeah');
+                              alert(result);
+                              window.location.replace("http://localhost:8080/admin/SearchOVR");
                             }
                            });
                     })
@@ -292,14 +290,38 @@ $(document).ready(function (){
                                    $.ajax({
                                      type: "POST",
                                      contentType : 'application/json; charset=utf-8',
-                                     dataType : 'json',
                                      url: "http://localhost:8080/admin/delRepair",
                                      data: JSON.stringify(repairData), // This converts the payLoad to Json to pass along to Controller
                                      success :function(result) {
-                                      // do what ever you want with data
-                                      alert('yeah');
+                                      alert(result);
+                                      window.location.replace("http://localhost:8080/admin/SearchOVR");
                                     }
                                    });
                             })
+
+
+         $("#delAdminRepairbtn").click(function (){
+
+                                            var repairData = {
+                                              "id": repair.get("id"),
+                                              "status": repair.get("status"),
+                                              "licenseplates": repair.get("licenseplates"),
+                                              "repairtype": repair.get("repairtype"),
+                                              "repaircost": repair.get("repaircost"),
+                                              "description": repair.get("description"),
+                                              "repairDate": repair.get("repairDate")
+                                             }
+
+                                            $.ajax({
+                                              type: "POST",
+                                              contentType : 'application/json; charset=utf-8',
+                                              url: "http://localhost:8080/admin/delRepair",
+                                              data: JSON.stringify(repairData), // This converts the payLoad to Json to pass along to Controller
+                                              success :function(result) {
+                                               alert(result);
+                                               window.location.replace("http://localhost:8080/admin/home");
+                                             }
+                                            });
+                                     })
 
 });

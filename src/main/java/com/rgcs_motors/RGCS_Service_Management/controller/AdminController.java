@@ -99,21 +99,4 @@ public class AdminController {
         return redirectUrl;
     }
 
-    @RequestMapping(value = "/admin/deleteRepair", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String deleteRepair(@RequestBody RepairData repairData,
-                                             RedirectAttributes redirectAttributes) {
-        System.out.println("delete repair");
-        try {
-            Repair repair = RepairFromJsonConverter.buildRepairObjectFromJson(repairData);
-            System.out.println("repair from jso : " + repair.getRepairdate());
-            String deletionResult = deleteRepairService.deleteRepair(repair);
-            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_REPAIR_DELETION_MESSAGE);
-            System.out.println("Successful deletio!!");
-            redirectUrl = "redirect:" + ADMIN_PAGE;
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
-        }
-
-        return redirectUrl;
-    }
 }

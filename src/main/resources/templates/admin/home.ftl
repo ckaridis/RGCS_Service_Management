@@ -186,7 +186,7 @@
                                 <strong>Are you sure you want to delete this data?</strong>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="delRepairbtn" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                <button type="button" id="delAdminRepairbtn" class="btn btn-danger" data-dismiss="modal">Delete</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

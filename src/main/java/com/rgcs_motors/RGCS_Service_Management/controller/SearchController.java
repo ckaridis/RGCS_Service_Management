@@ -42,6 +42,7 @@ public class SearchController {
     private static final String SEARCH_FORM_DATE ="searchFormDate";
 
     private String redirectUrl = "";
+    private String response = "";
 
     @Autowired
     private SearchForm form;
@@ -216,12 +217,13 @@ public class SearchController {
             String deletionResult = deleteVehicleService.deleteVehicle(vehicle);
             redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_VEHICLE_DELETION_MESSAGE);
             System.out.println("Successful deletio!!");
-            redirectUrl = "redirect:" + SEARCH_PAGE;
+            response = SUCCESSFUL_VEHICLE_DELETION_MESSAGE;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+            response = e.getCause().toString();
         }
 
-        return redirectUrl;
+        return response;
     }
 
 
@@ -234,12 +236,13 @@ public class SearchController {
             String deletionResult = deleteUserService.deleteUser(user);
             redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_USER_DELETION_MESSAGE);
             System.out.println("Successful deletio!!");
-            redirectUrl = "redirect:" + SEARCH_PAGE;
+            response = SUCCESSFUL_USER_DELETION_MESSAGE;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+            response = e.getCause().toString();
         }
 
-        return redirectUrl;
+        return response;
     }
 
 
@@ -253,12 +256,13 @@ public class SearchController {
             String deletionResult = deleteRepairService.deleteRepair(repair);
             redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_REPAIR_DELETION_MESSAGE);
             System.out.println("Successful deletio!!");
-            redirectUrl = "redirect:" + SEARCH_PAGE;
+            response = SUCCESSFUL_REPAIR_DELETION_MESSAGE;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+            response = e.getCause().toString();
         }
 
-        return redirectUrl;
+        return response;
     }
 
 
