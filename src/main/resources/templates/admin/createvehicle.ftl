@@ -26,14 +26,12 @@
                                 <div class="col-md-5">
                                     <#if vatNumber??>
                                     <input id="uservat" name="uservat" type="text" value="${vatNumber}"
-                                           placeholder="Please type the Owner's VAT Number"
                                            class="form-control input-md" required="" readonly="readonly">
                                     <#else>
                                         <input id="uservat" name="uservat" type="text" value=""
-                                               placeholder="Please type the Owner's VAT Number"
+                                               placeholder="Fill in the owner's VAT"
                                                class="form-control input-md" required="" >
                                     </#if>
-
                                 </div>
                             </div>
 
@@ -42,9 +40,9 @@
                                 <label class="col-md-4 control-label" for="licenseplates">License Plate</label>
                                 <div class="col-md-5">
                                     <input id="licenseplates" name="licenseplates" type="text"
-                                           placeholder="Vehicle's Licence Plate"
+                                           placeholder="Fill in the licence plate"
                                            class="form-control input-md" required="">
-                                    <span class="help-block">ABC-1234</span>
+                                    <span class="help-block">e.g. ABC-1234</span>
 
                                 </div>
                             </div>
@@ -53,7 +51,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="brand">Brand</label>
                                 <div class="col-md-5">
-                                    <input id="brand" name="brand" type="text" placeholder="Vehicle brand"
+                                    <input id="brand" name="brand" type="text" placeholder="Fill in the vehicle brand"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
@@ -62,7 +60,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="model">Model</label>
                                 <div class="col-md-5">
-                                    <input id="model" name="model" type="text" placeholder="Vehicle model"
+                                    <input id="model" name="model" type="text" placeholder="Fill in the vehicle model"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
@@ -78,7 +76,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="factorydate">FactoryDate</label>
                                 <div class="col-md-5">
-                                    <input id="factorydate" name="factorydate" type="text" placeholder="FactoryDate"
+                                    <input id="factorydate" name="factorydate" type="text" placeholder="Fill in the factory date"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
@@ -91,12 +89,18 @@
                                     </button>
                                 </div>
                             </div>
-
                         </fieldset>
                     </form>
 
                 </div>
                 <br>
+                <#if success_modal??>
+                    <div class="row">
+                        <p class="alert alert-success">
+                            ${success_modal}
+                        </p>
+                    </div>
+                </#if>
                 <#if binding_result_vehicle??>
                     <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
                         Form errors on previous try :

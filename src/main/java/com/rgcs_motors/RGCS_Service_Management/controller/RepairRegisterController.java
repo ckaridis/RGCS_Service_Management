@@ -26,6 +26,7 @@ public class RepairRegisterController {
     private static final String REPAIR_REGISTER_FORM = "RepairRegistrationForm";
     private static final String ADMIN_CREATE_REPAIR_PAGE = "/admin/CreateRepair";
     private static final String FAILED_REGISTRATION_MESSAGE = "Registration repair process failed";
+    private static final String SUCCESS_REPAIR_REGISTER_MESSAGE = "Repair registered successfully";
     private String redirectUrl = "";
 
     @Autowired
@@ -66,6 +67,8 @@ public class RepairRegisterController {
             try {
                 Repair repair = RepairConverter.buildRepairObject(registrationForm);
                 String result = registerNewRepairService.registerNewRepair(repair);
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESS_REPAIR_REGISTER_MESSAGE);
+
                 System.out.println("Successful Registration!!");
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             } catch (Exception e) {

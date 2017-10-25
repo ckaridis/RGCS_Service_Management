@@ -1,11 +1,15 @@
 package com.rgcs_motors.RGCS_Service_Management.controller;
 
 import com.rgcs_motors.RGCS_Service_Management.converters.RepairConverter;
+import com.rgcs_motors.RGCS_Service_Management.converters.RepairFromJsonConverter;
 import com.rgcs_motors.RGCS_Service_Management.domain.Repair;
+import com.rgcs_motors.RGCS_Service_Management.model.RepairData;
 import com.rgcs_motors.RGCS_Service_Management.model.RepairRegistrationForm;
 import com.rgcs_motors.RGCS_Service_Management.services.AdminHomeService;
+import com.rgcs_motors.RGCS_Service_Management.services.DeleteRepairService;
 import com.rgcs_motors.RGCS_Service_Management.services.EditRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,10 +31,15 @@ public class AdminController {
     private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
     private static final String REPAIR_REGISTER_FORM = "RepairRegistrationForm";
     private static final String ADMIN_PAGE = "/admin/home";
+    private static final String SUCCESSFUL_REPAIR_DELETION_MESSAGE = "Repair was deleted successfully";
+
     private String redirectUrl = "";
+
     @Autowired
     private EditRepairService editRepairService;
 
+    @Autowired
+    private DeleteRepairService deleteRepairService;
 
     @Autowired
     private AdminHomeService adminHomeService;
@@ -87,6 +96,24 @@ public class AdminController {
                 redirectUrl = "redirect:" + ADMIN_PAGE;
             }
         }
+        return redirectUrl;
+    }
+
+    @RequestMapping(value = "/admin/deleteRepair", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String deleteRepair(@RequestBody RepairData repairData,
+                                             RedirectAttributes redirectAttributes) {
+        System.out.println("delete repair");
+        try {
+            Repair repair = RepairFromJsonConverter.buildRepairObjectFromJson(repairData);
+            System.out.println("repair from jso : " + repair.getRepairdate());
+            String deletionResult = deleteRepairService.deleteRepair(repair);
+            redirectAttributes.addFlashAttribute("deletionResult",SUCCESSFUL_REPAIR_DELETION_MESSAGE);
+            System.out.println("Successful deletio!!");
+            redirectUrl = "redirect:" + ADMIN_PAGE;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessageJson", e.getCause().toString());
+        }
+
         return redirectUrl;
     }
 }

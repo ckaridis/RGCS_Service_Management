@@ -29,8 +29,8 @@
                 <div class="row main">
                     <div class="panel-heading">
                         <div class="panel-title text-center">
-                            <h1 class="title">RGS Motors</h1>
-                            <h3> This project was created by Giorgos, Chris, Chris, Giannis, Vicky.</h3>
+                            <h1 class="title">RGCS Motors</h1>
+                            <h3> This project was created by George, Chris D., Chris K., John, Vicky.</h3>
                             <h4> Regeneration Coding School 2017.</h4>
                             <hr />
                         </div>

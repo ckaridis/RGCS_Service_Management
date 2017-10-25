@@ -15,7 +15,7 @@
         <div id="firstAddon" class="input-group-addon">@</div>
         <div id="secondAddon" class="input-group-addon">VAT</div>
         <input type="text" class="form-control input-large" name="searchval" id="searchval"
-         placeholder="Enter search criteria comma separated... f.ex. mail@com , vat number" required>
+         placeholder="Enter search criteria comma separated..." required>
       </div>
 
       <a id="clear_bt" class="btn btn-default text-muted" href=""

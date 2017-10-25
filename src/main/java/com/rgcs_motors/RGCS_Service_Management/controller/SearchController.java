@@ -37,7 +37,7 @@ public class SearchController {
     private static final String SUCCESSFUL_VEHICLE_EDIT_MESSAGE = "Vehicle updated successfully";
     private static final String SUCCESSFUL_REPAIR_EDIT_MESSAGE = "Repair updated successfully";
     private static final String SUCCESSFUL_VEHICLE_DELETION_MESSAGE = "Vehicle was deleted successfully";
-    private static final String SUCCESSFUL_REPAIR_DELETION_MESSAGE = "Vehicle was deleted successfully";
+    private static final String SUCCESSFUL_REPAIR_DELETION_MESSAGE = "Repair was deleted successfully";
     private static final String SUCCESSFUL_USER_DELETION_MESSAGE = "User was deleted successfully";
     private static final String SEARCH_FORM_DATE ="searchFormDate";
 

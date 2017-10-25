@@ -29,6 +29,8 @@ public class UserRegisterController {
     private static final String ADMIN_EMAIL = "AdminEmail";
     private static final String ADMIN_CREATEUSER_PAGE = "/admin/createuser";
     private static final String ADMIN_CREATEVEHICLE_PAGE = "/admin/CreateVehicle";
+    private static final String SUCCESS_USER_REGISTER_MESSAGE = "User registered successfully";
+
     private String redirectUrl = "";
 
     @Autowired
@@ -80,6 +82,7 @@ public class UserRegisterController {
                 System.out.println("user type is : " + user.getType());
                 String result = registerNewOwnerService.registerNewOwner(user);
                 redirectAttributes.addFlashAttribute("vatNumber",user.getVat());
+                redirectAttributes.addFlashAttribute("success_modal",SUCCESS_USER_REGISTER_MESSAGE);
                 redirectUrl = "redirect:" + ADMIN_CREATEVEHICLE_PAGE;
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());

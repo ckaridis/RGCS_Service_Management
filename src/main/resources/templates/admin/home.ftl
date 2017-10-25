@@ -54,8 +54,9 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" data-toggle="modal" data-target="#delete" data-uid="1"
-                                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                                    <button id="${repairs.getId()}-deleteRBtn" type="button" data-toggle="modal"
+                                            data-target="#delete" data-uid="1"
+                                            class="delete btn btn-danger btn-sm deleteRepairBtn"><span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </td>
                                 <td id="s2">${repairs.getId()}</td>
@@ -80,7 +81,6 @@
                                         <form class="form-horizontal" action="/admin/editRepair" method="post">
 
                                             <fieldset>
-
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label" for="id">Id</label>
                                                     <div class="col-md-5">
@@ -186,7 +186,7 @@
                                 <strong>Are you sure you want to delete this data?</strong>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="del" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                <button type="button" id="delRepairbtn" class="btn btn-danger" data-dismiss="modal">Delete</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

@@ -26,11 +26,10 @@
                                 <div class="col-md-5">
                                     <#if licensePlates??>
                                         <input id="licenseplates" name="licenseplates" type="text" value="${licensePlates}"
-                                               placeholder="Please type the Repair's License Plates"
                                                class="form-control input-md" required="" readonly="readonly">
                                         <#else>
                                             <input id="licenseplates" name="licenseplates" type="text" value=""
-                                                   placeholder="Please type Repair's License Plates"
+                                                   placeholder="Fill in the license plate"
                                                    class="form-control input-md" required="" >
                                     </#if>
 
@@ -44,7 +43,7 @@
                                 <div class="col-md-5">
                                     <input id="repairdate" name="repairdate" type="datetime-local"
                                            min="2017-10-23T08:30" max="2018-06-30T16:30"
-                                           placeholder="Repair Date"
+                                           placeholder="Fill in the repair date"
                                            class="form-control input-md" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                 </div>
                             </div>
@@ -54,7 +53,7 @@
                                 <label class="col-md-4 control-label" for="repairDescription">Repair Description</label>
                                 <div class="col-md-5">
                                     <input id="repairDescription" name="repairDescription" type="text"
-                                           placeholder="Repair Description"
+                                           placeholder="Fill in the repair description"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
@@ -62,7 +61,8 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="repairCost">Repair Cost</label>
                                 <div class="col-md-5">
-                                    <input id="repairCost" name="repairCost" type="text" placeholder="RepairCost"
+                                    <input id="repairCost" name="repairCost" type="text"
+                                           placeholder="Fill in the repair cost"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
@@ -103,6 +103,13 @@
 
                 </div>
                 <br>
+                <#if success_modal??>
+                    <div class="row">
+                        <p class="alert alert-success" align="center">
+                            ${success_modal}
+                        </p>
+                    </div>
+                </#if>
                 <#if binding_result??>
                     <p style="text-align:center; font-size:larger; color:lightSlateGrey;">
                         Form errors on previous try :

@@ -62,3 +62,9 @@ body, html{
         endColorstr="#ff3e3c55",GradientType=0);
     }
 }
+
+.alert-success {
+    color: #3c763d;
+    background-color: #caf3ba;
+    border-color: #d6e9c6;
+}

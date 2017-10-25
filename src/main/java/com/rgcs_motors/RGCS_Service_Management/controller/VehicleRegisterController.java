@@ -26,6 +26,8 @@ public class VehicleRegisterController {
     private static final String ADMIN_CREATE_VEHICLE_PAGE = "/admin/CreateVehicle";
     private static final String FAILED_REGISTRATION_MESSAGE = "Registration process failed";
     private static final String ADMIN_CREATE_REPAIR_PAGE = "/admin/CreateRepair";
+    private static final String SUCCESS_VEHICLE_REGISTER_MESSAGE = "Vehicle registered successfully";
+
     private String redirectUrl = "";
 
     @Autowired
@@ -67,6 +69,7 @@ public class VehicleRegisterController {
                 String result = registerNewVehicleService.registerNewVehicle(vehicle);
                 System.out.println("Successful Registration!!");
                 redirectAttributes.addFlashAttribute("licensePlates",vehicle.getLicenseplate());
+                redirectAttributes.addFlashAttribute("success_modal" ,SUCCESS_VEHICLE_REGISTER_MESSAGE);
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());

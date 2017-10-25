@@ -63,14 +63,14 @@
                        </#if>
                        <#if success_modal??>
                        <div class="row">
-                       <p class="alert alert-success">
+                       <p class="alert alert-success" align="center">
                           ${success_modal}
                        </p>
                        </div>
                        </#if>
                        <#if deletionResult??>
                        <div class="row">
-                       <p class="alert alert-success">
+                       <p class="alert alert-success" align="center">
                           ${deletionResult}
                        </p>
                        </div>
@@ -252,7 +252,7 @@
                                                            <div class="form-group">
                                                                <label class="col-md-4 control-label" for="lastname">Last Name</label>
                                                                <div class="col-md-5">
-                                                                  <input id="id" name="id" type="text" placeholder="user id"
+                                                                  <input id="id" name="id" type="text"
                                                                          class="form-control input-md" required="" readonly>
                                                                </div>
                                                            </div>
@@ -261,7 +261,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label" for="lastname">Last Name</label>
                                                                 <div class="col-md-5">
-                                                                    <input id="lastname" name="lastname" type="text" placeholder="Your last name"
+                                                                    <input id="lastname" name="lastname" type="text"
+                                                                           placeholder="Fill in the last name"
                                                                            class="form-control input-md" required="">
 
                                                                 </div>
@@ -271,7 +272,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label" for="firstname">First Name</label>
                                                                 <div class="col-md-5">
-                                                                    <input id="firstname" name="firstname" type="text" placeholder="Your first name"
+                                                                    <input id="firstname" name="firstname" type="text"
+                                                                           placeholder="Fill in the first name"
                                                                            class="form-control input-md" required="">
 
                                                                 </div>
@@ -281,7 +283,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label" for="vat">VAT</label>
                                                                 <div class="col-md-5">
-                                                                    <input id="vat" name="vat" type="text" placeholder="Your VAT number"
+                                                                    <input id="vat" name="vat" type="text" placeholder="Fill in the VAT number"
                                                                            class="form-control input-md" required="">
                                                                 </div>
                                                             </div>
@@ -290,9 +292,10 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label" for="email">Email</label>
                                                                 <div class="col-md-5">
-                                                                    <input id="email" name="email" type="text" placeholder="Your email here"
+                                                                    <input id="email" name="email" type="text"
+                                                                           placeholder="Fill in the email"
                                                                            class="form-control input-md" required="">
-                                                                    <span class="help-block">xxxxxxxxx@xxxxx.xxx</span>
+                                                                    <span class="help-block">e.g. example@mail.com</span>
                                                                 </div>
                                                             </div>
 
@@ -301,7 +304,7 @@
                                                                    <label class="col-md-4 control-label" for="address">Address</label>
                                                                    <div class="col-md-5">
                                                                       <input id="address" name="address" type="text"
-                                                                            placeholder="Your address goes here" class="form-control input-md"
+                                                                            placeholder="Fill in the address" class="form-control input-md"
                                                                             required="">
                                                                    </div>
                                                                 </div>
@@ -311,8 +314,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label" for="password">Password </label>
                                                                 <div class="col-md-5">
-                                                                    <input id="password" name="password" type="password" placeholder="Password"
-                                                                           class="form-control input-md" required="" readonly>
+                                                                    <input id="password" name="password" type="password" placeholder="Fill in the new password"
+                                                                           class="form-control input-md" required="">
 
                                                                 </div>
                                                             </div>
@@ -322,14 +325,14 @@
                                                                 <label class="col-md-4 control-label" for="confirmpassword">Confirm Password</label>
                                                                 <div class="col-md-5">
                                                                     <input id="confirmpassword" name="confirmpassword" type="password"
-                                                                           placeholder="Confirmation password" class="form-control input-md"
-                                                                           required="" readonly>
+                                                                           placeholder="Fill in the confirmation password" class="form-control input-md"
+                                                                           required="">
                                                                     <span class="help-block">Type again your password</span>
                                                                 </div>
                                                             </div>
 
                                                              <div class="form-group">
-                                                                   <label class="col-md-4 control-label" for="type">Select user type</label>
+                                                                   <label class="col-md-4 control-label" for="type">Select User Type</label>
                                                                    <div class="col-md-5">
                                                                       <select class="form-control" id="type" name="type">
                                                                          <option>Admin</option>
@@ -373,7 +376,7 @@
                                                      <div class="form-group">
                                                         <label class="col-md-4 control-label" for="id">Id</label>
                                                         <div class="col-md-5">
-                                                        <input id="id" name="id" type="text" placeholder="user id"
+                                                        <input id="id" name="id" type="text"
                                                            class="form-control input-md vehicleid" required="" readonly>
                                                         </div>
                                                      </div>
@@ -383,7 +386,7 @@
                                                           <label class="col-md-4 control-label" for="uservat">User VAT</label>
                                                           <div class="col-md-5">
                                                               <input id="uservat" name="uservat" type="text"
-                                                                     placeholder="Please type the Owner's VAT Number"
+                                                                     placeholder="Fill in the owner's VAT"
                                                                      class="form-control input-md" required="" readonly="readonly">
                                                           </div>
                                                       </div>
@@ -393,7 +396,7 @@
                                                           <label class="col-md-4 control-label" for="licenseplates">License Plate</label>
                                                           <div class="col-md-5">
                                                               <input id="licenseplates" name="licenseplates" type="text"
-                                                                     placeholder="Vehicle's Licence Plate"
+                                                                     placeholder="Fill in the license plate"
                                                                      class="form-control input-md" required="">
                                                               <span class="help-block">ABC-1234</span>
 
@@ -404,7 +407,8 @@
                                                       <div class="form-group">
                                                           <label class="col-md-4 control-label" for="brand">Brand</label>
                                                           <div class="col-md-5">
-                                                              <input id="brand" name="brand" type="text" placeholder="Vehicle brand"
+                                                              <input id="brand" name="brand" type="text"
+                                                                     placeholder="Fill in the vehicle brand"
                                                                      class="form-control input-md" required="">
                                                           </div>
                                                       </div>
@@ -413,7 +417,7 @@
                                                       <div class="form-group">
                                                           <label class="col-md-4 control-label" for="model">Model</label>
                                                           <div class="col-md-5">
-                                                              <input id="model" name="model" type="text" placeholder="Vehicle model"
+                                                              <input id="model" name="model" type="text" placeholder="Fill in the vehicle model"
                                                                      class="form-control input-md" required="">
                                                           </div>
                                                       </div>
@@ -421,7 +425,7 @@
                                                       <div class="form-group">
                                                           <label class="col-md-4 control-label" for="colour">Colour</label>
                                                           <div class="col-md-5">
-                                                              <input id="colour" name="colour" type="text" placeholder="Colour"
+                                                              <input id="colour" name="colour" type="text" placeholder="Fill in the vehicle colour"
                                                                      class="form-control input-md" required="">
                                                           </div>
                                                       </div>
@@ -429,7 +433,8 @@
                                                       <div class="form-group">
                                                           <label class="col-md-4 control-label" for="factorydate">FactoryDate</label>
                                                           <div class="col-md-5">
-                                                              <input id="factorydate" name="factorydate" type="text" placeholder="FactoryDate"
+                                                              <input id="factorydate" name="factorydate" type="text"
+                                                                     placeholder="Fill in the factory date"
                                                                      class="form-control input-md" required="">
                                                           </div>
                                                       </div>
@@ -472,7 +477,7 @@
                                                                                     <div class="form-group">
                                                                                        <label class="col-md-4 control-label" for="id">Id</label>
                                                                                        <div class="col-md-5">
-                                                                                          <input id="id" name="id" type="text" placeholder="repair id"
+                                                                                          <input id="id" name="id" type="text"
                                                                                                class="form-control input-md repairid" required="" readonly>
                                                                                        </div>
                                                                                     </div>
@@ -482,7 +487,7 @@
                                                                                         <label class="col-md-4 control-label" for="licenseplates">License Plate</label>
                                                                                         <div class="col-md-5">
                                                                                                 <input id="licenseplates" name="licenseplates" type="text" value=""
-                                                                                                       placeholder="Please type the Repair's License Plates"
+                                                                                                       placeholder="Fill in the license plate"
                                                                                                        class="form-control input-md repairPlates" required="" readonly="readonly">
                                                                                         </div>
                                                                                     </div>
@@ -494,7 +499,7 @@
                                                                                         <div class="col-md-5">
                                                                                             <input id="repairdate" name="repairdate" type="datetime-local"
                                                                                                    min="2017-10-23T08:30" max="2018-06-30T16:30"
-                                                                                                   placeholder="Repair Date"
+                                                                                                   placeholder="Fill in the repair date"
                                                                                                    class="form-control input-md" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                                                                         </div>
                                                                                     </div>
@@ -504,7 +509,7 @@
                                                                                         <label class="col-md-4 control-label" for="repairDescription">Repair Description</label>
                                                                                         <div class="col-md-5">
                                                                                             <input id="repairDescription" name="repairDescription" type="text"
-                                                                                                   placeholder="Repair Description"
+                                                                                                   placeholder="Fill in the repair description"
                                                                                                    class="form-control input-md" required="">
                                                                                         </div>
                                                                                     </div>
@@ -512,7 +517,8 @@
                                                                                     <div class="form-group">
                                                                                         <label class="col-md-4 control-label" for="repairCost">Repair Cost</label>
                                                                                         <div class="col-md-5">
-                                                                                            <input id="repairCost" name="repairCost" type="text" placeholder="RepairCost"
+                                                                                            <input id="repairCost" name="repairCost" type="text"
+                                                                                                   placeholder="Fill in the repair cost"
                                                                                                    class="form-control input-md" required="">
                                                                                         </div>
                                                                                     </div>
