@@ -17,5 +17,4 @@ public class UserFromJsonConverter {
         userToBeDeleted.setId(userData.getId());
         return userToBeDeleted;
     }
-
 }

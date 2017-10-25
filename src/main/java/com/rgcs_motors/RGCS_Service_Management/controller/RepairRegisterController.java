@@ -62,12 +62,14 @@ public class RepairRegisterController {
             redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
         }
         else {
+
             try {
                 Repair repair = RepairConverter.buildRepairObject(registrationForm);
                 String result = registerNewRepairService.registerNewRepair(repair);
                 System.out.println("Successful Registration!!");
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             } catch (Exception e) {
+
                 redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());
                 redirectUrl = "redirect:" + ADMIN_CREATE_REPAIR_PAGE;
             }

@@ -17,5 +17,4 @@ public class VehicleFromJsoConverter {
         vehicleToBeDeleted.setId(vehicleData.getId());
         return vehicleToBeDeleted;
     }
-
 }

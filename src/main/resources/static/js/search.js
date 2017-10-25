@@ -42,30 +42,23 @@ $(document).ready(function (){
 
            var vatSelector = "#f2-".concat(selectorArray[0]);
            var vat = $(vatSelector).html();
-           alert(vat);
 
            var brandSelector = "#l2-".concat(selectorArray[0]);
            var brand = $(brandSelector).html();
-           alert(brand);
 
            var modelSelector = "#m2-".concat(selectorArray[0]);
            var model = $(modelSelector).html();
-           alert(model);
 
            var fdSelector = "#o2-".concat(selectorArray[0]);
            var fd = $(fdSelector).html();
-           alert(fd);
 
            var colourSelector = "#p2-".concat(selectorArray[0]);
            var colour = $(colourSelector).html();
-           alert(colour);
 
            var plateSelector = "#r2-".concat(selectorArray[0]);
            var plate = $(plateSelector).html();
-           alert(plate);
 
            var id = selectorArray[0];
-           alert(id);
 
            $(".vehicleid").val(id);
            $("#uservat").val(vat);
@@ -98,7 +91,6 @@ $(document).ready(function (){
                user.set("email",email);
                user.set("type",type);
 
-               alert(user.get("vat"));
             })
 
             $("#delUserBtn").click(function (){
@@ -113,9 +105,6 @@ $(document).ready(function (){
                "email": user.get("email"),
                "type": user.get("type")
             }
-
-
-            alert(userData.vat);
 
             $.ajax({
                type: "POST",
@@ -143,7 +132,6 @@ $(document).ready(function (){
            var repairdateSelector = "#l3-".concat(selectorArray[0]);
            var repairdate = $(repairdateSelector).html().trim();
            repairdate = repairdate.slice(0, 10) + "T" + repairdate.slice(10, 16).replace(" ", "");
-           alert(repairdate);
 
            var repairtypeSelector = "#m3-".concat(selectorArray[0]);
            var repairtype = $(repairtypeSelector).html();
@@ -215,7 +203,6 @@ $(document).ready(function (){
                    vehicle.set("colour",colour);
                    vehicle.set("factorydate",fd);
 
-                   alert(vehicle.get("colour"));
                 })
 
 
@@ -230,8 +217,6 @@ $(document).ready(function (){
                              "colour": vehicle.get("colour"),
                              "factorydate": vehicle.get("factorydate")
                             }
-
-                            alert(vehicleData.uservat);
 
                            $.ajax({
                              type: "POST",

@@ -45,7 +45,6 @@ public class AdminController {
         List<Repair> repairs = new ArrayList<Repair>();
         try {
             repairs = adminHomeService.fetchRepairsForAdmin();
-            System.out.println("the firtttttt element is "+ repairs.get(0).getLicenseplate());
 
         } catch (Exception e) {
 

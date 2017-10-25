@@ -1,13 +1,8 @@
 package com.rgcs_motors.RGCS_Service_Management.model;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class RepairRegistrationForm {
 

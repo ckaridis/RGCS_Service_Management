@@ -1,14 +1,11 @@
 package com.rgcs_motors.RGCS_Service_Management.services;
 
-import com.mysql.jdbc.exceptions.MySQLDataException;
-import com.mysql.jdbc.exceptions.MySQLTransactionRollbackException;
 import com.rgcs_motors.RGCS_Service_Management.domain.Vehicle;
 import com.rgcs_motors.RGCS_Service_Management.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 
 @Service
 @Transactional

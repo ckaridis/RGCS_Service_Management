@@ -34,11 +34,6 @@ public class AdminHomeServiceImpl implements AdminHomeService {
             errorMessage = repairsAdminNotFoundError;
             System.out.println("Repairs Admin is empty !\n");
         }
-        else {
-            for (Repair repair : repairs) {
-                System.out.println(">>>>>>>>>>>>>>>>>>the Admin repairs date " + repair.getRepairdate());
-            }
-        }
         if(errorMessage != ("")) {
             throw new Exception(errorMessage);
         }

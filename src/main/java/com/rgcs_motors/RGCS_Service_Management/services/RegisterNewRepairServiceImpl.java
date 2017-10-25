@@ -16,6 +16,7 @@ public class RegisterNewRepairServiceImpl implements RegisterNewRepairService {
     private String returnedMessage = "";
 
     @Autowired
+
     private RepairRepository repairRepo;
 
     @Override
@@ -26,12 +27,9 @@ public class RegisterNewRepairServiceImpl implements RegisterNewRepairService {
             registeredRepair = repairRepo.save(repair);
             returnedMessage = (registeredRepair == null) ? errorMessage : successMessage;
         }
-        /*catch (MySQ e){
-            throw new Exception("The User with the above VAT does not exist");
-
-        }*/
         catch(Exception e) {
             throw new Exception(e.getMessage().toString());
         }
-        return returnedMessage;    }
+        return returnedMessage;
+    }
 }

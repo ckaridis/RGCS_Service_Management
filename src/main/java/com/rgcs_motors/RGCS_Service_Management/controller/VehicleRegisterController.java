@@ -71,8 +71,6 @@ public class VehicleRegisterController {
             } catch (Exception e) {
                     redirectAttributes.addFlashAttribute("errorMessage", e.getCause().toString());
                     redirectUrl = "redirect:" + ADMIN_CREATE_VEHICLE_PAGE;
-
-
             }
         }
         return redirectUrl;
