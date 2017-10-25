@@ -53,7 +53,7 @@
                                 <div class="cols-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="password" data-minlength="6" class="form-control" name="password"
+                                        <input type="password" maxlength="15" minlength="6" class="form-control" name="password"
                                                id="password"  placeholder="Enter your Password" required/>
 
                                     </div>

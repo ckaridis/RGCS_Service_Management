@@ -14,7 +14,8 @@
             <@navbar/>
             <div class="container">
                 <div class="row">
-                    <form class="form-horizontal" action="/admin/CreateVehicle" method="post">
+                    <form class="form-horizontal" data-toggle="validator"
+                     action="/admin/CreateVehicle" method="post">
                         <fieldset>
 
                             <!-- Form Name -->
@@ -30,6 +31,7 @@
                                     <#else>
                                         <input id="uservat" name="uservat" type="text" value=""
                                                placeholder="Fill in the owner's VAT"
+                                               pattern="^[1-9]{9}$"
                                                class="form-control input-md" required="" >
                                     </#if>
                                 </div>
@@ -41,6 +43,7 @@
                                 <div class="col-md-5">
                                     <input id="licenseplates" name="licenseplates" type="text"
                                            placeholder="Fill in the licence plate"
+                                           pattern="[a-zA-Z]{3}-[0-9]{4}"
                                            class="form-control input-md" required="">
                                     <span class="help-block">e.g. ABC-1234</span>
 
@@ -76,7 +79,9 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="factorydate">FactoryDate</label>
                                 <div class="col-md-5">
-                                    <input id="factorydate" name="factorydate" type="text" placeholder="Fill in the factory date"
+                                    <input id="factorydate" name="factorydate" type="text"
+                                    placeholder="Fill in the factory date"
+                                    pattern="[1-9]{1}[0-9]{3}"
                                            class="form-control input-md" required="">
                                 </div>
                             </div>
