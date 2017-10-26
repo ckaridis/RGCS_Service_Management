@@ -101,7 +101,7 @@
                 <br>
                 <#if success_modal??>
                     <div class="row">
-                        <p class="alert alert-success">
+                        <p class="alert alert-success" align="center">
                             ${success_modal}
                         </p>
                     </div>
